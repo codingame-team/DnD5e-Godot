@@ -72,7 +72,8 @@ static func from_data(data: Dictionary) -> MonsterData:
 	m.max_hp       = data.get("hp", 4)
 	m.hp           = m.max_hp
 	m.ac           = data.get("ac", 10)
-	m.speed        = data.get("speed", 30)
+	var speed_raw: Variant = data.get("speed", 30)
+	m.speed = int(str(speed_raw).split(" ")[0]) if speed_raw is String else int(speed_raw)
 	m.xp           = data.get("xp", 0)
 	var ab: Dictionary = data.get("abilities", {})
 	m.str_score = ab.get("str", 10)

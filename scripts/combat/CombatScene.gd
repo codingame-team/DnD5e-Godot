@@ -76,9 +76,9 @@ func _build_grid() -> void:
 			inst.mesh = floor_mesh
 			var mat := StandardMaterial3D.new()
 			if (row + col) % 2 == 0:
-				mat.albedo_color = Color(0.28, 0.24, 0.20)
+				mat.albedo_color = Color(0.72, 0.68, 0.62)
 			else:
-				mat.albedo_color = Color(0.22, 0.19, 0.16)
+				mat.albedo_color = Color(0.60, 0.56, 0.50)
 			mat.roughness = 0.9
 			inst.set_surface_override_material(0, mat)
 			inst.position = Vector3(col * TILE_SIZE - cx, 0.0, row * TILE_SIZE - cz)
@@ -135,16 +135,6 @@ func _spawn_pieces() -> void:
 func _create_combatant_node(cname: String, is_hero: bool) -> Node3D:
 	var root := Node3D.new()
 	root.name = cname
-	var model_path: String = MODEL_HERO if is_hero else MODEL_MONSTER
-	if ResourceLoader.exists(model_path):
-			var scene: PackedScene = load(model_path)
-			if scene != null:
-				var model := scene.instantiate()
-				model.scale = Vector3(0.5, 0.5, 0.5) if is_hero else Vector3(0.4, 0.4, 0.4)
-				model.position.y = 0.08
-				root.add_child(model)
-				_add_name_label(root, cname, is_hero)
-				return root
 	root.add_child(_build_procedural_figure(is_hero))
 	_add_name_label(root, cname, is_hero)
 	return root

@@ -3,9 +3,11 @@
 [ext_resource type="Script" path="res://scripts/combat/CombatScene.gd" id="1_combat"]
 
 [sub_resource type="Environment" id="Env_1"]
+background_mode = 1
+background_color = Color(0.3, 0.45, 0.7, 1)
 ambient_light_source = 2
-ambient_light_color = Color(0.6, 0.6, 0.65, 1)
-ambient_light_energy = 0.6
+ambient_light_color = Color(0.8, 0.8, 0.9, 1)
+ambient_light_energy = 1.0
 
 [node name="CombatScene" type="Node3D"]
 script = ExtResource("1_combat")
