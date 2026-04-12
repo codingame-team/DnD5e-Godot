@@ -1,0 +1,110 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnd_combat"]
+
+[ext_resource type="Script" path="res://scripts/combat/CombatScene.gd" id="1_combat"]
+
+[node name="CombatScene" type="Node3D"]
+script = ExtResource("1_combat")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866, -0.35, 0.354, 0, 0.71, 0.704, -0.5, -0.606, 0.612, 0, 10, 0)
+light_energy = 1.0
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707, 0, 15, 15)
+fov = 45.0
+
+[node name="GridRoot" type="Node3D" parent="."]
+[node name="CombatantRoot" type="Node3D" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="InitiativePanel" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchor_right = 0.22
+anchor_bottom = 0.6
+offset_left = 8
+offset_top = 8
+
+[node name="InitiativeTitle" type="Label" parent="UI/InitiativePanel"]
+layout_mode = 2
+text = "Initiative"
+theme_override_font_sizes/font_size = 18
+
+[node name="InitiativeList" type="VBoxContainer" parent="UI/InitiativePanel"]
+layout_mode = 2
+
+[node name="ActionPanel" type="HBoxContainer" parent="UI"]
+layout_mode = 1
+anchor_left = 0.22
+anchor_top = 0.88
+anchor_right = 0.78
+anchor_bottom = 0.99
+offset_top = -4
+
+[node name="BtnAttack" type="Button" parent="UI/ActionPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 50)
+text = "⚔ Attaque"
+theme_override_font_sizes/font_size = 18
+
+[node name="BtnSpell" type="Button" parent="UI/ActionPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 50)
+text = "✨ Sort"
+theme_override_font_sizes/font_size = 18
+
+[node name="BtnMove" type="Button" parent="UI/ActionPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 50)
+text = "→ Déplacer"
+theme_override_font_sizes/font_size = 18
+
+[node name="BtnEndTurn" type="Button" parent="UI/ActionPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 50)
+text = "✓ Fin Tour"
+theme_override_font_sizes/font_size = 18
+
+[node name="LogPanel" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchor_left = 0.78
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.88
+offset_left = -4
+offset_right = -8
+offset_top = 8
+
+[node name="LogTitle" type="Label" parent="UI/LogPanel"]
+layout_mode = 2
+text = "Journal"
+theme_override_font_sizes/font_size = 16
+
+[node name="LogScroll" type="ScrollContainer" parent="UI/LogPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LogText" type="RichTextLabel" parent="UI/LogPanel/LogScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+scroll_following = true
+theme_override_font_sizes/normal_font_size = 13
+
+[node name="CurrentTurnLabel" type="Label" parent="UI"]
+layout_mode = 1
+anchor_left = 0.22
+anchor_top = 0.82
+anchor_right = 0.78
+anchor_bottom = 0.89
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(1.0, 0.9, 0.3, 1)

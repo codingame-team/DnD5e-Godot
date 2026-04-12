@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnd_main_menu"]
+
+[ext_resource type="Script" path="res://scripts/ui/MainMenu.gd" id="1_main_menu"]
+
+[sub_resource type="GradientTexture2D" id="1"]
+gradient = SubResource("Gradient_1")
+
+[sub_resource type="Gradient" id="Gradient_1"]
+colors = PackedColorArray(0.04, 0.04, 0.08, 1, 0.1, 0.06, 0.15, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_main_menu")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.04, 0.04, 0.1, 1)
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchor_left = 0.3
+anchor_top = 0.2
+anchor_right = 0.7
+anchor_bottom = 0.9
+alignment = 1
+
+[node name="Title" type="Label" parent="VBox"]
+layout_mode = 2
+text = "⚔  DnD Tactics  ⚔"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 52
+
+[node name="Subtitle" type="Label" parent="VBox"]
+layout_mode = 2
+text = "Tactical RPG — D&D 5th Edition"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.7, 0.7, 0.9, 1)
+
+[node name="Spacer1" type="Control" parent="VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 60)
+
+[node name="BtnNewGame" type="Button" parent="VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 56)
+text = "Nouvelle Partie"
+theme_override_font_sizes/font_size = 24
+
+[node name="BtnLoadGame" type="Button" parent="VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 56)
+text = "Continuer"
+theme_override_font_sizes/font_size = 24
+
+[node name="BtnSettings" type="Button" parent="VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 56)
+text = "Options"
+theme_override_font_sizes/font_size = 24
+
+[node name="BtnQuit" type="Button" parent="VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 56)
+text = "Quitter"
+theme_override_font_sizes/font_size = 24
+
+[node name="Version" type="Label" parent="."]
+layout_mode = 1
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -30
+text = "v0.1.0 — Godot 4.6 — D&D 5e SRD"
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.5, 0.5, 0.6, 1)
