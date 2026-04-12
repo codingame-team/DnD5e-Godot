@@ -144,13 +144,19 @@ def export_classes(class_names: list[str] | None = None,
 
 
 def export_monsters(monster_names: list[str] | None = None,
-                    output: Path = OUTPUT_DIR / "monsters") -> int:
-    """Exporte les monstres D&D 5e (official + extended)."""
+                    output: Path = OUTPUT_DIR / "monsters",
+                    official_only: bool = True) -> int:
+    """Exporte les monstres D&D 5e.
+
+    Args:
+        official_only: si True (défaut), n'exporte que les 332 monstres officiels SRD.
+                       Mettre False pour inclure les 2200+ monstres extended (lent).
+    """
     output.mkdir(parents=True, exist_ok=True)
-    sources = [
-        DATA_ROOT / "monsters" / "official",
-        DATA_ROOT / "monsters" / "extended",
-    ]
+    sources = [DATA_ROOT / "monsters" / "official"]
+    if not official_only:
+        sources.append(DATA_ROOT / "monsters" / "extended")
+
     files: dict[str, Path] = {}
     for src in sources:
         if src.exists():
@@ -163,9 +169,15 @@ def export_monsters(monster_names: list[str] | None = None,
     exported = 0
     index = []
 
-    for stem, fpath in sorted(files.items()):
+    items = sorted(files.items())
+    total = len(items)
+    for i, (stem, fpath) in enumerate(items):
         with open(fpath, encoding="utf-8") as f:
             raw = json.load(f)
+
+        # Ignorer les fichiers qui sont des listes cumulatives (ex: bestiary-sublist-data*)
+        if isinstance(raw, list):
+            continue
 
         cr = _parse_cr(raw.get("challenge_rating", 0))
         hp_raw = raw.get("hit_points_roll", "")
@@ -204,18 +216,21 @@ def export_monsters(monster_names: list[str] | None = None,
 
         dest = output / f"{stem}.json"
         with open(dest, "w", encoding="utf-8") as f:
-            json.dump(out, f, ensure_ascii=False, indent=2)
+            # Compact pour la performance (Godot lit du JSON, pas besoin de pretty-print)
+            json.dump(out, f, ensure_ascii=False, separators=(",", ":"))
 
         index.append({
             "index": out["index"], "name": out["name"],
             "cr": cr, "type": out["type"], "hp": out["hp"], "ac": out["ac"],
         })
         exported += 1
+        if exported % 50 == 0:
+            print(f"    {exported}/{total}...", end="\r", flush=True)
 
-    print(f"  ✓ {exported} monstres exportés")
+    print(f"  ✓ {exported} monstres exportés ({total} fichiers traités)")
 
     with open(output / "_index.json", "w", encoding="utf-8") as f:
-        json.dump(sorted(index, key=lambda x: x["cr"]), f, ensure_ascii=False, indent=2)
+        json.dump(sorted(index, key=lambda x: x["cr"]), f, ensure_ascii=False, separators=(",", ":"))
 
     return exported
 
@@ -336,16 +351,18 @@ def copy_tokens(output: Path = OUTPUT_DIR.parent / "assets" / "tokens") -> int:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Exporte les données D&D 5e → Godot JSON")
-    parser.add_argument("--output", default=str(OUTPUT_DIR), help="Dossier de sortie")
-    parser.add_argument("--all",      action="store_true", help="Exporter tout")
+    parser.add_argument("--output",   default=str(OUTPUT_DIR), help="Dossier de sortie")
+    parser.add_argument("--all",      action="store_true", help="Exporter tout (SRD officiel)")
+    parser.add_argument("--extended", action="store_true", help="Inclure les monstres extended (>2000, lent)")
     parser.add_argument("--classes",  nargs="*", help="Classes à exporter (vide = toutes)")
-    parser.add_argument("--monsters", nargs="*", help="Monstres à exporter (vide = tous)")
+    parser.add_argument("--monsters", nargs="*", help="Monstres à exporter (vide = tous SRD)")
     parser.add_argument("--spells",   action="store_true", help="Exporter les sorts")
     parser.add_argument("--items",    action="store_true", help="Exporter les objets")
     parser.add_argument("--tokens",   action="store_true", help="Copier les tokens PNG")
     args = parser.parse_args()
 
     out = Path(args.output)
+    official_only = not args.extended
     print(f"\n🎲 DnD Data Exporter → {out}\n")
 
     if args.all or args.classes is not None:
@@ -355,7 +372,7 @@ def main() -> None:
 
     if args.all or args.monsters is not None:
         names = args.monsters if args.monsters else None
-        n = export_monsters(names, out / "monsters")
+        n = export_monsters(names, out / "monsters", official_only=official_only)
         print(f"  → {n} monstres\n")
 
     if args.all or args.spells:
