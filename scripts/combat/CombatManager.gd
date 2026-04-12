@@ -23,10 +23,10 @@ func resolve_attack(attacker: HeroData, target: MonsterData,
 
 	# Bonus d'attaque : mod STR + maîtrise
 	var atk_bonus := attacker.str_mod() + attacker.proficiency_bonus
-	var roll      := TurnManager.roll_d20(advantage)
-	var crit      := roll == 20
-	var total     := roll + atk_bonus
-	var hit       := crit or (roll != 1 and total >= target.ac)
+	var roll := TurnManager.roll_d20(advantage)
+	var crit := roll == 20
+	var total := roll + atk_bonus
+	var hit := crit or (roll != 1 and total >= target.ac)
 
 	var damage := 0
 	var weapon_data := DataManager.get_item("weapon", attacker.weapon_index) if attacker.weapon_index != "" else {}
@@ -35,7 +35,7 @@ func resolve_attack(attacker: HeroData, target: MonsterData,
 	if hit:
 		damage = TurnManager.roll_damage(damage_dice)
 		if crit:
-			damage += TurnManager.roll_damage(damage_dice)  # dés doublés au critique
+			damage += TurnManager.roll_damage(damage_dice) # dés doublés au critique
 		target.take_damage(damage)
 		if not target.is_alive():
 			combatant_died.emit(target.name, false)
@@ -56,10 +56,10 @@ func resolve_monster_attack(attacker: MonsterData, target: HeroData) -> Dictiona
 		return {"error": "aucune action"}
 
 	var atk_bonus: int = action.get("attack_bonus", attacker.get_attack_bonus())
-	var roll  := TurnManager.roll_d20()
+	var roll := TurnManager.roll_d20()
 	var total := roll + atk_bonus
-	var crit  := roll == 20
-	var hit   := crit or (roll != 1 and total >= target.ac)
+	var crit := roll == 20
+	var hit := crit or (roll != 1 and total >= target.ac)
 
 	var damage := 0
 	if hit:
@@ -119,6 +119,6 @@ func resolve_spell(caster: HeroData, spell_index: String,
 	caster.action_used = true
 	AudioManager.play_spell_cast()
 
-	var result := {"spell": spell.get("name",""), "results": results}
+	var result := {"spell": spell.get("name", ""), "results": results}
 	spell_resolved.emit(caster.name, targets.map(func(t): return t.name), result)
 	return result
