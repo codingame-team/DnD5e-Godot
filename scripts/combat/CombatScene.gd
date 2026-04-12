@@ -12,6 +12,7 @@ const GRID_ROWS := 8
 @onready var btn_spell: Button              = $UI/ActionPanel/BtnSpell
 @onready var btn_move: Button               = $UI/ActionPanel/BtnMove
 @onready var btn_end_turn: Button           = $UI/ActionPanel/BtnEndTurn
+@onready var btn_potion: Button             = $UI/ActionPanel/BtnPotion
 @onready var log_text: RichTextLabel        = $UI/LogPanel/LogScroll/LogText
 @onready var turn_label: Label              = $UI/CurrentTurnLabel
 @onready var initiative_list: VBoxContainer = $UI/InitiativePanel/InitiativeList
@@ -48,6 +49,7 @@ func _connect_buttons() -> void:
 	btn_spell.pressed.connect(_on_btn_spell)
 	btn_move.pressed.connect(_on_btn_move)
 	btn_end_turn.pressed.connect(_end_turn)
+	btn_potion.pressed.connect(_on_btn_potion)
 
 func _on_btn_attack() -> void:
 	_pending_action = "attack"
@@ -56,6 +58,26 @@ func _on_btn_attack() -> void:
 func _on_btn_spell() -> void:
 	_pending_action = "spell"
 	_log("[color=cyan]Choisissez une cible pour le sort.[/color]")
+
+func _on_btn_potion() -> void:
+	var hero := _get_current_hero()
+	if hero == null:
+		_log("[color=orange]Ce n'est pas votre tour.[/color]")
+		return
+	if hero.bonus_action_used:
+		_log("[color=orange]Action bonus déjà utilisée ce tour.[/color]")
+		return
+	if hero.potions <= 0:
+		_log("[color=orange]Plus de potions !")
+		return
+	var heal_amount := TurnManager.roll_damage("2d4+2")
+	hero.hp = mini(hero.hp + heal_amount, hero.max_hp)
+	hero.bonus_action_used = true
+	hero.potions -= 1
+	_log("[color=lime]%s boit une Potion de Soin : +%d PV (%d/%d). Potions restantes : %d[/color]" \
+		% [hero.name, heal_amount, hero.hp, hero.max_hp, hero.potions])
+	_update_hp_label(hero.name)
+	_update_potion_button(hero)
 
 func _on_btn_move() -> void:
 	_pending_action = "move"
@@ -107,6 +129,8 @@ func _load_combatants() -> void:
 		var hero := HeroData.from_class_data(cls_data, h_dict.get("name", "Heros"))
 		hero.hp = h_dict.get("hp", hero.max_hp) if h_dict.get("hp", 0) > 0 else hero.max_hp
 		heroes.append(hero)
+		_log("[color=aqua]%s equipe : Epee longue (1d8), Cotte de mailles (CA %d), %d potion(s) — PV %d[/color]" \
+			% [hero.name, hero.ac, hero.potions, hero.max_hp])
 	var enemy_list: Array = GameManager.current_scenario.get("enemies", []) \
 						 if not GameManager.current_scenario.is_empty() \
 						 else ["goblin", "goblin"]
@@ -385,13 +409,14 @@ func _on_turn_started(combatant: Dictionary) -> void:
 	var cname: String = combatant.get("name", "?")
 	turn_label.text = "Tour de : %s" % cname
 	var is_hero: bool = combatant.get("_is_hero", false)
-	_update_action_buttons(is_hero)
 	_log("[b]%s[/b] commence son tour." % cname)
 	_clear_highlights()
 	_pending_action = ""
+	# Reset hero turn state first, then update buttons (potion disabled state depends on it)
 	for hero in heroes:
 		if hero.name == cname:
 			hero.reset_turn()
+	_update_action_buttons(is_hero)
 	if not is_hero:
 		await get_tree().create_timer(0.6).timeout
 		_ai_monster_turn(combatant)
@@ -503,7 +528,16 @@ func _on_attack_resolved(_attacker: String, _target: String, _result: Dictionary
 	_update_all_hp_labels()
 	_check_victory()
 
-func _on_combatant_died(cname: String, _is_hero: bool) -> void:
+func _on_combatant_died(cname: String, is_hero: bool) -> void:
+	# Double-check the combatant is really dead (guards against spurious signals)
+	if is_hero:
+		for h in heroes:
+			if h.name == cname and h.is_alive():
+				return  # still alive, ignore
+	else:
+		for m in monsters:
+			if m.name == cname and m.is_alive():
+				return
 	_log("[color=gray][i]%s est elimine.[/i][/color]" % cname)
 	var piece: Variant = _pieces.get(cname)
 	if piece != null:
@@ -596,6 +630,15 @@ func _update_action_buttons(is_hero: bool) -> void:
 	btn_spell.disabled   = not is_hero
 	btn_move.disabled    = not is_hero
 	btn_end_turn.visible = is_hero
+	btn_potion.visible   = is_hero
+	if is_hero:
+		var hero := _get_current_hero()
+		if hero != null:
+			_update_potion_button(hero)
+
+func _update_potion_button(hero: HeroData) -> void:
+	btn_potion.text = "🧪 Potion (%d)" % hero.potions
+	btn_potion.disabled = hero.potions <= 0 or hero.bonus_action_used
 
 func _update_initiative_ui() -> void:
 	for child in initiative_list.get_children():

@@ -32,6 +32,7 @@ extends Resource
 # Équipement (index des items)
 @export var weapon_index: String = ""
 @export var armor_index: String = ""
+@export var potions: int = 2  # Potions of Healing (2d4+2)
 
 # Portrait / modèle 3D
 @export var portrait_path: String = ""
@@ -82,7 +83,7 @@ func to_dict() -> Dictionary:
 		"speed": speed, "proficiency_bonus": proficiency_bonus,
 		"abilities": {"str": str_score, "dex": dex_score, "con": con_score,
 		              "int": int_score, "wis": wis_score, "cha": cha_score},
-		"weapon_index": weapon_index, "armor_index": armor_index,
+		"weapon_index": weapon_index, "armor_index": armor_index, "potions": potions,
 	}
 
 static func from_class_data(class_data: Dictionary, hero_name: String = "", lvl: int = 1) -> HeroData:
@@ -96,4 +97,13 @@ static func from_class_data(class_data: Dictionary, hero_name: String = "", lvl:
 	h.max_hp = h.hit_die + h.con_mod()
 	h.hp = h.max_hp
 	h.proficiency_bonus = (lvl - 1) / 4 + 2
+	# Équipement de base : Cotte de mailles + Épée longue + 2 potions
+	h.weapon_index = "longsword"
+	h.armor_index = "chain-mail"
+	h.potions = 2
+	# AC depuis l'armure (Cotte de mailles = 16, pas de bonus DEX)
+	var armor_data := DataManager.get_item("armors", h.armor_index)
+	if not armor_data.is_empty():
+		var ac_data: Dictionary = armor_data.get("armor_class", {})
+		h.ac = int(ac_data.get("base", 16))
 	return h

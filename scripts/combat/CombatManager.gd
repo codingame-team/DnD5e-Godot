@@ -29,7 +29,7 @@ func resolve_attack(attacker: HeroData, target: MonsterData,
 	var hit := crit or (roll != 1 and total >= target.ac)
 
 	var damage := 0
-	var weapon_data := DataManager.get_item("weapon", attacker.weapon_index) if attacker.weapon_index != "" else {}
+	var weapon_data := DataManager.get_item("weapons", attacker.weapon_index) if attacker.weapon_index != "" else {}
 	var damage_dice: String = weapon_data.get("damage", {}).get("damage_dice", "1d4")
 
 	if hit:

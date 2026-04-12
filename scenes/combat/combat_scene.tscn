@@ -81,6 +81,13 @@ custom_minimum_size = Vector2(0, 50)
 text = "✓ Fin Tour"
 theme_override_font_sizes/font_size = 18
 
+[node name="BtnPotion" type="Button" parent="UI/ActionPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 50)
+text = "🧪 Potion (2)"
+theme_override_font_sizes/font_size = 18
+
 [node name="LogPanel" type="VBoxContainer" parent="UI"]
 layout_mode = 1
 anchor_left = 0.78
