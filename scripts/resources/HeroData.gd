@@ -60,10 +60,10 @@ func hp_percent() -> float:
 	return float(hp) / float(max_hp)
 
 func reset_turn() -> void:
-	action_used       = false
+	action_used = false
 	bonus_action_used = false
-	reaction_used     = false
-	movement_used     = 0
+	reaction_used = false
+	movement_used = 0
 
 func take_damage(amount: int) -> int:
 	var actual := mini(amount, hp)
@@ -89,11 +89,11 @@ static func from_class_data(class_data: Dictionary, hero_name: String = "", lvl:
 	"""Instancie un HeroData depuis les données brutes de DataManager."""
 	var h := HeroData.new()
 	h.class_index = class_data.get("index", "fighter")
-	h.name        = hero_name if hero_name != "" else class_data.get("name", "Héros")
-	h.level       = lvl
-	h.hit_die     = class_data.get("hit_die", 10)
+	h.name = hero_name if hero_name != "" else class_data.get("name", "Héros")
+	h.level = lvl
+	h.hit_die = class_data.get("hit_die", 10)
 	# HP de base niveau 1 : max du dé de vie + mod CON
-	h.max_hp      = h.hit_die + h.con_mod()
-	h.hp          = h.max_hp
+	h.max_hp = h.hit_die + h.con_mod()
+	h.hp = h.max_hp
 	h.proficiency_bonus = (lvl - 1) / 4 + 2
 	return h
