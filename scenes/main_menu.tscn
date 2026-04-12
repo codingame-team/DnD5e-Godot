@@ -1,12 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnd_main_menu"]
+[gd_scene load_steps=2 format=3 uid="uid://dnd_main_menu"]
 
 [ext_resource type="Script" path="res://scripts/ui/MainMenu.gd" id="1_main_menu"]
-
-[sub_resource type="GradientTexture2D" id="1"]
-gradient = SubResource("Gradient_1")
-
-[sub_resource type="Gradient" id="Gradient_1"]
-colors = PackedColorArray(0.04, 0.04, 0.08, 1, 0.1, 0.06, 0.15, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
