@@ -1,0 +1,1 @@
+{"index":"war-horse","name":"Warhorse","size":"L","type":"beast","cr":0.5,"xp":50,"hp":{"average":19,"formula":"3d10 + 3"},"hp_roll":"{'average': 19, 'formula': '3d10 + 3'}","ac":11,"speed":60,"abilities":{"str":10,"dex":10,"con":10,"int":10,"wis":10,"cha":10},"actions":[],"reactions":[],"legendary_actions":[],"traits":[],"senses":[],"languages":[],"proficiencies":[]}

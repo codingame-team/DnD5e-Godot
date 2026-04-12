@@ -1,0 +1,27 @@
+{
+  "index": "maul",
+  "name": "Maul",
+  "category": "weapon",
+  "cost": {
+    "quantity": 10,
+    "unit": "gp"
+  },
+  "weight": 10,
+  "desc": [],
+  "damage": {
+    "damage_dice": "2d6",
+    "damage_type": {
+      "index": "bludgeoning",
+      "name": "Bludgeoning",
+      "url": "/api/damage-types/bludgeoning"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "heavy",
+    "two-handed"
+  ],
+  "weapon_range": "Melee",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

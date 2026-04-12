@@ -67,7 +67,7 @@ func _on_class_selected(class_index: String, pressed_btn: Button) -> void:
 func _on_start() -> void:
 	if selected_class.is_empty():
 		return
-	var class_data := DataManager.get_class(selected_class)
+	var class_data := DataManager.get_class_data(selected_class)
 	var hero       := HeroData.from_class_data(class_data, "", 1)
 	GameManager.party.clear()
 	GameManager.add_hero(hero.to_dict())

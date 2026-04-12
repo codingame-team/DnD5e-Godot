@@ -1,0 +1,17 @@
+{
+  "index": "weapon",
+  "name": "Weapon, +1, +2, or +3",
+  "category": "magic-item",
+  "cost": {},
+  "weight": 0,
+  "desc": [
+    "Weapon (any), uncommon (+1), rare (+2), or very rare (+3)",
+    "You have a bonus to attack and damage rolls made with this magic weapon. The bonus is determined by the weapon's rarity."
+  ],
+  "damage": {},
+  "armor_class": {},
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

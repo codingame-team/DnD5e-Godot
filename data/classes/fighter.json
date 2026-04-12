@@ -1,0 +1,17 @@
+{
+  "index": "fighter",
+  "name": "Fighter",
+  "hit_die": 10,
+  "saving_throws": [
+    "str",
+    "con"
+  ],
+  "proficiencies": [
+    "all-armor",
+    "shields",
+    "simple-weapons",
+    "martial-weapons"
+  ],
+  "spellcasting": null,
+  "levels": []
+}

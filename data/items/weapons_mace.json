@@ -1,0 +1,26 @@
+{
+  "index": "mace",
+  "name": "Mace",
+  "category": "weapon",
+  "cost": {
+    "quantity": 5,
+    "unit": "gp"
+  },
+  "weight": 4,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d6",
+    "damage_type": {
+      "index": "bludgeoning",
+      "name": "Bludgeoning",
+      "url": "/api/damage-types/bludgeoning"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "monk"
+  ],
+  "weapon_range": "Melee",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

@@ -1,0 +1,15 @@
+{
+  "index": "monk",
+  "name": "Monk",
+  "hit_die": 8,
+  "saving_throws": [
+    "str",
+    "dex"
+  ],
+  "proficiencies": [
+    "simple-weapons",
+    "shortswords"
+  ],
+  "spellcasting": null,
+  "levels": []
+}

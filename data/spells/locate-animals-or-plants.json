@@ -1,0 +1,24 @@
+{
+  "index": "locate-animals-or-plants",
+  "name": "Locate Animals or Plants",
+  "level": 2,
+  "school": "Divination",
+  "casting_time": "1 action",
+  "range": "Self",
+  "duration": "Instantaneous",
+  "concentration": "False",
+  "ritual": "True",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "desc": "Describe or name a specific kind of beast or plant. Concentrating on the voice of nature in your surroundings, you learn the direction and distance to the closest creature or plant of that kind within 5 miles, if any are present.",
+  "damage": {},
+  "dc": {},
+  "classes": [
+    "bard",
+    "druid",
+    "ranger"
+  ]
+}

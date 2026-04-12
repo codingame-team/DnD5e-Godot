@@ -1,0 +1,31 @@
+{
+  "index": "scorching-ray",
+  "name": "Scorching Ray",
+  "level": 2,
+  "school": "Evocation",
+  "casting_time": "1 action",
+  "range": "120 feet",
+  "duration": "Instantaneous",
+  "concentration": "False",
+  "ritual": "False",
+  "components": [
+    "V",
+    "S"
+  ],
+  "desc": "You create three rays of fire and hurl them at targets within range. You can hurl them at one target or several. Make a ranged spell attack for each ray. On a hit, the target takes 2d6 fire damage.",
+  "damage": {
+    "damage_type": {
+      "index": "fire",
+      "name": "Fire",
+      "url": "/api/damage-types/fire"
+    },
+    "damage_at_slot_level": {
+      "2": "2d6"
+    }
+  },
+  "dc": {},
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "index": "false-life",
+  "name": "False Life",
+  "level": 1,
+  "school": "Necromancy",
+  "casting_time": "1 action",
+  "range": "Self",
+  "duration": "1 hour",
+  "concentration": "False",
+  "ritual": "False",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "desc": "Bolstering yourself with a necromantic facsimile of life, you gain 1d4 + 4 temporary hit points for the duration.",
+  "damage": {},
+  "dc": {},
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ]
+}

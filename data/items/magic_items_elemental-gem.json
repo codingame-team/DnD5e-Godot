@@ -1,0 +1,23 @@
+{
+  "index": "elemental-gem",
+  "name": "Elemental Gem",
+  "category": "magic-item",
+  "cost": {},
+  "weight": 0,
+  "desc": [
+    "Wondrous item, uncommon",
+    "This gem contains a mote of elemental energy. When you use an action to break the gem, an elemental is summoned as if you had cast the conjure elemental spell, and the gem's magic is lost. The type of gem determines the elemental summoned by the spell.",
+    "| Gem | Summoned Elemental |",
+    "|---|---|",
+    "| Blue sapphire | Air elemental |",
+    "| Yellow diamond | Earth elemental |",
+    "| Red corundum | Fire elemental |",
+    "| Emerald | Water elemental |"
+  ],
+  "damage": {},
+  "armor_class": {},
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

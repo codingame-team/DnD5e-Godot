@@ -1,0 +1,27 @@
+{
+  "index": "quarterstaff",
+  "name": "Quarterstaff",
+  "category": "weapon",
+  "cost": {
+    "quantity": 2,
+    "unit": "sp"
+  },
+  "weight": 4,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d6",
+    "damage_type": {
+      "index": "bludgeoning",
+      "name": "Bludgeoning",
+      "url": "/api/damage-types/bludgeoning"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "versatile",
+    "monk"
+  ],
+  "weapon_range": "Melee",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

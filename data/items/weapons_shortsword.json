@@ -1,0 +1,28 @@
+{
+  "index": "shortsword",
+  "name": "Shortsword",
+  "category": "weapon",
+  "cost": {
+    "quantity": 10,
+    "unit": "gp"
+  },
+  "weight": 2,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d6",
+    "damage_type": {
+      "index": "piercing",
+      "name": "Piercing",
+      "url": "/api/damage-types/piercing"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "finesse",
+    "light",
+    "monk"
+  ],
+  "weapon_range": "Melee",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

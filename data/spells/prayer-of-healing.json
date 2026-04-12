@@ -1,0 +1,20 @@
+{
+  "index": "prayer-of-healing",
+  "name": "Prayer of Healing",
+  "level": 2,
+  "school": "Evocation",
+  "casting_time": "10 minutes",
+  "range": "30 feet",
+  "duration": "Instantaneous",
+  "concentration": "False",
+  "ritual": "False",
+  "components": [
+    "V"
+  ],
+  "desc": "Up to six creatures of your choice that you can see within range each regain hit points equal to 2d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.",
+  "damage": {},
+  "dc": {},
+  "classes": [
+    "cleric"
+  ]
+}

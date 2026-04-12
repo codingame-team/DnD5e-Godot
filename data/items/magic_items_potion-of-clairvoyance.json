@@ -1,0 +1,17 @@
+{
+  "index": "potion-of-clairvoyance",
+  "name": "Potion of Clairvoyance",
+  "category": "magic-item",
+  "cost": {},
+  "weight": 0,
+  "desc": [
+    "Potion, rare",
+    "When you drink this potion, you gain the effect of the clairvoyance spell. An eyeball bobs in this yellowish liquid but vanishes when the potion is opened."
+  ],
+  "damage": {},
+  "armor_class": {},
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

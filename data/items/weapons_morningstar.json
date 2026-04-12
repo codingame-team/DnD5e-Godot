@@ -1,0 +1,24 @@
+{
+  "index": "morningstar",
+  "name": "Morningstar",
+  "category": "weapon",
+  "cost": {
+    "quantity": 15,
+    "unit": "gp"
+  },
+  "weight": 4,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d8",
+    "damage_type": {
+      "index": "piercing",
+      "name": "Piercing",
+      "url": "/api/damage-types/piercing"
+    }
+  },
+  "armor_class": {},
+  "properties": [],
+  "weapon_range": "Melee",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

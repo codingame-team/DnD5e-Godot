@@ -1,0 +1,21 @@
+{
+  "index": "chain-shirt",
+  "name": "Chain Shirt",
+  "category": "armor",
+  "cost": {
+    "quantity": 50,
+    "unit": "gp"
+  },
+  "weight": 20,
+  "desc": [],
+  "damage": {},
+  "armor_class": {
+    "base": 13,
+    "dex_bonus": "True",
+    "max_bonus": 2
+  },
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": "False"
+}

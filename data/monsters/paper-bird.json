@@ -1,0 +1,1 @@
+{"index":"paper-bird","name":"Paper Bird","size":"T","type":"construct","cr":0.0,"xp":10,"hp":{"average":1,"formula":"1d4 - 1"},"hp_roll":"{'average': 1, 'formula': '1d4 - 1'}","ac":13,"speed":10,"abilities":{"str":10,"dex":10,"con":10,"int":10,"wis":10,"cha":10},"actions":[],"reactions":[],"legendary_actions":[],"traits":[],"senses":[],"languages":[],"proficiencies":[]}

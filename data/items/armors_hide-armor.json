@@ -1,0 +1,21 @@
+{
+  "index": "hide-armor",
+  "name": "Hide Armor",
+  "category": "armor",
+  "cost": {
+    "quantity": 10,
+    "unit": "gp"
+  },
+  "weight": 12,
+  "desc": [],
+  "damage": {},
+  "armor_class": {
+    "base": 12,
+    "dex_bonus": "True",
+    "max_bonus": 2
+  },
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": "False"
+}

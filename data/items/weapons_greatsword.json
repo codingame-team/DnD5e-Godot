@@ -1,0 +1,27 @@
+{
+  "index": "greatsword",
+  "name": "Greatsword",
+  "category": "weapon",
+  "cost": {
+    "quantity": 50,
+    "unit": "gp"
+  },
+  "weight": 6,
+  "desc": [],
+  "damage": {
+    "damage_dice": "2d6",
+    "damage_type": {
+      "index": "slashing",
+      "name": "Slashing",
+      "url": "/api/damage-types/slashing"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "heavy",
+    "two-handed"
+  ],
+  "weapon_range": "Melee",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

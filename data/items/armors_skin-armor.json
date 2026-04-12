@@ -1,0 +1,21 @@
+{
+  "index": "skin-armor",
+  "name": "Skin Armor",
+  "category": "armor",
+  "cost": {
+    "quantity": 0,
+    "unit": "gp"
+  },
+  "weight": 0,
+  "desc": [],
+  "damage": {},
+  "armor_class": {
+    "base": 10,
+    "dex_bonus": "True",
+    "max_bonus": "None"
+  },
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": "False"
+}

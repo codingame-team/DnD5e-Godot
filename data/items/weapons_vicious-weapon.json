@@ -1,0 +1,17 @@
+{
+  "index": "vicious-weapon",
+  "name": "Vicious Weapon",
+  "category": "weapon",
+  "cost": {},
+  "weight": 0,
+  "desc": [
+    "Weapon (any), rare",
+    "When you roll a 20 on your attack roll with this magic weapon, your critical hit deals an extra 2d6 damage of the weapon's type."
+  ],
+  "damage": {},
+  "armor_class": {},
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

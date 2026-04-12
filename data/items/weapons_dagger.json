@@ -1,0 +1,29 @@
+{
+  "index": "dagger",
+  "name": "Dagger",
+  "category": "weapon",
+  "cost": {
+    "quantity": 2,
+    "unit": "gp"
+  },
+  "weight": 1,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d4",
+    "damage_type": {
+      "index": "piercing",
+      "name": "Piercing",
+      "url": "/api/damage-types/piercing"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "finesse",
+    "light",
+    "thrown",
+    "monk"
+  ],
+  "weapon_range": "Melee",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

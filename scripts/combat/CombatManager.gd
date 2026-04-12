@@ -1,6 +1,7 @@
 ## CombatManager.gd
 ## Logique de résolution de combat D&D 5e (attaque, sorts, déplacement).
 ## Communique avec TurnManager pour l'ordre des tours.
+class_name CombatManager
 extends Node
 
 signal attack_resolved(attacker: String, target: String, result: Dictionary)

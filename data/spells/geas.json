@@ -1,0 +1,31 @@
+{
+  "index": "geas",
+  "name": "Geas",
+  "level": 5,
+  "school": "Enchantment",
+  "casting_time": "1 minute",
+  "range": "60 feet",
+  "duration": "30 days",
+  "concentration": "False",
+  "ritual": "False",
+  "components": [
+    "V"
+  ],
+  "desc": "You place a magical command on a creature that you can see within range, forcing it to carry out some service or refrain from some action or course of activity as you decide. If the creature can understand you, it must succeed on a wisdom saving throw or become charmed by you for the duration. While the creature is charmed by you, it takes 5d10 psychic damage each time it acts in a manner directly counter to your instructions, but no more than once each day. A creature that can't understand you is unaffected by the spell. You can issue any command you choose, short of an activity that would result in certain death. Should you issue a suicidal command, the spell ends. You can end the spell early by using an action to dismiss it. A remove curse, greater restoration, or wish spell also ends it.",
+  "damage": {},
+  "dc": {
+    "dc_type": {
+      "index": "wis",
+      "name": "WIS",
+      "url": "/api/ability-scores/wis"
+    },
+    "dc_success": "none"
+  },
+  "classes": [
+    "bard",
+    "cleric",
+    "druid",
+    "paladin",
+    "wizard"
+  ]
+}

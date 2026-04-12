@@ -1,0 +1,21 @@
+{
+  "index": "scale-mail",
+  "name": "Scale Mail",
+  "category": "armor",
+  "cost": {
+    "quantity": 50,
+    "unit": "gp"
+  },
+  "weight": 45,
+  "desc": [],
+  "damage": {},
+  "armor_class": {
+    "base": 14,
+    "dex_bonus": "True",
+    "max_bonus": 2
+  },
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": "True"
+}

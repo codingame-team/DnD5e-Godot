@@ -1,0 +1,1 @@
+{"index":"troll-limb","name":"Troll Limb","size":"S","type":"giant","cr":0.5,"xp":50,"hp":{"average":14,"formula":"4d6"},"hp_roll":"{'average': 14, 'formula': '4d6'}","ac":13,"speed":20,"abilities":{"str":10,"dex":10,"con":10,"int":10,"wis":10,"cha":10},"actions":[],"reactions":[],"legendary_actions":[],"traits":[],"senses":["Darkvision 60 ft."],"languages":[],"proficiencies":[]}

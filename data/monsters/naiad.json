@@ -1,0 +1,1 @@
+{"index":"naiad","name":"Naiad","size":"M","type":"fey","cr":2.0,"xp":200,"hp":{"average":31,"formula":"7d8"},"hp_roll":"{'average': 31, 'formula': '7d8'}","ac":15,"speed":30,"abilities":{"str":10,"dex":10,"con":10,"int":10,"wis":10,"cha":10},"actions":[],"reactions":[],"legendary_actions":[],"traits":[],"senses":[],"languages":["Common","Sylvan"],"proficiencies":[]}

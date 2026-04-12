@@ -1,0 +1,25 @@
+{
+  "index": "water-breathing",
+  "name": "Water Breathing",
+  "level": 3,
+  "school": "Transmutation",
+  "casting_time": "1 action",
+  "range": "30 feet",
+  "duration": "24 hours",
+  "concentration": "False",
+  "ritual": "True",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "desc": "This spell gives a maximum of ten willing creatures within range and you can see, the ability to breathe underwater until the end of its term. Affected creatures also retain their normal breathing pattern.",
+  "damage": {},
+  "dc": {},
+  "classes": [
+    "druid",
+    "ranger",
+    "sorcerer",
+    "wizard"
+  ]
+}

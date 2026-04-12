@@ -1,0 +1,22 @@
+{
+  "index": "healing-word",
+  "name": "Healing Word",
+  "level": 1,
+  "school": "Evocation",
+  "casting_time": "1 bonus action",
+  "range": "60 feet",
+  "duration": "Instantaneous",
+  "concentration": "False",
+  "ritual": "False",
+  "components": [
+    "V"
+  ],
+  "desc": "A creature of your choice that you can see within range regains hit points equal to 1d4 + your spellcasting ability modifier. This spell has no effect on undead or constructs.",
+  "damage": {},
+  "dc": {},
+  "classes": [
+    "bard",
+    "cleric",
+    "druid"
+  ]
+}

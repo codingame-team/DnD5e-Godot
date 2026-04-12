@@ -1,0 +1,26 @@
+{
+  "index": "rapier",
+  "name": "Rapier",
+  "category": "weapon",
+  "cost": {
+    "quantity": 25,
+    "unit": "gp"
+  },
+  "weight": 2,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d8",
+    "damage_type": {
+      "index": "piercing",
+      "name": "Piercing",
+      "url": "/api/damage-types/piercing"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "finesse"
+  ],
+  "weapon_range": "Melee",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

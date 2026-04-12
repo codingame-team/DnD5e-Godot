@@ -1,0 +1,1 @@
+{"index":"clawfoot","name":"Clawfoot","size":"M","type":"beast","cr":1.0,"xp":100,"hp":{"average":19,"formula":"3d8 + 6"},"hp_roll":"{'average': 19, 'formula': '3d8 + 6'}","ac":13,"speed":40,"abilities":{"str":10,"dex":10,"con":10,"int":10,"wis":10,"cha":10},"actions":[],"reactions":[],"legendary_actions":[],"traits":[],"senses":[],"languages":[],"proficiencies":[]}

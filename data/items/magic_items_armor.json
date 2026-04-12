@@ -1,0 +1,17 @@
+{
+  "index": "armor",
+  "name": "Armor, +1, +2, or +3",
+  "category": "magic-item",
+  "cost": {},
+  "weight": 0,
+  "desc": [
+    "Armor (light, medium, or heavy), rare (+1), very rare (+2), or legendary (+3)",
+    "You have a bonus to AC while wearing this armor. The bonus is determined by its rarity."
+  ],
+  "damage": {},
+  "armor_class": {},
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

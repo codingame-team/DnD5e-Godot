@@ -1,0 +1,62 @@
+[
+  {
+    "index": "barbarian",
+    "name": "Barbarian",
+    "hit_die": 12
+  },
+  {
+    "index": "bard",
+    "name": "Bard",
+    "hit_die": 8
+  },
+  {
+    "index": "cleric",
+    "name": "Cleric",
+    "hit_die": 8
+  },
+  {
+    "index": "druid",
+    "name": "Druid",
+    "hit_die": 8
+  },
+  {
+    "index": "fighter",
+    "name": "Fighter",
+    "hit_die": 10
+  },
+  {
+    "index": "monk",
+    "name": "Monk",
+    "hit_die": 8
+  },
+  {
+    "index": "paladin",
+    "name": "Paladin",
+    "hit_die": 10
+  },
+  {
+    "index": "ranger",
+    "name": "Ranger",
+    "hit_die": 10
+  },
+  {
+    "index": "rogue",
+    "name": "Rogue",
+    "hit_die": 8
+  },
+  {
+    "index": "sorcerer",
+    "name": "Sorcerer",
+    "hit_die": 6
+  },
+  {
+    "index": "warlock",
+    "name": "Warlock",
+    "hit_die": 8
+  },
+  {
+    "index": "wizard",
+    "name": "Wizard",
+    "hit_die": 6
+  }
+]

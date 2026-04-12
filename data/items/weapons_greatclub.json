@@ -1,0 +1,26 @@
+{
+  "index": "greatclub",
+  "name": "Greatclub",
+  "category": "weapon",
+  "cost": {
+    "quantity": 2,
+    "unit": "sp"
+  },
+  "weight": 10,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d8",
+    "damage_type": {
+      "index": "bludgeoning",
+      "name": "Bludgeoning",
+      "url": "/api/damage-types/bludgeoning"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "two-handed"
+  ],
+  "weapon_range": "Melee",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

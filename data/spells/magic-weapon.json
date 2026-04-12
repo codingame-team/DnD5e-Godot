@@ -1,0 +1,22 @@
+{
+  "index": "magic-weapon",
+  "name": "Magic Weapon",
+  "level": 2,
+  "school": "Transmutation",
+  "casting_time": "1 bonus action",
+  "range": "Touch",
+  "duration": "Up to 1 hour",
+  "concentration": "True",
+  "ritual": "False",
+  "components": [
+    "V",
+    "S"
+  ],
+  "desc": "You touch a nonmagical weapon. Until the spell ends, that weapon becomes a magic weapon with a +1 bonus to attack rolls and damage rolls.",
+  "damage": {},
+  "dc": {},
+  "classes": [
+    "paladin",
+    "wizard"
+  ]
+}

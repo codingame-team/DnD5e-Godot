@@ -1,0 +1,27 @@
+{
+  "index": "dart",
+  "name": "Dart",
+  "category": "weapon",
+  "cost": {
+    "quantity": 5,
+    "unit": "cp"
+  },
+  "weight": 0.25,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d4",
+    "damage_type": {
+      "index": "piercing",
+      "name": "Piercing",
+      "url": "/api/damage-types/piercing"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "finesse",
+    "thrown"
+  ],
+  "weapon_range": "Ranged",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

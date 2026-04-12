@@ -64,7 +64,7 @@ func _build_grid() -> void:
 func _load_combatants() -> void:
 	# Charger les héros depuis GameManager
 	for h_dict in GameManager.party:
-		var cls_data := DataManager.get_class(h_dict.get("class_index", "fighter"))
+		var cls_data := DataManager.get_class_data(h_dict.get("class_index", "fighter"))
 		var hero := HeroData.from_class_data(cls_data, h_dict.get("name","Héros"))
 		hero.hp = h_dict.get("hp", hero.max_hp)
 		heroes.append(hero)
@@ -151,20 +151,24 @@ func _on_round_started(round_num: int) -> void:
 		GameManager.end_combat(false)
 
 func _ai_monster_turn(combatant: Dictionary) -> void:
-	var name: String = combatant.get("name", "")
-	var monster := _get_monster_by_name(name)
+	var cname: String = combatant.get("name", "")
+	var monster: MonsterData = _get_monster_by_name(cname)
 	if monster == null or heroes.is_empty():
 		TurnManager.end_current_turn()
 		return
-	# Cibler le héros le plus faible
-	var target := heroes.filter(func(h): return h.is_alive()).reduce(
-		func(best, h): return h if h.hp < best.hp else best, heroes[0])
-	if target and target.is_alive():
-		var result := combat_manager.resolve_monster_attack(monster, target)
+	# Cibler le héros vivant le plus faible
+	var alive: Array = heroes.filter(func(h: HeroData): return h.is_alive())
+	if alive.is_empty():
+		TurnManager.end_current_turn()
+		return
+	var target: HeroData = alive.reduce(
+		func(best: HeroData, h: HeroData): return h if h.hp < best.hp else best)
+	if target != null and target.is_alive():
+		var result: Dictionary = combat_manager.resolve_monster_attack(monster, target)
 		if result.get("hit", false):
-			_log("[color=red]%s touche %s : %d dégâts ![/color]" % [name, target.name, result.get("damage",0)])
+			_log("[color=red]%s touche %s : %d dégâts ![/color]" % [cname, target.name, result.get("damage",0)])
 		else:
-			_log("%s attaque %s et rate (roll %d)." % [name, target.name, result.get("roll",0)])
+			_log("%s attaque %s et rate (roll %d)." % [cname, target.name, result.get("roll",0)])
 	TurnManager.end_current_turn()
 
 func _end_turn() -> void:
@@ -173,8 +177,8 @@ func _end_turn() -> void:
 	_check_victory()
 
 func _check_victory() -> void:
-	var alive_monsters := monsters.filter(func(m): return m.is_alive())
-	var alive_heroes   := heroes.filter(func(h): return h.is_alive())
+	var alive_monsters: Array = monsters.filter(func(m: MonsterData): return m.is_alive())
+	var alive_heroes: Array   = heroes.filter(func(h: HeroData): return h.is_alive())
 	if alive_monsters.is_empty():
 		_log("[color=lime][b]Victoire ! Tous les ennemis sont vaincus.[/b][/color]")
 		await get_tree().create_timer(2.0).timeout
@@ -209,14 +213,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			_try_move_at_mouse()
 
 func _try_attack_at_mouse() -> void:
-	# Raycast simple : chercher le monstre le plus proche du curseur
 	if heroes.is_empty() or monsters.is_empty():
 		return
-	var hero    := _get_current_hero()
-	var monster := monsters.filter(func(m): return m.is_alive())[0] if monsters.any(func(m): return m.is_alive()) else null
+	var hero: HeroData = _get_current_hero()
+	var alive_m: Array = monsters.filter(func(m: MonsterData): return m.is_alive())
+	var monster: MonsterData = alive_m[0] if not alive_m.is_empty() else null
 	if hero == null or monster == null:
 		return
-	var result := combat_manager.resolve_attack(hero, monster)
+	var result: Dictionary = combat_manager.resolve_attack(hero, monster)
 	if result.has("error"):
 		_log("[color=orange]%s[/color]" % result["error"])
 	_pending_action = ""
@@ -241,7 +245,7 @@ func _update_initiative_ui() -> void:
 	for combatant in TurnManager.initiative_order:
 		var lbl := Label.new()
 		lbl.text = "%s [%d]" % [combatant.get("name","?"), combatant.get("_initiative",0)]
-		lbl.theme_override_font_sizes = {"font_size": 13}
+		lbl.add_theme_font_size_override("font_size", 13)
 		initiative_list.add_child(lbl)
 
 func _update_piece_colors() -> void:

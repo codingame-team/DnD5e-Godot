@@ -1,0 +1,17 @@
+{
+  "index": "mantle-of-spell-resistance",
+  "name": "Mantle of Spell Resistance",
+  "category": "magic-item",
+  "cost": {},
+  "weight": 0,
+  "desc": [
+    "Wondrous item, rare (requires attunement)",
+    "You have advantage on saving throws against spells while you wear this cloak."
+  ],
+  "damage": {},
+  "armor_class": {},
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

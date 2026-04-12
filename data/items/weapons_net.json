@@ -1,0 +1,20 @@
+{
+  "index": "net",
+  "name": "Net",
+  "category": "weapon",
+  "cost": {
+    "quantity": 1,
+    "unit": "gp"
+  },
+  "weight": 3,
+  "desc": [],
+  "damage": {},
+  "armor_class": {},
+  "properties": [
+    "thrown",
+    "special"
+  ],
+  "weapon_range": "Ranged",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

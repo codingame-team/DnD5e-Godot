@@ -1,0 +1,17 @@
+{
+  "index": "helm-of-comprehending-languages",
+  "name": "Helm of Comprehending Languages",
+  "category": "magic-item",
+  "cost": {},
+  "weight": 0,
+  "desc": [
+    "Wondrous item, uncommon",
+    "While wearing this helm, you can use an action to cast the comprehend languages spell from it at will."
+  ],
+  "damage": {},
+  "armor_class": {},
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

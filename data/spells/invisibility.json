@@ -1,0 +1,25 @@
+{
+  "index": "invisibility",
+  "name": "Invisibility",
+  "level": 2,
+  "school": "Illusion",
+  "casting_time": "1 action",
+  "range": "Touch",
+  "duration": "Up to 1 hour",
+  "concentration": "True",
+  "ritual": "False",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "desc": "A creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target's person. The spell ends for a target that attacks or casts a spell.",
+  "damage": {},
+  "dc": {},
+  "classes": [
+    "bard",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ]
+}

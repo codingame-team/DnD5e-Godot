@@ -74,10 +74,11 @@ func load_game(slot: int = 0) -> bool:
 	if not FileAccess.file_exists(path):
 		return false
 	var file := FileAccess.open(path, FileAccess.READ)
-	var result := JSON.parse_string(file.get_as_text())
-	if result == null:
+	var result: Variant = JSON.parse_string(file.get_as_text())
+	if result == null or not result is Dictionary:
 		return false
-	party  = result.get("party", [])
-	gold   = result.get("gold", 0)
-	round_number = result.get("round", 0)
+	var data := result as Dictionary
+	party  = data.get("party", [])
+	gold   = data.get("gold", 0)
+	round_number = data.get("round", 0)
 	return true

@@ -1,0 +1,21 @@
+{
+  "index": "half-plate-armor",
+  "name": "Half Plate Armor",
+  "category": "armor",
+  "cost": {
+    "quantity": 750,
+    "unit": "gp"
+  },
+  "weight": 40,
+  "desc": [],
+  "damage": {},
+  "armor_class": {
+    "base": 15,
+    "dex_bonus": "True",
+    "max_bonus": 2
+  },
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": "True"
+}

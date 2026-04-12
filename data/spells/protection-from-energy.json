@@ -1,0 +1,25 @@
+{
+  "index": "protection-from-energy",
+  "name": "Protection From Energy",
+  "level": 3,
+  "school": "Abjuration",
+  "casting_time": "1 action",
+  "range": "Touch",
+  "duration": "Up to 1 hour",
+  "concentration": "True",
+  "ritual": "False",
+  "components": [
+    "V",
+    "S"
+  ],
+  "desc": "For the duration, the willing creature you touch has resistance to one damage type of your choice: acid, cold, fire, lightning, or thunder.",
+  "damage": {},
+  "dc": {},
+  "classes": [
+    "cleric",
+    "druid",
+    "ranger",
+    "sorcerer",
+    "wizard"
+  ]
+}

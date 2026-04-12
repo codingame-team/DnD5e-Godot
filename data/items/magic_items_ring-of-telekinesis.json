@@ -1,0 +1,17 @@
+{
+  "index": "ring-of-telekinesis",
+  "name": "Ring of Telekinesis",
+  "category": "magic-item",
+  "cost": {},
+  "weight": 0,
+  "desc": [
+    "Ring, very rare (requires attunement)",
+    "While wearing this ring, you can cast the telekinesis spell at will, but you can target only objects that aren't being worn or carried."
+  ],
+  "damage": {},
+  "armor_class": {},
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

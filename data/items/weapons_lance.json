@@ -1,0 +1,27 @@
+{
+  "index": "lance",
+  "name": "Lance",
+  "category": "weapon",
+  "cost": {
+    "quantity": 10,
+    "unit": "gp"
+  },
+  "weight": 6,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d12",
+    "damage_type": {
+      "index": "piercing",
+      "name": "Piercing",
+      "url": "/api/damage-types/piercing"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "reach",
+    "special"
+  ],
+  "weapon_range": "Melee",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

@@ -1,0 +1,21 @@
+{
+  "index": "leather-armor",
+  "name": "Leather Armor",
+  "category": "armor",
+  "cost": {
+    "quantity": 10,
+    "unit": "gp"
+  },
+  "weight": 10,
+  "desc": [],
+  "damage": {},
+  "armor_class": {
+    "base": 11,
+    "dex_bonus": "True",
+    "max_bonus": "None"
+  },
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": "False"
+}

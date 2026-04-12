@@ -1,0 +1,26 @@
+{
+  "index": "warhammer",
+  "name": "Warhammer",
+  "category": "weapon",
+  "cost": {
+    "quantity": 15,
+    "unit": "gp"
+  },
+  "weight": 2,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d8",
+    "damage_type": {
+      "index": "bludgeoning",
+      "name": "Bludgeoning",
+      "url": "/api/damage-types/bludgeoning"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "versatile"
+  ],
+  "weapon_range": "Melee",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

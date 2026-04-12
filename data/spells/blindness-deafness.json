@@ -1,0 +1,30 @@
+{
+  "index": "blindness-deafness",
+  "name": "Blindness/Deafness",
+  "level": 2,
+  "school": "Necromancy",
+  "casting_time": "1 action",
+  "range": "30 feet",
+  "duration": "1 minute",
+  "concentration": "False",
+  "ritual": "False",
+  "components": [
+    "V"
+  ],
+  "desc": "You can blind or deafen a foe. Choose one creature that you can see within range to make a constitution saving throw. If it fails, the target is either blinded or deafened (your choice) for the duration. At the end of each of its turns, the target can make a constitution saving throw. On a success, the spell ends.",
+  "damage": {},
+  "dc": {
+    "dc_type": {
+      "index": "con",
+      "name": "CON",
+      "url": "/api/ability-scores/con"
+    },
+    "dc_success": "none"
+  },
+  "classes": [
+    "bard",
+    "cleric",
+    "sorcerer",
+    "wizard"
+  ]
+}

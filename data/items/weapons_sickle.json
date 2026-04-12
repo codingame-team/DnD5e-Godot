@@ -1,0 +1,27 @@
+{
+  "index": "sickle",
+  "name": "Sickle",
+  "category": "weapon",
+  "cost": {
+    "quantity": 1,
+    "unit": "gp"
+  },
+  "weight": 2,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d4",
+    "damage_type": {
+      "index": "slashing",
+      "name": "Slashing",
+      "url": "/api/damage-types/slashing"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "light",
+    "monk"
+  ],
+  "weapon_range": "Melee",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

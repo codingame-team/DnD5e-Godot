@@ -1,0 +1,28 @@
+{
+  "index": "crossbow-hand",
+  "name": "Crossbow, hand",
+  "category": "weapon",
+  "cost": {
+    "quantity": 75,
+    "unit": "gp"
+  },
+  "weight": 3,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d6",
+    "damage_type": {
+      "index": "piercing",
+      "name": "Piercing",
+      "url": "/api/damage-types/piercing"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "ammunition",
+    "light",
+    "loading"
+  ],
+  "weapon_range": "Ranged",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

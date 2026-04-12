@@ -1,0 +1,25 @@
+{
+  "index": "jump",
+  "name": "Jump",
+  "level": 1,
+  "school": "Transmutation",
+  "casting_time": "1 action",
+  "range": "Touch",
+  "duration": "1 minute",
+  "concentration": "False",
+  "ritual": "False",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "desc": "You touch a creature. The creature's jump distance is tripled until the spell ends.",
+  "damage": {},
+  "dc": {},
+  "classes": [
+    "druid",
+    "ranger",
+    "sorcerer",
+    "wizard"
+  ]
+}

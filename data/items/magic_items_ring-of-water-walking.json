@@ -1,0 +1,17 @@
+{
+  "index": "ring-of-water-walking",
+  "name": "Ring of Water Walking",
+  "category": "magic-item",
+  "cost": {},
+  "weight": 0,
+  "desc": [
+    "Ring, uncommon",
+    "While wearing this ring, you can stand on and move across any liquid surface as if it were solid ground."
+  ],
+  "damage": {},
+  "armor_class": {},
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

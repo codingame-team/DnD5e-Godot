@@ -1,0 +1,24 @@
+{
+  "index": "fog-cloud",
+  "name": "Fog Cloud",
+  "level": 1,
+  "school": "Conjuration",
+  "casting_time": "1 action",
+  "range": "120 feet",
+  "duration": "Up to 1 hour",
+  "concentration": "True",
+  "ritual": "False",
+  "components": [
+    "V",
+    "S"
+  ],
+  "desc": "You create a 20-foot-radius sphere of fog centered on a point within range. The sphere spreads around corners, and its area is heavily obscured. It lasts for the duration or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it.",
+  "damage": {},
+  "dc": {},
+  "classes": [
+    "druid",
+    "ranger",
+    "sorcerer",
+    "wizard"
+  ]
+}

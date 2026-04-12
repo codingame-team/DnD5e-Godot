@@ -1,0 +1,24 @@
+{
+  "index": "flail",
+  "name": "Flail",
+  "category": "weapon",
+  "cost": {
+    "quantity": 10,
+    "unit": "gp"
+  },
+  "weight": 2,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d8",
+    "damage_type": {
+      "index": "bludgeoning",
+      "name": "Bludgeoning",
+      "url": "/api/damage-types/bludgeoning"
+    }
+  },
+  "armor_class": {},
+  "properties": [],
+  "weapon_range": "Melee",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

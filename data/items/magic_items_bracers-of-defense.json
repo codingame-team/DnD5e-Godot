@@ -1,0 +1,17 @@
+{
+  "index": "bracers-of-defense",
+  "name": "Bracers of Defense",
+  "category": "magic-item",
+  "cost": {},
+  "weight": 0,
+  "desc": [
+    "Wondous item, rare (requires attunement)",
+    "While wearing these bracers, you gain a +2 bonus to AC if you are wearing no armor and using no shield."
+  ],
+  "damage": {},
+  "armor_class": {},
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

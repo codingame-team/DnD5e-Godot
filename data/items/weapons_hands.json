@@ -1,0 +1,26 @@
+{
+  "index": "hands",
+  "name": "Hands",
+  "category": "weapon",
+  "cost": {
+    "quantity": 0,
+    "unit": "gp"
+  },
+  "weight": 0,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d2",
+    "damage_type": {
+      "index": "slashing",
+      "name": "Slashing",
+      "url": "/api/damage-types/slashing"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "versatile"
+  ],
+  "weapon_range": "Melee",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

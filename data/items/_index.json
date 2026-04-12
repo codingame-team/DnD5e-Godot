@@ -1,0 +1,1672 @@
+[
+  {
+    "index": "battleaxe",
+    "name": "Battleaxe",
+    "category": "weapons"
+  },
+  {
+    "index": "berserker-axe",
+    "name": "Berserker Axe",
+    "category": "weapons"
+  },
+  {
+    "index": "blowgun",
+    "name": "Blowgun",
+    "category": "weapons"
+  },
+  {
+    "index": "club",
+    "name": "Club",
+    "category": "weapons"
+  },
+  {
+    "index": "crossbow-hand",
+    "name": "Crossbow, hand",
+    "category": "weapons"
+  },
+  {
+    "index": "crossbow-heavy",
+    "name": "Crossbow, heavy",
+    "category": "weapons"
+  },
+  {
+    "index": "crossbow-light",
+    "name": "Crossbow, light",
+    "category": "weapons"
+  },
+  {
+    "index": "dagger-of-venom",
+    "name": "Dagger of Venom",
+    "category": "weapons"
+  },
+  {
+    "index": "dagger",
+    "name": "Dagger",
+    "category": "weapons"
+  },
+  {
+    "index": "dancing-sword",
+    "name": "Dancing Sword",
+    "category": "weapons"
+  },
+  {
+    "index": "dart",
+    "name": "Dart",
+    "category": "weapons"
+  },
+  {
+    "index": "defender",
+    "name": "Defender",
+    "category": "weapons"
+  },
+  {
+    "index": "dragon-slayer",
+    "name": "Dragon Slayer",
+    "category": "weapons"
+  },
+  {
+    "index": "dwarven-thrower",
+    "name": "Dwarven Thrower",
+    "category": "weapons"
+  },
+  {
+    "index": "flail",
+    "name": "Flail",
+    "category": "weapons"
+  },
+  {
+    "index": "flame-tongue",
+    "name": "Flame Tongue",
+    "category": "weapons"
+  },
+  {
+    "index": "frost-brand",
+    "name": "Frost Brand",
+    "category": "weapons"
+  },
+  {
+    "index": "giant-slayer",
+    "name": "Giant Slayer",
+    "category": "weapons"
+  },
+  {
+    "index": "glaive",
+    "name": "Glaive",
+    "category": "weapons"
+  },
+  {
+    "index": "greataxe",
+    "name": "Greataxe",
+    "category": "weapons"
+  },
+  {
+    "index": "greatclub",
+    "name": "Greatclub",
+    "category": "weapons"
+  },
+  {
+    "index": "greatsword",
+    "name": "Greatsword",
+    "category": "weapons"
+  },
+  {
+    "index": "halberd",
+    "name": "Halberd",
+    "category": "weapons"
+  },
+  {
+    "index": "hammer-of-thunderbolts",
+    "name": "Hammer of Thunderbolts",
+    "category": "weapons"
+  },
+  {
+    "index": "handaxe",
+    "name": "Handaxe",
+    "category": "weapons"
+  },
+  {
+    "index": "hands",
+    "name": "Hands",
+    "category": "weapons"
+  },
+  {
+    "index": "holy-avenger",
+    "name": "Holy Avenger",
+    "category": "weapons"
+  },
+  {
+    "index": "javelin-of-lightning",
+    "name": "Javelin of Lightning",
+    "category": "weapons"
+  },
+  {
+    "index": "javelin",
+    "name": "Javelin",
+    "category": "weapons"
+  },
+  {
+    "index": "lance",
+    "name": "Lance",
+    "category": "weapons"
+  },
+  {
+    "index": "light-hammer",
+    "name": "Light hammer",
+    "category": "weapons"
+  },
+  {
+    "index": "longbow",
+    "name": "Longbow",
+    "category": "weapons"
+  },
+  {
+    "index": "longsword",
+    "name": "Longsword",
+    "category": "weapons"
+  },
+  {
+    "index": "luck-blade",
+    "name": "Luck Blade",
+    "category": "weapons"
+  },
+  {
+    "index": "mace-of-disruption",
+    "name": "Mace of Disruption",
+    "category": "weapons"
+  },
+  {
+    "index": "mace-of-smiting",
+    "name": "Mace of Smiting",
+    "category": "weapons"
+  },
+  {
+    "index": "mace-of-terror",
+    "name": "Mace of Terror",
+    "category": "weapons"
+  },
+  {
+    "index": "mace",
+    "name": "Mace",
+    "category": "weapons"
+  },
+  {
+    "index": "maul",
+    "name": "Maul",
+    "category": "weapons"
+  },
+  {
+    "index": "morningstar",
+    "name": "Morningstar",
+    "category": "weapons"
+  },
+  {
+    "index": "net",
+    "name": "Net",
+    "category": "weapons"
+  },
+  {
+    "index": "nine-lives-stealer",
+    "name": "Nine Lives Stealer",
+    "category": "weapons"
+  },
+  {
+    "index": "oathbow",
+    "name": "Oathbow",
+    "category": "weapons"
+  },
+  {
+    "index": "pike",
+    "name": "Pike",
+    "category": "weapons"
+  },
+  {
+    "index": "quarterstaff",
+    "name": "Quarterstaff",
+    "category": "weapons"
+  },
+  {
+    "index": "rapier",
+    "name": "Rapier",
+    "category": "weapons"
+  },
+  {
+    "index": "scimitar-of-speed",
+    "name": "Scimitar of Speed",
+    "category": "weapons"
+  },
+  {
+    "index": "scimitar",
+    "name": "Scimitar",
+    "category": "weapons"
+  },
+  {
+    "index": "shortbow",
+    "name": "Shortbow",
+    "category": "weapons"
+  },
+  {
+    "index": "shortsword",
+    "name": "Shortsword",
+    "category": "weapons"
+  },
+  {
+    "index": "sickle",
+    "name": "Sickle",
+    "category": "weapons"
+  },
+  {
+    "index": "sling",
+    "name": "Sling",
+    "category": "weapons"
+  },
+  {
+    "index": "spear",
+    "name": "Spear",
+    "category": "weapons"
+  },
+  {
+    "index": "sun-blade",
+    "name": "Sun Blade",
+    "category": "weapons"
+  },
+  {
+    "index": "sword-of-life-stealing",
+    "name": "Sword of Life Stealing",
+    "category": "weapons"
+  },
+  {
+    "index": "sword-of-sharpness",
+    "name": "Sword of Sharpness",
+    "category": "weapons"
+  },
+  {
+    "index": "sword-of-wounding",
+    "name": "Sword of Wounding",
+    "category": "weapons"
+  },
+  {
+    "index": "trident-of-fish-command",
+    "name": "Trident of Fish Command",
+    "category": "weapons"
+  },
+  {
+    "index": "trident",
+    "name": "Trident",
+    "category": "weapons"
+  },
+  {
+    "index": "vicious-weapon",
+    "name": "Vicious Weapon",
+    "category": "weapons"
+  },
+  {
+    "index": "vorpal-sword",
+    "name": "Vorpal Sword",
+    "category": "weapons"
+  },
+  {
+    "index": "war-pick",
+    "name": "War pick",
+    "category": "weapons"
+  },
+  {
+    "index": "warhammer",
+    "name": "Warhammer",
+    "category": "weapons"
+  },
+  {
+    "index": "weapon",
+    "name": "Weapon, +1, +2, or +3",
+    "category": "weapons"
+  },
+  {
+    "index": "whip",
+    "name": "Whip",
+    "category": "weapons"
+  },
+  {
+    "index": "adamantine-armor",
+    "name": "Adamantine Armor",
+    "category": "armors"
+  },
+  {
+    "index": "animated-shield",
+    "name": "Animated Shield",
+    "category": "armors"
+  },
+  {
+    "index": "armor-of-invulnerability",
+    "name": "Armor of Invulnerability",
+    "category": "armors"
+  },
+  {
+    "index": "armor-of-resistance",
+    "name": "Armor of Resistance",
+    "category": "armors"
+  },
+  {
+    "index": "armor-of-vulnerability",
+    "name": "Armor of Vulnerability",
+    "category": "armors"
+  },
+  {
+    "index": "armor",
+    "name": "Armor, +1, +2, or +3",
+    "category": "armors"
+  },
+  {
+    "index": "arrow-catching-shield",
+    "name": "Arrow-Catching Shield",
+    "category": "armors"
+  },
+  {
+    "index": "breastplate",
+    "name": "Breastplate",
+    "category": "armors"
+  },
+  {
+    "index": "chain-mail",
+    "name": "Chain Mail",
+    "category": "armors"
+  },
+  {
+    "index": "chain-shirt",
+    "name": "Chain Shirt",
+    "category": "armors"
+  },
+  {
+    "index": "demon-armor",
+    "name": "Demon Armor",
+    "category": "armors"
+  },
+  {
+    "index": "dragon-scale-mail",
+    "name": "Dragon Scale Mail",
+    "category": "armors"
+  },
+  {
+    "index": "dwarven-plate",
+    "name": "Dwarven Plate",
+    "category": "armors"
+  },
+  {
+    "index": "elven-chain",
+    "name": "Elven Chain",
+    "category": "armors"
+  },
+  {
+    "index": "glamoured-studded-leather-armor",
+    "name": "Glamoured Studded Leather Armor",
+    "category": "armors"
+  },
+  {
+    "index": "half-plate-armor",
+    "name": "Half Plate Armor",
+    "category": "armors"
+  },
+  {
+    "index": "hide-armor",
+    "name": "Hide Armor",
+    "category": "armors"
+  },
+  {
+    "index": "leather-armor",
+    "name": "Leather Armor",
+    "category": "armors"
+  },
+  {
+    "index": "mithral-armor",
+    "name": "Mithral Armor",
+    "category": "armors"
+  },
+  {
+    "index": "padded-armor",
+    "name": "Padded Armor",
+    "category": "armors"
+  },
+  {
+    "index": "plate-armor-of-etherealness",
+    "name": "Plate Armor of Etherealness",
+    "category": "armors"
+  },
+  {
+    "index": "plate-armor",
+    "name": "Plate Armor",
+    "category": "armors"
+  },
+  {
+    "index": "ring-mail",
+    "name": "Ring Mail",
+    "category": "armors"
+  },
+  {
+    "index": "scale-mail",
+    "name": "Scale Mail",
+    "category": "armors"
+  },
+  {
+    "index": "shield-of-missile-attraction",
+    "name": "Shield of Missile Attraction",
+    "category": "armors"
+  },
+  {
+    "index": "shield",
+    "name": "Shield",
+    "category": "armors"
+  },
+  {
+    "index": "skin-armor",
+    "name": "Skin Armor",
+    "category": "armors"
+  },
+  {
+    "index": "spellguard-shield",
+    "name": "Spellguard Shield",
+    "category": "armors"
+  },
+  {
+    "index": "splint-armor",
+    "name": "Splint Armor",
+    "category": "armors"
+  },
+  {
+    "index": "studded-leather-armor",
+    "name": "Studded Leather Armor",
+    "category": "armors"
+  },
+  {
+    "index": "adamantine-armor",
+    "name": "Adamantine Armor",
+    "category": "magic-items"
+  },
+  {
+    "index": "ammunition",
+    "name": "Ammunition, +1, +2, or +3",
+    "category": "magic-items"
+  },
+  {
+    "index": "amulet-of-health",
+    "name": "Amulet of Health",
+    "category": "magic-items"
+  },
+  {
+    "index": "amulet-of-proof-against-detection-and-location",
+    "name": "Amulet of Proof against Detection and Location",
+    "category": "magic-items"
+  },
+  {
+    "index": "amulet-of-the-planes",
+    "name": "Amulet of the Planes",
+    "category": "magic-items"
+  },
+  {
+    "index": "animated-shield",
+    "name": "Animated Shield",
+    "category": "magic-items"
+  },
+  {
+    "index": "apparatus-of-the-crab",
+    "name": "Apparatus of the Crab",
+    "category": "magic-items"
+  },
+  {
+    "index": "armor-of-invulnerability",
+    "name": "Armor of Invulnerability",
+    "category": "magic-items"
+  },
+  {
+    "index": "armor-of-resistance",
+    "name": "Armor of Resistance",
+    "category": "magic-items"
+  },
+  {
+    "index": "armor-of-vulnerability",
+    "name": "Armor of Vulnerability",
+    "category": "magic-items"
+  },
+  {
+    "index": "armor",
+    "name": "Armor, +1, +2, or +3",
+    "category": "magic-items"
+  },
+  {
+    "index": "arrow-catching-shield",
+    "name": "Arrow-Catching Shield",
+    "category": "magic-items"
+  },
+  {
+    "index": "arrow-of-slaying",
+    "name": "Arrow of Slaying",
+    "category": "magic-items"
+  },
+  {
+    "index": "bag-of-beans",
+    "name": "Bag of Beans",
+    "category": "magic-items"
+  },
+  {
+    "index": "bag-of-devouring",
+    "name": "Bag of Devouring",
+    "category": "magic-items"
+  },
+  {
+    "index": "bag-of-holding",
+    "name": "Bag of Holding",
+    "category": "magic-items"
+  },
+  {
+    "index": "bag-of-tricks",
+    "name": "Bag of Tricks",
+    "category": "magic-items"
+  },
+  {
+    "index": "bead-of-force",
+    "name": "Bead of Force",
+    "category": "magic-items"
+  },
+  {
+    "index": "belt-of-dwarvenkind",
+    "name": "Belt of Dwarvenkind",
+    "category": "magic-items"
+  },
+  {
+    "index": "belt-of-giant-strength",
+    "name": "Belt of Giant Strength",
+    "category": "magic-items"
+  },
+  {
+    "index": "berserker-axe",
+    "name": "Berserker Axe",
+    "category": "magic-items"
+  },
+  {
+    "index": "boots-of-elvenkind",
+    "name": "Boots of Elvenkind",
+    "category": "magic-items"
+  },
+  {
+    "index": "boots-of-levitation",
+    "name": "Boots of Levitation",
+    "category": "magic-items"
+  },
+  {
+    "index": "boots-of-speed",
+    "name": "Boots of Speed",
+    "category": "magic-items"
+  },
+  {
+    "index": "boots-of-striding-and-springing",
+    "name": "Boots of Striding and Springing",
+    "category": "magic-items"
+  },
+  {
+    "index": "boots-of-the-winterlands",
+    "name": "Boots of the Winterlands",
+    "category": "magic-items"
+  },
+  {
+    "index": "bowl-of-commanding-water-elementals",
+    "name": "Bowl of Commanding Water Elementals",
+    "category": "magic-items"
+  },
+  {
+    "index": "bracers-of-archery",
+    "name": "Bracers of Archery",
+    "category": "magic-items"
+  },
+  {
+    "index": "bracers-of-defense",
+    "name": "Bracers of Defense",
+    "category": "magic-items"
+  },
+  {
+    "index": "brazier-of-commanding-fire-elementals",
+    "name": "Brazier of Commanding Fire Elementals",
+    "category": "magic-items"
+  },
+  {
+    "index": "brooch-of-shielding",
+    "name": "Brooch of Shielding",
+    "category": "magic-items"
+  },
+  {
+    "index": "broom-of-flying",
+    "name": "Broom of Flying",
+    "category": "magic-items"
+  },
+  {
+    "index": "candle-of-invocation",
+    "name": "Candle of Invocation",
+    "category": "magic-items"
+  },
+  {
+    "index": "cape-of-the-mountebank",
+    "name": "Cape of the Mountebank",
+    "category": "magic-items"
+  },
+  {
+    "index": "carpet-of-flying",
+    "name": "Carpet of Flying",
+    "category": "magic-items"
+  },
+  {
+    "index": "censer-of-controlling-air-elementals",
+    "name": "Censer of Controlling Air Elementals",
+    "category": "magic-items"
+  },
+  {
+    "index": "chime-of-opening",
+    "name": "Chime of Opening",
+    "category": "magic-items"
+  },
+  {
+    "index": "circlet-of-blasting",
+    "name": "Circlet of Blasting",
+    "category": "magic-items"
+  },
+  {
+    "index": "cloak-of-arachnida",
+    "name": "Cloak of Arachnida",
+    "category": "magic-items"
+  },
+  {
+    "index": "cloak-of-displacement",
+    "name": "Cloak of Displacement",
+    "category": "magic-items"
+  },
+  {
+    "index": "cloak-of-elvenkind",
+    "name": "Cloak of Elvenkind",
+    "category": "magic-items"
+  },
+  {
+    "index": "cloak-of-protection",
+    "name": "Cloak of Protection",
+    "category": "magic-items"
+  },
+  {
+    "index": "cloak-of-the-bat",
+    "name": "Cloak of the Bat",
+    "category": "magic-items"
+  },
+  {
+    "index": "cloak-of-the-manta-ray",
+    "name": "Cloak of the Manta Ray",
+    "category": "magic-items"
+  },
+  {
+    "index": "crystal-ball",
+    "name": "Crystal Ball",
+    "category": "magic-items"
+  },
+  {
+    "index": "cube-of-force",
+    "name": "Cube of Force",
+    "category": "magic-items"
+  },
+  {
+    "index": "cubic-gate",
+    "name": "Cubic Gate",
+    "category": "magic-items"
+  },
+  {
+    "index": "dagger-of-venom",
+    "name": "Dagger of Venom",
+    "category": "magic-items"
+  },
+  {
+    "index": "dancing-sword",
+    "name": "Dancing Sword",
+    "category": "magic-items"
+  },
+  {
+    "index": "decanter-of-endless-water",
+    "name": "Decanter of Endless Water",
+    "category": "magic-items"
+  },
+  {
+    "index": "deck-of-illusions",
+    "name": "Deck of Illusions",
+    "category": "magic-items"
+  },
+  {
+    "index": "deck-of-many-things",
+    "name": "Deck of Many Things",
+    "category": "magic-items"
+  },
+  {
+    "index": "defender",
+    "name": "Defender",
+    "category": "magic-items"
+  },
+  {
+    "index": "demon-armor",
+    "name": "Demon Armor",
+    "category": "magic-items"
+  },
+  {
+    "index": "dimensional-shackles",
+    "name": "Dimensional Shackles",
+    "category": "magic-items"
+  },
+  {
+    "index": "dragon-scale-mail",
+    "name": "Dragon Scale Mail",
+    "category": "magic-items"
+  },
+  {
+    "index": "dragon-slayer",
+    "name": "Dragon Slayer",
+    "category": "magic-items"
+  },
+  {
+    "index": "dust-of-disappearance",
+    "name": "Dust of Disappearance",
+    "category": "magic-items"
+  },
+  {
+    "index": "dust-of-dryness",
+    "name": "Dust of Dryness",
+    "category": "magic-items"
+  },
+  {
+    "index": "dust-of-sneezing-and-choking",
+    "name": "Dust of Sneezing and Choking",
+    "category": "magic-items"
+  },
+  {
+    "index": "dwarven-plate",
+    "name": "Dwarven Plate",
+    "category": "magic-items"
+  },
+  {
+    "index": "dwarven-thrower",
+    "name": "Dwarven Thrower",
+    "category": "magic-items"
+  },
+  {
+    "index": "efficient-quiver",
+    "name": "Efficient Quiver",
+    "category": "magic-items"
+  },
+  {
+    "index": "efreeti-bottle",
+    "name": "Efreeti Bottle",
+    "category": "magic-items"
+  },
+  {
+    "index": "elemental-gem",
+    "name": "Elemental Gem",
+    "category": "magic-items"
+  },
+  {
+    "index": "elven-chain",
+    "name": "Elven Chain",
+    "category": "magic-items"
+  },
+  {
+    "index": "eversmoking-bottle",
+    "name": "Eversmoking Bottle",
+    "category": "magic-items"
+  },
+  {
+    "index": "eyes-of-charming",
+    "name": "Eyes of Charming",
+    "category": "magic-items"
+  },
+  {
+    "index": "eyes-of-minute-seeing",
+    "name": "Eyes of Minute Seeing",
+    "category": "magic-items"
+  },
+  {
+    "index": "eyes-of-the-eagle",
+    "name": "Eyes of the Eagle",
+    "category": "magic-items"
+  },
+  {
+    "index": "feather-token",
+    "name": "Feather Token",
+    "category": "magic-items"
+  },
+  {
+    "index": "figurine-of-wondrous-power",
+    "name": "Figurine of Wondrous Power",
+    "category": "magic-items"
+  },
+  {
+    "index": "flame-tongue",
+    "name": "Flame Tongue",
+    "category": "magic-items"
+  },
+  {
+    "index": "folding-boat",
+    "name": "Folding Boat",
+    "category": "magic-items"
+  },
+  {
+    "index": "frost-brand",
+    "name": "Frost Brand",
+    "category": "magic-items"
+  },
+  {
+    "index": "gauntlets-of-ogre-power",
+    "name": "Gauntlets of Ogre Power",
+    "category": "magic-items"
+  },
+  {
+    "index": "gem-of-brightness",
+    "name": "Gem of Brightness",
+    "category": "magic-items"
+  },
+  {
+    "index": "gem-of-seeing",
+    "name": "Gem of Seeing",
+    "category": "magic-items"
+  },
+  {
+    "index": "giant-slayer",
+    "name": "Giant Slayer",
+    "category": "magic-items"
+  },
+  {
+    "index": "glamoured-studded-leather-armor",
+    "name": "Glamoured Studded Leather Armor",
+    "category": "magic-items"
+  },
+  {
+    "index": "gloves-of-missile-snaring",
+    "name": "Gloves of Missile Snaring",
+    "category": "magic-items"
+  },
+  {
+    "index": "gloves-of-swimming-and-climbing",
+    "name": "Gloves of Swimming and Climbing",
+    "category": "magic-items"
+  },
+  {
+    "index": "goggles-of-night",
+    "name": "Goggles of Night",
+    "category": "magic-items"
+  },
+  {
+    "index": "hammer-of-thunderbolts",
+    "name": "Hammer of Thunderbolts",
+    "category": "magic-items"
+  },
+  {
+    "index": "handy-haversack",
+    "name": "Handy Haversack",
+    "category": "magic-items"
+  },
+  {
+    "index": "hat-of-disguise",
+    "name": "Hat of Disguise",
+    "category": "magic-items"
+  },
+  {
+    "index": "headband-of-intellect",
+    "name": "Headband of Intellect",
+    "category": "magic-items"
+  },
+  {
+    "index": "helm-of-brilliance",
+    "name": "Helm of Brilliance",
+    "category": "magic-items"
+  },
+  {
+    "index": "helm-of-comprehending-languages",
+    "name": "Helm of Comprehending Languages",
+    "category": "magic-items"
+  },
+  {
+    "index": "helm-of-telepathy",
+    "name": "Helm of Telepathy",
+    "category": "magic-items"
+  },
+  {
+    "index": "helm-of-teleportation",
+    "name": "Helm of Teleportation",
+    "category": "magic-items"
+  },
+  {
+    "index": "holy-avenger",
+    "name": "Holy Avenger",
+    "category": "magic-items"
+  },
+  {
+    "index": "horn-of-blasting",
+    "name": "Horn of Blasting",
+    "category": "magic-items"
+  },
+  {
+    "index": "horn-of-valhalla",
+    "name": "Horn of Valhalla",
+    "category": "magic-items"
+  },
+  {
+    "index": "horseshoes-of-a-zephyr",
+    "name": "Horseshoes of a Zephyr",
+    "category": "magic-items"
+  },
+  {
+    "index": "horseshoes-of-speed",
+    "name": "Horseshoes of Speed",
+    "category": "magic-items"
+  },
+  {
+    "index": "immovable-rod",
+    "name": "Immovable Rod",
+    "category": "magic-items"
+  },
+  {
+    "index": "instant-fortress",
+    "name": "Instant Fortress",
+    "category": "magic-items"
+  },
+  {
+    "index": "ioun-stone",
+    "name": "Ioun Stone",
+    "category": "magic-items"
+  },
+  {
+    "index": "iron-bands-of-binding",
+    "name": "Iron Bands of Binding",
+    "category": "magic-items"
+  },
+  {
+    "index": "iron-flask",
+    "name": "Iron Flask",
+    "category": "magic-items"
+  },
+  {
+    "index": "javelin-of-lightning",
+    "name": "Javelin of Lightning",
+    "category": "magic-items"
+  },
+  {
+    "index": "lantern-of-revealing",
+    "name": "Lantern of Revealing",
+    "category": "magic-items"
+  },
+  {
+    "index": "luck-blade",
+    "name": "Luck Blade",
+    "category": "magic-items"
+  },
+  {
+    "index": "mace-of-disruption",
+    "name": "Mace of Disruption",
+    "category": "magic-items"
+  },
+  {
+    "index": "mace-of-smiting",
+    "name": "Mace of Smiting",
+    "category": "magic-items"
+  },
+  {
+    "index": "mace-of-terror",
+    "name": "Mace of Terror",
+    "category": "magic-items"
+  },
+  {
+    "index": "mantle-of-spell-resistance",
+    "name": "Mantle of Spell Resistance",
+    "category": "magic-items"
+  },
+  {
+    "index": "manual-of-bodily-health",
+    "name": "Manual of Bodily Health",
+    "category": "magic-items"
+  },
+  {
+    "index": "manual-of-gainful-exercise",
+    "name": "Manual of Gainful Exercise",
+    "category": "magic-items"
+  },
+  {
+    "index": "manual-of-golems",
+    "name": "Manual of Golems",
+    "category": "magic-items"
+  },
+  {
+    "index": "manual-of-quickness-of-action",
+    "name": "Manual of Quickness of Action",
+    "category": "magic-items"
+  },
+  {
+    "index": "marvelous-pigments",
+    "name": "Marvelous Pigments",
+    "category": "magic-items"
+  },
+  {
+    "index": "medallion-of-thoughts",
+    "name": "Medallion of Thoughts",
+    "category": "magic-items"
+  },
+  {
+    "index": "mirror-of-life-trapping",
+    "name": "Mirror of Life Trapping",
+    "category": "magic-items"
+  },
+  {
+    "index": "mithral-armor",
+    "name": "Mithral Armor",
+    "category": "magic-items"
+  },
+  {
+    "index": "necklace-of-adaptation",
+    "name": "Necklace of Adaptation",
+    "category": "magic-items"
+  },
+  {
+    "index": "necklace-of-fireballs",
+    "name": "Necklace of Fireballs",
+    "category": "magic-items"
+  },
+  {
+    "index": "necklace-of-prayer-beads",
+    "name": "Necklace of Prayer Beads",
+    "category": "magic-items"
+  },
+  {
+    "index": "nine-lives-stealer",
+    "name": "Nine Lives Stealer",
+    "category": "magic-items"
+  },
+  {
+    "index": "oathbow",
+    "name": "Oathbow",
+    "category": "magic-items"
+  },
+  {
+    "index": "oil-of-etherealness",
+    "name": "Oil of Etherealness",
+    "category": "magic-items"
+  },
+  {
+    "index": "oil-of-sharpness",
+    "name": "Oil of Sharpness",
+    "category": "magic-items"
+  },
+  {
+    "index": "oil-of-slipperiness",
+    "name": "Oil of Slipperiness",
+    "category": "magic-items"
+  },
+  {
+    "index": "orb-of-dragonkind",
+    "name": "Orb of Dragonkind",
+    "category": "magic-items"
+  },
+  {
+    "index": "pearl-of-power",
+    "name": "Pearl of Power",
+    "category": "magic-items"
+  },
+  {
+    "index": "periapt-of-health",
+    "name": "Periapt of Health",
+    "category": "magic-items"
+  },
+  {
+    "index": "periapt-of-proof-against-poison",
+    "name": "Periapt of Proof against Poison",
+    "category": "magic-items"
+  },
+  {
+    "index": "periapt-of-wound-closure",
+    "name": "Periapt of Wound Closure",
+    "category": "magic-items"
+  },
+  {
+    "index": "philter-of-love",
+    "name": "Philter of Love",
+    "category": "magic-items"
+  },
+  {
+    "index": "pipes-of-haunting",
+    "name": "Pipes of Haunting",
+    "category": "magic-items"
+  },
+  {
+    "index": "pipes-of-the-sewers",
+    "name": "Pipes of the Sewers",
+    "category": "magic-items"
+  },
+  {
+    "index": "plate-armor-of-etherealness",
+    "name": "Plate Armor of Etherealness",
+    "category": "magic-items"
+  },
+  {
+    "index": "portable-hole",
+    "name": "Portable Hole",
+    "category": "magic-items"
+  },
+  {
+    "index": "potion-of-animal-friendship",
+    "name": "Potion of Animal Friendship",
+    "category": "magic-items"
+  },
+  {
+    "index": "potion-of-clairvoyance",
+    "name": "Potion of Clairvoyance",
+    "category": "magic-items"
+  },
+  {
+    "index": "potion-of-climbing",
+    "name": "Potion of Climbing",
+    "category": "magic-items"
+  },
+  {
+    "index": "potion-of-diminution",
+    "name": "Potion of Diminution",
+    "category": "magic-items"
+  },
+  {
+    "index": "potion-of-flying",
+    "name": "Potion of Flying",
+    "category": "magic-items"
+  },
+  {
+    "index": "potion-of-gaseous-form",
+    "name": "Potion of Gaseous Form",
+    "category": "magic-items"
+  },
+  {
+    "index": "potion-of-giant-strength",
+    "name": "Potion of Giant Strength",
+    "category": "magic-items"
+  },
+  {
+    "index": "potion-of-growth",
+    "name": "Potion of Growth",
+    "category": "magic-items"
+  },
+  {
+    "index": "potion-of-healing",
+    "name": "Potion of Healing",
+    "category": "magic-items"
+  },
+  {
+    "index": "potion-of-heroism",
+    "name": "Potion of Heroism",
+    "category": "magic-items"
+  },
+  {
+    "index": "potion-of-invisibility",
+    "name": "Potion of Invisibility",
+    "category": "magic-items"
+  },
+  {
+    "index": "potion-of-mind-reading",
+    "name": "Potion of Mind Reading",
+    "category": "magic-items"
+  },
+  {
+    "index": "potion-of-poison",
+    "name": "Potion of Poison",
+    "category": "magic-items"
+  },
+  {
+    "index": "potion-of-resistance",
+    "name": "Potion of Resistance",
+    "category": "magic-items"
+  },
+  {
+    "index": "potion-of-speed",
+    "name": "Potion of Speed",
+    "category": "magic-items"
+  },
+  {
+    "index": "potion-of-water-breathing",
+    "name": "Potion of Water Breathing",
+    "category": "magic-items"
+  },
+  {
+    "index": "restorative-ointment",
+    "name": "Restorative Ointment",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-animal-influence",
+    "name": "Ring of Animal Influence",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-djinni-summoning",
+    "name": "Ring of Djinni Summoning",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-elemental-command",
+    "name": "Ring of Elemental Command",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-evasion",
+    "name": "Ring of Evasion",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-feather-falling",
+    "name": "Ring of Feather Falling",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-free-action",
+    "name": "Ring of Free Action",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-invisibility",
+    "name": "Ring of Invisibility",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-jumping",
+    "name": "Ring of Jumping",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-mind-shielding",
+    "name": "Ring of Mind Shielding",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-protection",
+    "name": "Ring of Protection",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-regeneration",
+    "name": "Ring of Regeneration",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-resistance",
+    "name": "Ring of Resistance",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-shooting-stars",
+    "name": "Ring of Shooting Stars",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-spell-storing",
+    "name": "Ring of Spell Storing",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-spell-turning",
+    "name": "Ring of Spell Turning",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-swimming",
+    "name": "Ring of Swimming",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-telekinesis",
+    "name": "Ring of Telekinesis",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-the-ram",
+    "name": "Ring of the Ram",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-three-wishes",
+    "name": "Ring of Three Wishes",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-warmth",
+    "name": "Ring of Warmth",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-water-walking",
+    "name": "Ring of Water Walking",
+    "category": "magic-items"
+  },
+  {
+    "index": "ring-of-x-ray-vision",
+    "name": "Ring of X-ray Vision",
+    "category": "magic-items"
+  },
+  {
+    "index": "robe-of-eyes",
+    "name": "Robe of Eyes",
+    "category": "magic-items"
+  },
+  {
+    "index": "robe-of-scintillating-colors",
+    "name": "Robe of Scintillating Colors",
+    "category": "magic-items"
+  },
+  {
+    "index": "robe-of-stars",
+    "name": "Robe of Stars",
+    "category": "magic-items"
+  },
+  {
+    "index": "robe-of-the-archmagi",
+    "name": "Robe of the Archmagi",
+    "category": "magic-items"
+  },
+  {
+    "index": "robe-of-useful-items",
+    "name": "Robe of Useful Items",
+    "category": "magic-items"
+  },
+  {
+    "index": "rod-of-absorption",
+    "name": "Rod of Absorption",
+    "category": "magic-items"
+  },
+  {
+    "index": "rod-of-alertness",
+    "name": "Rod of Alertness",
+    "category": "magic-items"
+  },
+  {
+    "index": "rod-of-lordly-might",
+    "name": "Rod of Lordly Might",
+    "category": "magic-items"
+  },
+  {
+    "index": "rod-of-rulership",
+    "name": "Rod of Rulership",
+    "category": "magic-items"
+  },
+  {
+    "index": "rod-of-security",
+    "name": "Rod of Security",
+    "category": "magic-items"
+  },
+  {
+    "index": "rope-of-climbing",
+    "name": "Rope of Climbing",
+    "category": "magic-items"
+  },
+  {
+    "index": "rope-of-entanglement",
+    "name": "Rope of Entanglement",
+    "category": "magic-items"
+  },
+  {
+    "index": "scarab-of-protection",
+    "name": "Scarab of Protection",
+    "category": "magic-items"
+  },
+  {
+    "index": "scimitar-of-speed",
+    "name": "Scimitar of Speed",
+    "category": "magic-items"
+  },
+  {
+    "index": "shield-of-missile-attraction",
+    "name": "Shield of Missile Attraction",
+    "category": "magic-items"
+  },
+  {
+    "index": "slippers-of-spider-climbing",
+    "name": "Slippers of Spider Climbing",
+    "category": "magic-items"
+  },
+  {
+    "index": "sovereign-glue",
+    "name": "Sovereign Glue",
+    "category": "magic-items"
+  },
+  {
+    "index": "spell-scroll",
+    "name": "Spell Scroll",
+    "category": "magic-items"
+  },
+  {
+    "index": "spellguard-shield",
+    "name": "Spellguard Shield",
+    "category": "magic-items"
+  },
+  {
+    "index": "sphere-of-annihilation",
+    "name": "Sphere of Annihilation",
+    "category": "magic-items"
+  },
+  {
+    "index": "staff-of-charming",
+    "name": "Staff of Charming",
+    "category": "magic-items"
+  },
+  {
+    "index": "staff-of-fire",
+    "name": "Staff of Fire",
+    "category": "magic-items"
+  },
+  {
+    "index": "staff-of-frost",
+    "name": "Staff of Frost",
+    "category": "magic-items"
+  },
+  {
+    "index": "staff-of-healing",
+    "name": "Staff of Healing",
+    "category": "magic-items"
+  },
+  {
+    "index": "staff-of-power",
+    "name": "Staff of Power",
+    "category": "magic-items"
+  },
+  {
+    "index": "staff-of-striking",
+    "name": "Staff of Striking",
+    "category": "magic-items"
+  },
+  {
+    "index": "staff-of-swarming-insects",
+    "name": "Staff of Swarming Insects",
+    "category": "magic-items"
+  },
+  {
+    "index": "staff-of-the-magi",
+    "name": "Staff of the Magi",
+    "category": "magic-items"
+  },
+  {
+    "index": "staff-of-the-python",
+    "name": "Staff of the Python",
+    "category": "magic-items"
+  },
+  {
+    "index": "staff-of-the-woodlands",
+    "name": "Staff of the Woodlands",
+    "category": "magic-items"
+  },
+  {
+    "index": "staff-of-thunder-and-lightning",
+    "name": "Staff of Thunder and Lightning",
+    "category": "magic-items"
+  },
+  {
+    "index": "staff-of-withering",
+    "name": "Staff of Withering",
+    "category": "magic-items"
+  },
+  {
+    "index": "stone-of-controlling-earth-elementals",
+    "name": "Stone of Controlling Earth Elementals",
+    "category": "magic-items"
+  },
+  {
+    "index": "stone-of-good-luck-(luckstone)",
+    "name": "Stone of Good Luck (Luckstone)",
+    "category": "magic-items"
+  },
+  {
+    "index": "sun-blade",
+    "name": "Sun Blade",
+    "category": "magic-items"
+  },
+  {
+    "index": "sword-of-life-stealing",
+    "name": "Sword of Life Stealing",
+    "category": "magic-items"
+  },
+  {
+    "index": "sword-of-sharpness",
+    "name": "Sword of Sharpness",
+    "category": "magic-items"
+  },
+  {
+    "index": "sword-of-wounding",
+    "name": "Sword of Wounding",
+    "category": "magic-items"
+  },
+  {
+    "index": "talisman-of-pure-good",
+    "name": "Talisman of Pure Good",
+    "category": "magic-items"
+  },
+  {
+    "index": "talisman-of-the-sphere",
+    "name": "Talisman of the Sphere",
+    "category": "magic-items"
+  },
+  {
+    "index": "talisman-of-ultimate-evil",
+    "name": "Talisman of Ultimate Evil",
+    "category": "magic-items"
+  },
+  {
+    "index": "tome-of-clear-thought",
+    "name": "Tome of Clear Thought",
+    "category": "magic-items"
+  },
+  {
+    "index": "tome-of-leadership-and-influence",
+    "name": "Tome of Leadership and Influence",
+    "category": "magic-items"
+  },
+  {
+    "index": "tome-of-understanding",
+    "name": "Tome of Understanding",
+    "category": "magic-items"
+  },
+  {
+    "index": "trident-of-fish-command",
+    "name": "Trident of Fish Command",
+    "category": "magic-items"
+  },
+  {
+    "index": "universal-solvent",
+    "name": "Universal Solvent",
+    "category": "magic-items"
+  },
+  {
+    "index": "vicious-weapon",
+    "name": "Vicious Weapon",
+    "category": "magic-items"
+  },
+  {
+    "index": "vorpal-sword",
+    "name": "Vorpal Sword",
+    "category": "magic-items"
+  },
+  {
+    "index": "wand-of-binding",
+    "name": "Wand of Binding",
+    "category": "magic-items"
+  },
+  {
+    "index": "wand-of-enemy-detection",
+    "name": "Wand of Enemy Detection",
+    "category": "magic-items"
+  },
+  {
+    "index": "wand-of-fear",
+    "name": "Wand of Fear",
+    "category": "magic-items"
+  },
+  {
+    "index": "wand-of-fireballs",
+    "name": "Wand of Fireballs",
+    "category": "magic-items"
+  },
+  {
+    "index": "wand-of-lightning-bolts",
+    "name": "Wand of Lightning Bolts",
+    "category": "magic-items"
+  },
+  {
+    "index": "wand-of-magic-detection",
+    "name": "Wand of Magic Detection",
+    "category": "magic-items"
+  },
+  {
+    "index": "wand-of-magic-missiles",
+    "name": "Wand of Magic Missiles",
+    "category": "magic-items"
+  },
+  {
+    "index": "wand-of-paralysis",
+    "name": "Wand of Paralysis",
+    "category": "magic-items"
+  },
+  {
+    "index": "wand-of-polymorph",
+    "name": "Wand of Polymorph",
+    "category": "magic-items"
+  },
+  {
+    "index": "wand-of-secrets",
+    "name": "Wand of Secrets",
+    "category": "magic-items"
+  },
+  {
+    "index": "wand-of-the-war-mage",
+    "name": "Wand of the War Mage, +1, +2, or +3",
+    "category": "magic-items"
+  },
+  {
+    "index": "wand-of-web",
+    "name": "Wand of Web",
+    "category": "magic-items"
+  },
+  {
+    "index": "wand-of-wonder",
+    "name": "Wand of Wonder",
+    "category": "magic-items"
+  },
+  {
+    "index": "weapon",
+    "name": "Weapon, +1, +2, or +3",
+    "category": "magic-items"
+  },
+  {
+    "index": "well-of-many-worlds",
+    "name": "Well of Many Worlds",
+    "category": "magic-items"
+  },
+  {
+    "index": "wind-fan",
+    "name": "Wind Fan",
+    "category": "magic-items"
+  },
+  {
+    "index": "winged-boots",
+    "name": "Winged Boots",
+    "category": "magic-items"
+  },
+  {
+    "index": "wings-of-flying",
+    "name": "Wings of Flying",
+    "category": "magic-items"
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "index": "blowgun",
+  "name": "Blowgun",
+  "category": "weapon",
+  "cost": {
+    "quantity": 10,
+    "unit": "gp"
+  },
+  "weight": 1,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d1",
+    "damage_type": {
+      "index": "piercing",
+      "name": "Piercing",
+      "url": "/api/damage-types/piercing"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "ammunition",
+    "loading"
+  ],
+  "weapon_range": "Ranged",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

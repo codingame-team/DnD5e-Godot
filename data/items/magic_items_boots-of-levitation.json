@@ -1,0 +1,17 @@
+{
+  "index": "boots-of-levitation",
+  "name": "Boots of Levitation",
+  "category": "magic-item",
+  "cost": {},
+  "weight": 0,
+  "desc": [
+    "Wondrous item, rare (requires attunement)",
+    "While you wear these boots, you can use an action to cast the levitate spell on yourself at will."
+  ],
+  "damage": {},
+  "armor_class": {},
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

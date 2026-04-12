@@ -1,0 +1,17 @@
+{
+  "index": "amulet-of-health",
+  "name": "Amulet of Health",
+  "category": "magic-item",
+  "cost": {},
+  "weight": 0,
+  "desc": [
+    "Wondrous item, rare (requires attunement)",
+    "Your Constitution score is 19 while you wear this amulet. It has no effect on you if your Constitution is already 19 or higher"
+  ],
+  "damage": {},
+  "armor_class": {},
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

@@ -1,0 +1,27 @@
+{
+  "index": "javelin",
+  "name": "Javelin",
+  "category": "weapon",
+  "cost": {
+    "quantity": 5,
+    "unit": "sp"
+  },
+  "weight": 2,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d6",
+    "damage_type": {
+      "index": "piercing",
+      "name": "Piercing",
+      "url": "/api/damage-types/piercing"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "thrown",
+    "monk"
+  ],
+  "weapon_range": "Melee",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

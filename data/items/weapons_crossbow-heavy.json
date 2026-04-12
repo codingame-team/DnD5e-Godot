@@ -1,0 +1,29 @@
+{
+  "index": "crossbow-heavy",
+  "name": "Crossbow, heavy",
+  "category": "weapon",
+  "cost": {
+    "quantity": 50,
+    "unit": "gp"
+  },
+  "weight": 18,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d10",
+    "damage_type": {
+      "index": "piercing",
+      "name": "Piercing",
+      "url": "/api/damage-types/piercing"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "ammunition",
+    "heavy",
+    "loading",
+    "two-handed"
+  ],
+  "weapon_range": "Ranged",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

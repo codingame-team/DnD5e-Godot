@@ -1,0 +1,25 @@
+{
+  "index": "cure-wounds",
+  "name": "Cure Wounds",
+  "level": 1,
+  "school": "Evocation",
+  "casting_time": "1 action",
+  "range": "Touch",
+  "duration": "Instantaneous",
+  "concentration": "False",
+  "ritual": "False",
+  "components": [
+    "V",
+    "S"
+  ],
+  "desc": "A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs.",
+  "damage": {},
+  "dc": {},
+  "classes": [
+    "bard",
+    "cleric",
+    "druid",
+    "paladin",
+    "ranger"
+  ]
+}

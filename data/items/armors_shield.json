@@ -1,0 +1,21 @@
+{
+  "index": "shield",
+  "name": "Shield",
+  "category": "armor",
+  "cost": {
+    "quantity": 10,
+    "unit": "gp"
+  },
+  "weight": 6,
+  "desc": [],
+  "damage": {},
+  "armor_class": {
+    "base": 2,
+    "dex_bonus": "False",
+    "max_bonus": "None"
+  },
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": "False"
+}

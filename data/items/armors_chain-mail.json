@@ -1,0 +1,21 @@
+{
+  "index": "chain-mail",
+  "name": "Chain Mail",
+  "category": "armor",
+  "cost": {
+    "quantity": 75,
+    "unit": "gp"
+  },
+  "weight": 55,
+  "desc": [],
+  "damage": {},
+  "armor_class": {
+    "base": 16,
+    "dex_bonus": "False",
+    "max_bonus": "None"
+  },
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 13,
+  "stealth_disadvantage": "True"
+}

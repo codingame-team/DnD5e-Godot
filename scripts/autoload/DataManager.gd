@@ -24,7 +24,7 @@ func _ready() -> void:
 
 func _load_index(category: String) -> void:
 	var path := DATA_BASE + category + "/_index.json"
-	var data := _read_json(path)
+	var data: Variant = _read_json(path)
 	if data == null:
 		push_warning("DataManager: index manquant pour '%s'" % category)
 		return
@@ -41,7 +41,7 @@ func _load_index(category: String) -> void:
 func get_monster(index: String) -> Dictionary:
 	return _get_cached("monsters/" + index)
 
-func get_class(index: String) -> Dictionary:
+func get_class_data(index: String) -> Dictionary:
 	return _get_cached("classes/" + index)
 
 func get_spell(index: String) -> Dictionary:
@@ -65,17 +65,17 @@ func get_spells_for_class(class_index: String, max_level: int = 9) -> Array:
 func _get_cached(key: String) -> Dictionary:
 	if _cache.has(key):
 		return _cache[key]
-	var data := _read_json(DATA_BASE + key + ".json")
-	if data == null:
+	var data: Variant = _read_json(DATA_BASE + key + ".json")
+	if data == null or not data is Dictionary:
 		return {}
 	_cache[key] = data
 	return data
 
-func _read_json(path: String):
+func _read_json(path: String) -> Variant:
 	if not FileAccess.file_exists(path):
 		return null
 	var file := FileAccess.open(path, FileAccess.READ)
 	if file == null:
 		return null
-	var result := JSON.parse_string(file.get_as_text())
+	var result: Variant = JSON.parse_string(file.get_as_text())
 	return result

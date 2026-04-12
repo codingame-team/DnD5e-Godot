@@ -1,0 +1,20 @@
+{
+  "index": "rogue",
+  "name": "Rogue",
+  "hit_die": 8,
+  "saving_throws": [
+    "dex",
+    "int"
+  ],
+  "proficiencies": [
+    "light-armor",
+    "simple-weapons",
+    "longswords",
+    "rapiers",
+    "shortswords",
+    "hand-crossbows",
+    "thieves-tools"
+  ],
+  "spellcasting": null,
+  "levels": []
+}

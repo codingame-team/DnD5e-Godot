@@ -1,0 +1,18 @@
+{
+  "index": "barbarian",
+  "name": "Barbarian",
+  "hit_die": 12,
+  "saving_throws": [
+    "str",
+    "con"
+  ],
+  "proficiencies": [
+    "light-armor",
+    "medium-armor",
+    "shields",
+    "simple-weapons",
+    "martial-weapons"
+  ],
+  "spellcasting": null,
+  "levels": []
+}

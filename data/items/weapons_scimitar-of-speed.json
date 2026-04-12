@@ -1,0 +1,17 @@
+{
+  "index": "scimitar-of-speed",
+  "name": "Scimitar of Speed",
+  "category": "weapon",
+  "cost": {},
+  "weight": 0,
+  "desc": [
+    "Weapon (scimitar), very rare (requires attunement)",
+    "You gain a +2 bonus to attack and damage rolls made with this magic weapon. In addition, you can make one attack with it as a bonus action on each of your turns."
+  ],
+  "damage": {},
+  "armor_class": {},
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

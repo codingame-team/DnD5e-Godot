@@ -1,0 +1,21 @@
+{
+  "index": "studded-leather-armor",
+  "name": "Studded Leather Armor",
+  "category": "armor",
+  "cost": {
+    "quantity": 45,
+    "unit": "gp"
+  },
+  "weight": 13,
+  "desc": [],
+  "damage": {},
+  "armor_class": {
+    "base": 12,
+    "dex_bonus": "True",
+    "max_bonus": "None"
+  },
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": "False"
+}

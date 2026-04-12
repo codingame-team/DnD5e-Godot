@@ -1,0 +1,28 @@
+{
+  "index": "spear",
+  "name": "Spear",
+  "category": "weapon",
+  "cost": {
+    "quantity": 1,
+    "unit": "gp"
+  },
+  "weight": 3,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d6",
+    "damage_type": {
+      "index": "piercing",
+      "name": "Piercing",
+      "url": "/api/damage-types/piercing"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "thrown",
+    "versatile",
+    "monk"
+  ],
+  "weapon_range": "Melee",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

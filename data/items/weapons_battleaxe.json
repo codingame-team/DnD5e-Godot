@@ -1,0 +1,26 @@
+{
+  "index": "battleaxe",
+  "name": "Battleaxe",
+  "category": "weapon",
+  "cost": {
+    "quantity": 10,
+    "unit": "gp"
+  },
+  "weight": 4,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d8",
+    "damage_type": {
+      "index": "slashing",
+      "name": "Slashing",
+      "url": "/api/damage-types/slashing"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "versatile"
+  ],
+  "weapon_range": "Melee",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

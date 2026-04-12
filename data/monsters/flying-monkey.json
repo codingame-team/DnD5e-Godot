@@ -1,0 +1,1 @@
+{"index":"flying-monkey","name":"Flying Monkey","size":"S","type":"beast","cr":0.0,"xp":10,"hp":{"average":3,"formula":"1d6"},"hp_roll":"{'average': 3, 'formula': '1d6'}","ac":12,"speed":30,"abilities":{"str":10,"dex":10,"con":10,"int":10,"wis":10,"cha":10},"actions":[],"reactions":[],"legendary_actions":[],"traits":[],"senses":[],"languages":[],"proficiencies":[]}

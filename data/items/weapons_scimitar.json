@@ -1,0 +1,27 @@
+{
+  "index": "scimitar",
+  "name": "Scimitar",
+  "category": "weapon",
+  "cost": {
+    "quantity": 25,
+    "unit": "gp"
+  },
+  "weight": 3,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d6",
+    "damage_type": {
+      "index": "slashing",
+      "name": "Slashing",
+      "url": "/api/damage-types/slashing"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "finesse",
+    "light"
+  ],
+  "weapon_range": "Melee",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

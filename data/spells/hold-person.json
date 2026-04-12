@@ -1,0 +1,34 @@
+{
+  "index": "hold-person",
+  "name": "Hold Person",
+  "level": 2,
+  "school": "Enchantment",
+  "casting_time": "1 action",
+  "range": "60 feet",
+  "duration": "Up to 1 minute",
+  "concentration": "True",
+  "ritual": "False",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "desc": "Choose a humanoid that you can see within range. The target must succeed on a wisdom saving throw or be paralyzed for the duration. At the end of each of its turns, the target can make another wisdom saving throw. On a success, the spell ends on the target.",
+  "damage": {},
+  "dc": {
+    "dc_type": {
+      "index": "wis",
+      "name": "WIS",
+      "url": "/api/ability-scores/wis"
+    },
+    "dc_success": "none"
+  },
+  "classes": [
+    "bard",
+    "cleric",
+    "druid",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ]
+}

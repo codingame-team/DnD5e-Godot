@@ -1,0 +1,28 @@
+{
+  "index": "longbow",
+  "name": "Longbow",
+  "category": "weapon",
+  "cost": {
+    "quantity": 50,
+    "unit": "gp"
+  },
+  "weight": 2,
+  "desc": [],
+  "damage": {
+    "damage_dice": "1d8",
+    "damage_type": {
+      "index": "piercing",
+      "name": "Piercing",
+      "url": "/api/damage-types/piercing"
+    }
+  },
+  "armor_class": {},
+  "properties": [
+    "ammunition",
+    "heavy",
+    "two-handed"
+  ],
+  "weapon_range": "Ranged",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}

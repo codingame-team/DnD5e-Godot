@@ -1,0 +1,17 @@
+{
+  "index": "ring-of-swimming",
+  "name": "Ring of Swimming",
+  "category": "magic-item",
+  "cost": {},
+  "weight": 0,
+  "desc": [
+    "Ring, uncommon",
+    "You have a swimming speed of 40 feet while wearing this ring."
+  ],
+  "damage": {},
+  "armor_class": {},
+  "properties": [],
+  "weapon_range": "",
+  "str_minimum": 0,
+  "stealth_disadvantage": false
+}
