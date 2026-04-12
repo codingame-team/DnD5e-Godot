@@ -49,6 +49,9 @@ func _build_grid() -> void:
 	var floor_mesh := BoxMesh.new()
 	floor_mesh.size = Vector3(TILE_SIZE - 0.06, 0.15, TILE_SIZE - 0.06)
 
+	var cx := (GRID_COLS - 1) * TILE_SIZE / 2.0
+	var cz := (GRID_ROWS - 1) * TILE_SIZE / 2.0
+
 	for row in GRID_ROWS:
 		for col in GRID_COLS:
 			var inst := MeshInstance3D.new()
@@ -57,20 +60,27 @@ func _build_grid() -> void:
 			mat.albedo_color = Color(0.30, 0.25, 0.22) if (row + col) % 2 == 0 \
 			                   else Color(0.26, 0.22, 0.19)
 			inst.set_surface_override_material(0, mat)
-			inst.position = Vector3(col * TILE_SIZE, 0.0, row * TILE_SIZE)
+			inst.position = Vector3(col * TILE_SIZE - cx, 0.0, row * TILE_SIZE - cz)
 			inst.set_meta("grid_pos", Vector2i(col, row))
 			grid_root.add_child(inst)
 
 func _load_combatants() -> void:
-	# Charger les héros depuis GameManager
-	for h_dict in GameManager.party:
+	# Mode test : créer un héros par défaut si la partie n'est pas initialisée
+	var source_party: Array = GameManager.party if not GameManager.party.is_empty() \
+	                          else [{"class_index": "fighter", "name": "Guerrier", "hp": 0}]
+
+	for h_dict in source_party:
 		var cls_data := DataManager.get_class_data(h_dict.get("class_index", "fighter"))
+		if cls_data.is_empty():
+			continue
 		var hero := HeroData.from_class_data(cls_data, h_dict.get("name","Héros"))
-		hero.hp = h_dict.get("hp", hero.max_hp)
+		hero.hp = h_dict.get("hp", hero.max_hp) if h_dict.get("hp", 0) > 0 else hero.max_hp
 		heroes.append(hero)
 
-	# Charger les monstres depuis l'encounter
-	var enemy_list: Array = GameManager.current_scenario.get("enemies", ["goblin", "goblin"])
+	# Mode test : ennemis par défaut si pas de scénario
+	var enemy_list: Array = GameManager.current_scenario.get("enemies", []) \
+	                         if not GameManager.current_scenario.is_empty() \
+	                         else ["goblin", "goblin"]
 	for i in enemy_list.size():
 		var m_data := DataManager.get_monster(enemy_list[i])
 		if not m_data.is_empty():
@@ -259,7 +269,9 @@ func _log(msg: String) -> void:
 # --------------------------------------------------------------------------
 
 func _grid_to_world(gpos: Vector2i) -> Vector3:
-	return Vector3(gpos.x * TILE_SIZE, 0.0, gpos.y * TILE_SIZE)
+	var cx := (GRID_COLS - 1) * TILE_SIZE / 2.0
+	var cz := (GRID_ROWS - 1) * TILE_SIZE / 2.0
+	return Vector3(gpos.x * TILE_SIZE - cx, 0.0, gpos.y * TILE_SIZE - cz)
 
 func _get_current_hero() -> HeroData:
 	var alive := heroes.filter(func(h): return h.is_alive())
