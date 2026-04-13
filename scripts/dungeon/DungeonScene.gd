@@ -70,6 +70,10 @@ var _invert_camera_x: bool = false
 # Minimap 2D
 var _minimap: Node2D = null
 
+# Animation héros
+var _hero_anim_player: AnimationPlayer = null
+var _is_moving: bool = false   # verrou anti-spam pendant tween/anim
+
 # --------------------------------------------------------------------------
 # Initialisation
 # --------------------------------------------------------------------------
@@ -274,35 +278,62 @@ func _adjust_hero_height() -> void:
 	var model := hero.get_child(0) as Node3D
 	if model == null:
 		return
-	var aabb := _compute_aabb(model)
+	var aabb := _compute_aabb(model, model.global_transform.affine_inverse())
 	if aabb.size.y > 0.01:
 		var sf := 1.8 / aabb.size.y
 		model.scale = Vector3(sf, sf, sf)
 		model.position.y = -aabb.position.y * sf
+	# Récupération de l'AnimationPlayer et démarrage idle
+	_hero_anim_player = _find_anim_player(model)
+	_play_named_anim(_hero_anim_player, ["Idle", "idle", "IDLE", "Stand", "stand", "T-Pose"])
+
+## Cherche récursivement un AnimationPlayer dans la sous-arborescence.
+func _find_anim_player(node: Node) -> AnimationPlayer:
+	if node is AnimationPlayer:
+		return node as AnimationPlayer
+	for child in node.get_children():
+		var result := _find_anim_player(child)
+		if result != null:
+			return result
+	return null
+
+## Joue la première animation trouvée parmi les noms proposés.
+## Essaie "mixamo.com" (nom Mixamo natif) avant le repli sur list[0].
+func _play_named_anim(ap: AnimationPlayer, names: Array) -> void:
+	if ap == null or not is_instance_valid(ap):
+		return
+	for anim_name in (names + ["mixamo.com"]):
+		if ap.has_animation(anim_name):
+			ap.play(anim_name)
+			return
+	var list := ap.get_animation_list()
+	if list.size() > 0:
+		ap.play(list[0])
 
 func _load_hero_model() -> Node3D:
 	var class_idx := "fighter"
 	if not GameManager.party.is_empty():
 		class_idx = GameManager.party[0].get("class_index", "fighter")
 	var model_path: String = CLASS_MODELS.get(class_idx, CLASS_MODELS["fighter"])
-	var gltf_doc   := GLTFDocument.new()
-	var gltf_state := GLTFState.new()
-	var err := gltf_doc.append_from_file(model_path, gltf_state)
-	if err == OK:
-		var scene_node: Node = gltf_doc.generate_scene(gltf_state)
-		var n3d := Node3D.new()
-		n3d.add_child(scene_node)
-		# La normalisation de hauteur est faite en differe (_adjust_hero_height)
-		# car l'AABB des maillages skinnes n'est disponible qu'apres ajout a la scene.
-		return n3d
+	var packed := load(model_path) as PackedScene
+	if packed != null:
+		var instance := packed.instantiate() as Node3D
+		if instance != null:
+			# AnimationPlayer accessible en différé après ajout à la scène
+			return instance
 	return _make_capsule_hero()
 
-func _compute_aabb(node: Node) -> AABB:
+func _compute_aabb(node: Node, ref_inv: Transform3D) -> AABB:
+	## Calcule l'AABB dans l'espace local du model root en tenant compte
+	## de toute la hiérarchie de transforms (bones, sockets, etc.).
 	var result := AABB()
 	if node is MeshInstance3D:
-		result = (node as MeshInstance3D).get_aabb()
+		var mi := node as MeshInstance3D
+		# Transforme l'AABB locale vers l'espace du modèle racine
+		var rel := ref_inv * mi.global_transform
+		result = rel * mi.get_aabb()
 	for child in node.get_children():
-		var child_aabb := _compute_aabb(child)
+		var child_aabb := _compute_aabb(child, ref_inv)
 		if result.size == Vector3.ZERO:
 			result = child_aabb
 		elif child_aabb.size != Vector3.ZERO:
@@ -367,8 +398,11 @@ func _update_camera() -> void:
 		CamMode.THIRD:
 			camera.near = 0.05
 			var dist := DIST_THIRD * _cam_zoom
-			# Même direction de visée qu'en 1ere personne, puis position "derrière".
-			var fwd := Vector3(-sin(deg_to_rad(_hero_yaw)), 0.0, cos(deg_to_rad(_hero_yaw)))
+			# Orbite autour du héros : _cam_yaw décale la caméra en azimut
+			var view_yaw_3rd := _hero_yaw + _cam_yaw
+			var fwd := Vector3(
+				-sin(deg_to_rad(view_yaw_3rd)), 0.0,
+				cos(deg_to_rad(view_yaw_3rd)))
 			var pivot      := wp + Vector3(0, 1.1, 0)
 			var raw_cam    := pivot - fwd * dist + Vector3(0, dist * 0.35, 0)
 			camera.global_position = _push_cam_from_wall(pivot, raw_cam)
@@ -445,14 +479,9 @@ func _update_minimap() -> void:
 		return
 	_minimap.set("hero_pos", _hero_pos)
 	_minimap.set("hero_yaw", _hero_yaw)
-	# Rotation selon le mode camera.
-	# ISO : nord en haut (pas de rotation)
-	# THIRD, FIRST : direction de regard du heros pointe vers le haut
-	# yaw=0=sud (+row dans grille), rotation = 180 - _hero_yaw.
-	if _cam_mode == CamMode.ISO:
-		_minimap.rotation = 0.0
-	else:  # THIRD et FIRST
-		_minimap.rotation = deg_to_rad(180.0 - _hero_yaw)
+	# La carte reste toujours orientée nord en haut.
+	# Seul le curseur héros (dessiné dans MinimapDraw._draw) tourne via hero_yaw.
+	_minimap.rotation = 0.0
 	_minimap.queue_redraw()
 
 func _cycle_cam_mode() -> void:
@@ -486,12 +515,12 @@ func _input(event: InputEvent) -> void:
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			_cam_zoom = minf(3.0, _cam_zoom + 0.1)
 			_update_camera()
-		elif event.button_index == MOUSE_BUTTON_MIDDLE:
+		elif (event.button_index == MOUSE_BUTTON_MIDDLE
+				or event.button_index == MOUSE_BUTTON_RIGHT):
 			_cam_drag = event.pressed
 			_cam_drag_last = event.position
-	# Orbite : glisser bouton milieu (ISO + 3ème personne uniquement)
-	# (En THIRD la camera reste de dos au heros)
-	if event is InputEventMouseMotion and _cam_drag and _cam_mode == CamMode.ISO:
+	# Orbite : bouton milieu ou droit (ISO + 3ème personne, pas 1ère)
+	if event is InputEventMouseMotion and _cam_drag and _cam_mode != CamMode.FIRST:
 		var delta: float = event.relative.x
 		var direction_sign := -1.0 if _invert_camera_x else 1.0
 		_cam_yaw = fmod(_cam_yaw + delta * _mouse_sensitivity * direction_sign, 360.0)
@@ -539,11 +568,15 @@ func _unhandled_input(event: InputEvent) -> void:
 			_rotate_hero(-90.0)
 	elif keycode == _settings_manager().get_keybind("turn_right") or keycode == KEY_RIGHT:
 			_rotate_hero(90.0)
+	elif keycode == _settings_manager().get_keybind("jump") or keycode == KEY_SPACE:
+		await _jump_hero()
+	elif keycode == _settings_manager().get_keybind("roll") or keycode == KEY_R:
+		await _roll_hero()
 
 # Avance de 1 case dans la direction du regard (direction=1) ou en arriere (-1).
 func _try_move_forward(direction: int) -> void:
-	# _yaw_to_dir pointe vers la visual "face" du modele GLTF (+Z = avant modele).
-	# On neglige la convention Godot (-Z) et on utilise la direction telle quelle.
+	if _is_moving:
+		return
 	var step: Vector2i = _yaw_to_dir(_hero_yaw) * direction
 	var new_pos := _hero_pos + step
 	if not _dungeon.is_walkable(new_pos.x, new_pos.y):
@@ -551,17 +584,92 @@ func _try_move_forward(direction: int) -> void:
 			_open_door(new_pos)
 		return
 	_hero_pos = new_pos
-	_move_hero()
+	await _move_hero()
 	_check_pickup()
 	_check_exit()
 
 # Rotation du heros de +/- 90 degrees (sans deplacement).
 func _rotate_hero(degrees: float) -> void:
+	if _is_moving:
+		return
 	_hero_yaw = fmod(_hero_yaw + degrees + 360.0, 360.0)
 	var hero := _get_hero()
 	if hero:
 		hero.rotation_degrees.y = -_hero_yaw
 	_update_camera()
+
+## Saute une case (ou passe par-dessus un baril vers la case suivante).
+func _jump_hero() -> void:
+	if _is_moving:
+		return
+	var step := _yaw_to_dir(_hero_yaw)
+	var next1 := _hero_pos + step
+	var next2 := _hero_pos + step * 2
+	# Saut par-dessus un baril si la case suivante est un obstacle et la suivante est libre
+	var over_barrel := _dungeon.get_cell(next1.x, next1.y) == DungeonGen.CELL_BARREL \
+		and _dungeon.is_walkable(next2.x, next2.y)
+	var target_pos: Vector2i
+	if over_barrel:
+		target_pos = next2
+	elif _dungeon.is_walkable(next1.x, next1.y):
+		target_pos = next1
+	else:
+		# Infranchissable : animation sur place
+		_play_named_anim(_hero_anim_player, ["Jump", "jump", "Roll", "roll"])
+		await get_tree().create_timer(0.5).timeout
+		_play_named_anim(_hero_anim_player, ["Idle", "idle", "IDLE", "Stand"])
+		return
+	_is_moving = true
+	_hero_pos = target_pos
+	var hero := _get_hero()
+	if hero == null:
+		_is_moving = false
+		return
+	hero.rotation_degrees.y = -_hero_yaw
+	var world_target := _grid_to_world(target_pos)
+	_play_named_anim(_hero_anim_player, ["Jump", "jump", "Roll", "roll"])
+	var duration := 0.50 if over_barrel else 0.35  # saut baril = 2 cases → plus long
+	var tween := create_tween()
+	tween.tween_property(hero, "position", world_target, duration).set_trans(Tween.TRANS_SPRING)
+	await tween.finished
+	_play_named_anim(_hero_anim_player, ["Idle", "idle", "IDLE", "Stand"])
+	_is_moving = false
+	_update_camera()
+	_check_pickup()
+	_check_exit()
+
+## Esquive latérale (priorité gauche puis droite) avec animation Roll.
+func _roll_hero() -> void:
+	if _is_moving:
+		return
+	var left_yaw := fmod(_hero_yaw - 90.0 + 360.0, 360.0)
+	var right_yaw := fmod(_hero_yaw + 90.0, 360.0)
+	var step := _yaw_to_dir(left_yaw)
+	var new_pos := _hero_pos + step
+	if not _dungeon.is_walkable(new_pos.x, new_pos.y):
+		step = _yaw_to_dir(right_yaw)
+		new_pos = _hero_pos + step
+	if not _dungeon.is_walkable(new_pos.x, new_pos.y):
+		# Pas de place : anime en place
+		_play_named_anim(_hero_anim_player, ["Roll", "roll"])
+		await get_tree().create_timer(0.6).timeout
+		_play_named_anim(_hero_anim_player, ["Idle", "idle", "IDLE", "Stand"])
+		return
+	_is_moving = true
+	_hero_pos = new_pos
+	var hero := _get_hero()
+	if hero == null:
+		_is_moving = false
+		return
+	var world_target := _grid_to_world(new_pos)
+	_play_named_anim(_hero_anim_player, ["Roll", "roll"])
+	var tween := create_tween()
+	tween.tween_property(hero, "position", world_target, 0.30).set_trans(Tween.TRANS_CUBIC)
+	await tween.finished
+	_play_named_anim(_hero_anim_player, ["Idle", "idle", "IDLE", "Stand"])
+	_is_moving = false
+	_update_camera()
+	_check_exit()
 
 # Yaw 0=sud(+Z), 90=ouest(-X), 180=nord(-Z), 270=est(+X)
 func _yaw_to_dir(yaw: float) -> Vector2i:
@@ -577,12 +685,17 @@ func _move_hero() -> void:
 	var hero := _get_hero()
 	if hero == null:
 		return
+	_is_moving = true
 	hero.rotation_degrees.y = -_hero_yaw
 	var target := _grid_to_world(_hero_pos)
+	# Run est plus dynamique que Walk pour un déplacement case à case
+	_play_named_anim(_hero_anim_player, ["Run", "Run_Weapon", "Walk", "walk", "Walking"])
 	var tween  := create_tween()
-	tween.tween_property(hero, "position", target, 0.14).set_trans(Tween.TRANS_QUAD)
+	tween.tween_property(hero, "position", target, 0.28).set_trans(Tween.TRANS_QUAD)
 	await tween.finished
+	_play_named_anim(_hero_anim_player, ["Idle", "idle", "IDLE", "Stand", "stand", "T-Pose"])
 	_update_camera()
+	_is_moving = false
 
 # --------------------------------------------------------------------------
 # Interactions
@@ -607,6 +720,7 @@ func _check_pickup() -> void:
 	var data: Dictionary = obj["data"]
 	match cell_type:
 		DungeonGen.CELL_GOLD:
+			_play_named_anim(_hero_anim_player, ["PickUp", "Pickup", "pickup"])
 			var amount: int = data.get("gold", 5)
 			GameManager.gold += amount
 			info_label.text = "+%d or ! Total : %d" % [amount, GameManager.gold]
@@ -615,6 +729,7 @@ func _check_pickup() -> void:
 			_dungeon.grid[_hero_pos.y][_hero_pos.x] = DungeonGen.CELL_FLOOR
 			_update_ui()
 		DungeonGen.CELL_CHEST:
+			_play_named_anim(_hero_anim_player, ["PickUp", "Pickup", "pickup"])
 			var loot: String = data.get("loot", "Parchemin")
 			var gold: int    = data.get("gold", 20)
 			GameManager.gold += gold
@@ -625,6 +740,7 @@ func _check_pickup() -> void:
 			_update_ui()
 		_: return
 	await get_tree().create_timer(2.5).timeout
+	_play_named_anim(_hero_anim_player, ["Idle", "idle", "IDLE", "Stand"])
 	info_label.text = ""
 
 func _check_exit() -> void:

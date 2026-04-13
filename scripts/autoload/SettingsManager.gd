@@ -20,7 +20,9 @@ const DEFAULT_SETTINGS := {
 		"cam_rotate_left": KEY_A,
 		"cam_rotate_right": KEY_E,
 		"cam_zoom_in": KEY_EQUAL,
-		"cam_zoom_out": KEY_MINUS
+		"cam_zoom_out": KEY_MINUS,
+		"jump": KEY_SPACE,
+		"roll": KEY_R
 	}
 }
 
@@ -33,7 +35,9 @@ const PRESET_QWERTY := {
 	"cam_rotate_left": KEY_Q,
 	"cam_rotate_right": KEY_E,
 	"cam_zoom_in": KEY_EQUAL,
-	"cam_zoom_out": KEY_MINUS
+	"cam_zoom_out": KEY_MINUS,
+	"jump": KEY_SPACE,
+	"roll": KEY_R
 }
 
 var _settings: Dictionary = {}
