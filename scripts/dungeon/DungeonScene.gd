@@ -606,7 +606,7 @@ func _jump_hero() -> void:
 	var next1 := _hero_pos + step
 	var next2 := _hero_pos + step * 2
 	# Saut par-dessus un baril si la case suivante est un obstacle et la suivante est libre
-	var over_barrel := _dungeon.get_cell(next1.x, next1.y) == DungeonGen.CELL_BARREL \
+	var over_barrel: bool = _dungeon.get_cell(next1.x, next1.y) == DungeonGen.CELL_BARREL \
 		and _dungeon.is_walkable(next2.x, next2.y)
 	var target_pos: Vector2i
 	if over_barrel:
