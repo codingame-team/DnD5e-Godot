@@ -7,7 +7,7 @@ const SETTINGS_PATH := "user://settings.cfg"
 const DEFAULT_SETTINGS := {
 	"music_enabled": true,
 	"sfx_enabled": true,
-	"music_volume_db": -10.0,
+	"music_volume_db": - 10.0,
 	"sfx_volume_db": 0.0,
 	"mouse_sensitivity": 0.4,
 	"invert_camera_x": false,

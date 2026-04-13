@@ -4,65 +4,65 @@ extends Node3D
 
 const DungeonGen = preload("res://scripts/dungeon/DungeonGenerator.gd")
 
-const TILE        := 2.0
-const DUNGEON_W   := 21
-const DUNGEON_H   := 21
-const DIST_ISO    := 32.0
-const DIST_THIRD  := 8.0
-const EYE_HEIGHT  := 1.55
+const TILE := 2.0
+const DUNGEON_W := 21
+const DUNGEON_H := 21
+const DIST_ISO := 32.0
+const DIST_THIRD := 8.0
+const EYE_HEIGHT := 1.55
 
 # Modeles 3D par classe
 const CLASS_MODELS := {
-	"fighter":   "res://assets/models/characters/Warrior.gltf",
-	"paladin":   "res://assets/models/characters/Warrior.gltf",
+	"fighter": "res://assets/models/characters/Warrior.gltf",
+	"paladin": "res://assets/models/characters/Warrior.gltf",
 	"barbarian": "res://assets/models/characters/Warrior.gltf",
-	"wizard":    "res://assets/models/characters/Wizard.gltf",
-	"sorcerer":  "res://assets/models/characters/Wizard.gltf",
-	"rogue":     "res://assets/models/characters/Rogue.gltf",
-	"ranger":    "res://assets/models/characters/Ranger.gltf",
-	"monk":      "res://assets/models/characters/Monk.gltf",
-	"cleric":    "res://assets/models/characters/Cleric.gltf",
-	"druid":     "res://assets/models/characters/Cleric.gltf",
+	"wizard": "res://assets/models/characters/Wizard.gltf",
+	"sorcerer": "res://assets/models/characters/Wizard.gltf",
+	"rogue": "res://assets/models/characters/Rogue.gltf",
+	"ranger": "res://assets/models/characters/Ranger.gltf",
+	"monk": "res://assets/models/characters/Monk.gltf",
+	"cleric": "res://assets/models/characters/Cleric.gltf",
+	"druid": "res://assets/models/characters/Cleric.gltf",
 }
 
-enum CamMode { ISO, THIRD, FIRST }
+enum CamMode {ISO, THIRD, FIRST}
 
-@onready var tile_root:    Node3D = $TileRoot
-@onready var object_root:  Node3D = $ObjectRoot
-@onready var hero_root:    Node3D = $HeroRoot
-@onready var camera:       Camera3D = $Camera3D
-@onready var party_label:  Label  = $UI/HUD/PartyLabel
-@onready var gold_label:   Label  = $UI/HUD/GoldLabel
-@onready var info_label:   Label  = $UI/HUD/InfoLabel
-@onready var cam_label:    Label  = $UI/HUD/CamLabel
-@onready var btn_combat:   Button = $UI/BtnCombat
+@onready var tile_root: Node3D = $TileRoot
+@onready var object_root: Node3D = $ObjectRoot
+@onready var hero_root: Node3D = $HeroRoot
+@onready var camera: Camera3D = $Camera3D
+@onready var party_label: Label = $UI/HUD/PartyLabel
+@onready var gold_label: Label = $UI/HUD/GoldLabel
+@onready var info_label: Label = $UI/HUD/InfoLabel
+@onready var cam_label: Label = $UI/HUD/CamLabel
+@onready var btn_combat: Button = $UI/BtnCombat
 
 # Donjon
-var _dungeon                        # DungeonGenerator (untyped pour duck-typing)
-var _dw:    int = DUNGEON_W
-var _dh:    int = DUNGEON_H
-var _cx:    float = 0.0
-var _cz:    float = 0.0
-var _hero_pos:    Vector2i
-var _hero_yaw:    float = 0.0      # direction de marche en degrés (Y)
-var _objects:     Dictionary = {}
+var _dungeon # DungeonGenerator (untyped pour duck-typing)
+var _dw: int = DUNGEON_W
+var _dh: int = DUNGEON_H
+var _cx: float = 0.0
+var _cz: float = 0.0
+var _hero_pos: Vector2i
+var _hero_yaw: float = 0.0 # direction de marche en degrés (Y)
+var _objects: Dictionary = {}
 
 # Matériaux
-var _mat_wall:       StandardMaterial3D
-var _mat_wall_ghost: StandardMaterial3D  # version semi-transparente pour occlusion
-var _mat_floor:  StandardMaterial3D
+var _mat_wall: StandardMaterial3D
+var _mat_wall_ghost: StandardMaterial3D # version semi-transparente pour occlusion
+var _mat_floor: StandardMaterial3D
 var _mat_floor2: StandardMaterial3D
-var _mat_door:   StandardMaterial3D
-var _mat_chest:  StandardMaterial3D
-var _mat_gold:   StandardMaterial3D
-var _mat_exit:   StandardMaterial3D
+var _mat_door: StandardMaterial3D
+var _mat_chest: StandardMaterial3D
+var _mat_gold: StandardMaterial3D
+var _mat_exit: StandardMaterial3D
 var _mat_barrel: StandardMaterial3D
 
 # Caméra
-var _cam_mode:   CamMode = CamMode.ISO
-var _cam_yaw:    float   = 0.0     # orbite horizontal (degrés)
-var _cam_zoom:   float   = 1.0     # multiplicateur de distance
-var _cam_drag:   bool    = false
+var _cam_mode: CamMode = CamMode.ISO
+var _cam_yaw: float = 0.0 # orbite horizontal (degrés)
+var _cam_zoom: float = 1.0 # multiplicateur de distance
+var _cam_drag: bool = false
 var _cam_drag_last: Vector2
 var _mouse_sensitivity: float = 0.4
 var _invert_camera_x: bool = false
@@ -72,7 +72,7 @@ var _minimap: Node2D = null
 
 # Animation héros
 var _hero_anim_player: AnimationPlayer = null
-var _is_moving: bool = false   # verrou anti-spam pendant tween/anim
+var _is_moving: bool = false # verrou anti-spam pendant tween/anim
 
 # --------------------------------------------------------------------------
 # Initialisation
@@ -103,25 +103,25 @@ func _ready() -> void:
 	_overview_camera()
 
 func _build_materials() -> void:
-	_mat_wall   = _mat(Color(0.28, 0.24, 0.20), 0.95, 0.1)
+	_mat_wall = _mat(Color(0.28, 0.24, 0.20), 0.95, 0.1)
 	# Version fantome : meme couleur, alpha 0.18, mode transparency activé
 	_mat_wall_ghost = _mat(Color(0.28, 0.24, 0.20), 0.95, 0.1)
-	_mat_wall_ghost.albedo_color.a  = 0.18
-	_mat_wall_ghost.transparency    = BaseMaterial3D.TRANSPARENCY_ALPHA
-	_mat_wall_ghost.render_priority = 1  # passe au-dessus des opaques
-	_mat_floor  = _mat(Color(0.52, 0.46, 0.40), 0.88, 0.0)
+	_mat_wall_ghost.albedo_color.a = 0.18
+	_mat_wall_ghost.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_mat_wall_ghost.render_priority = 1 # passe au-dessus des opaques
+	_mat_floor = _mat(Color(0.52, 0.46, 0.40), 0.88, 0.0)
 	_mat_floor2 = _mat(Color(0.44, 0.38, 0.34), 0.88, 0.0)
-	_mat_door   = _mat(Color(0.55, 0.35, 0.15), 0.70, 0.0)
-	_mat_chest  = _mat(Color(0.75, 0.55, 0.10), 0.60, 0.3)
-	_mat_gold   = _mat(Color(1.00, 0.82, 0.10), 0.20, 0.9)
-	_mat_exit   = _mat(Color(0.20, 0.80, 0.30), 0.50, 0.0)
+	_mat_door = _mat(Color(0.55, 0.35, 0.15), 0.70, 0.0)
+	_mat_chest = _mat(Color(0.75, 0.55, 0.10), 0.60, 0.3)
+	_mat_gold = _mat(Color(1.00, 0.82, 0.10), 0.20, 0.9)
+	_mat_exit = _mat(Color(0.20, 0.80, 0.30), 0.50, 0.0)
 	_mat_barrel = _mat(Color(0.45, 0.28, 0.12), 0.80, 0.0)
 
 func _mat(color: Color, roughness: float, metallic: float) -> StandardMaterial3D:
 	var m := StandardMaterial3D.new()
 	m.albedo_color = color
-	m.roughness    = roughness
-	m.metallic     = metallic
+	m.roughness = roughness
+	m.metallic = metallic
 	return m
 
 # Vue initiale : survol du donjon entier depuis le NORD (cote -Z)
@@ -146,7 +146,7 @@ func _build_dungeon_mesh() -> void:
 		for c in _dw:
 			var ct: int = _dungeon.get_cell(c, r)
 			if ct == DungeonGen.CELL_WALL:
-				continue  # les murs sont rendus en bandeaux d'arete
+				continue # les murs sont rendus en bandeaux d'arete
 			var base := _grid_to_world(Vector2i(c, r))
 			# Dalle de sol
 			var fi := MeshInstance3D.new()
@@ -157,15 +157,15 @@ func _build_dungeon_mesh() -> void:
 				fi.set_surface_override_material(0, _mat_floor)
 			else:
 				fi.set_surface_override_material(0, _mat_floor2)
-			fi.position = Vector3(base.x, -0.09, base.z)  # top du sol a y=0
+			fi.position = Vector3(base.x, -0.09, base.z) # top du sol a y=0
 			tile_root.add_child(fi)
 			# Bandeaux de mur sur les 4 aretes adjacentes a un mur
 			_add_edge_walls(base, c, r)
 
 # Place un bandeau mur fin sur chaque arete de la cellule (c,r) qui borde une cellule mur.
 func _add_edge_walls(base: Vector3, c: int, r: int) -> void:
-	var hy: float = 1.2   # centre du mur (sol a y=-0.09, mur de y=-0.09 a y=2.5)
-	var th: float = 0.20  # epaisseur du mur
+	var hy: float = 1.2 # centre du mur (sol a y=-0.09, mur de y=-0.09 a y=2.5)
+	var th: float = 0.20 # epaisseur du mur
 	# Nord
 	if _is_wall_cell(c, r - 1):
 		_add_wall_strip(Vector3(base.x, hy, base.z - TILE * 0.5), Vector3(TILE, 2.6, th))
@@ -192,7 +192,7 @@ func _add_wall_strip(pos: Vector3, size: Vector3) -> void:
 	wi.set_surface_override_material(0, _mat_wall)
 	wi.position = pos
 	tile_root.add_child(wi)
-	wi.add_to_group("walls")  # groupe pour transparence selective
+	wi.add_to_group("walls") # groupe pour transparence selective
 
 func _place_interactive_objects() -> void:
 	for item in _dungeon.interactables:
@@ -230,9 +230,9 @@ func _create_object_node(cell_type: int, _data: Dictionary) -> Node3D:
 			inst.position = Vector3(0, 0.06, 0)
 		DungeonGen.CELL_BARREL:
 			var m := CylinderMesh.new()
-			m.top_radius    = 0.22
+			m.top_radius = 0.22
 			m.bottom_radius = 0.22
-			m.height        = 0.6
+			m.height = 0.6
 			inst.mesh = m
 			inst.set_surface_override_material(0, _mat_barrel)
 			inst.position = Vector3(0, 0.3, 0)
@@ -255,7 +255,7 @@ func _spawn_hero() -> void:
 	var hero_node: Node3D = _load_hero_model()
 	root.add_child(hero_node)
 	root.position = _grid_to_world(_hero_pos)
-	root.rotation_degrees.y = -_hero_yaw   # Ry(-yaw) : yaw=0→sud, yaw=90→ouest, yaw=270→est ✓
+	root.rotation_degrees.y = - _hero_yaw # Ry(-yaw) : yaw=0→sud, yaw=90→ouest, yaw=270→est ✓
 	hero_root.add_child(root)
 	# Ajustement hauteur differe : AABB des modeles skinnes n'est disponible qu'apres add_child
 	call_deferred("_adjust_hero_height")
@@ -282,7 +282,7 @@ func _adjust_hero_height() -> void:
 	if aabb.size.y > 0.01:
 		var sf := 1.8 / aabb.size.y
 		model.scale = Vector3(sf, sf, sf)
-		model.position.y = -aabb.position.y * sf
+		model.position.y = - aabb.position.y * sf
 	# Récupération de l'AnimationPlayer et démarrage idle
 	_hero_anim_player = _find_anim_player(model)
 	_play_named_anim(_hero_anim_player, ["Idle", "idle", "IDLE", "Stand", "stand", "T-Pose"])
@@ -349,8 +349,8 @@ func _make_capsule_hero() -> Node3D:
 	body_inst.mesh = body_mesh
 	var body_mat := StandardMaterial3D.new()
 	body_mat.albedo_color = Color(0.30, 0.45, 0.75)
-	body_mat.roughness    = 0.55
-	body_mat.metallic     = 0.25
+	body_mat.roughness = 0.55
+	body_mat.metallic = 0.25
 	body_inst.set_surface_override_material(0, body_mat)
 	body_inst.position.y = 0.65
 	root.add_child(body_inst)
@@ -390,7 +390,7 @@ func _update_camera() -> void:
 		CamMode.ISO:
 			camera.near = 0.05
 			var dist := DIST_ISO * _cam_zoom
-			var d45  := dist * 0.70711
+			var d45 := dist * 0.70711
 			# Caméra au NORD (-Z) du heros pour que Z=avancer soit loin de camera
 			var offset := Basis(Vector3.UP, deg_to_rad(_cam_yaw)) * Vector3(0.0, d45, -d45)
 			camera.global_position = wp + offset
@@ -401,18 +401,18 @@ func _update_camera() -> void:
 			# Orbite autour du héros : _cam_yaw décale la caméra en azimut
 			var view_yaw_3rd := _hero_yaw + _cam_yaw
 			var fwd := Vector3(
-				-sin(deg_to_rad(view_yaw_3rd)), 0.0,
+				- sin(deg_to_rad(view_yaw_3rd)), 0.0,
 				cos(deg_to_rad(view_yaw_3rd)))
-			var pivot      := wp + Vector3(0, 1.1, 0)
-			var raw_cam    := pivot - fwd * dist + Vector3(0, dist * 0.35, 0)
+			var pivot := wp + Vector3(0, 1.1, 0)
+			var raw_cam := pivot - fwd * dist + Vector3(0, dist * 0.35, 0)
 			camera.global_position = _push_cam_from_wall(pivot, raw_cam)
 			camera.look_at(wp + Vector3(0, 0.9, 0), Vector3.UP)
 		CamMode.FIRST:
 			camera.near = 0.03
 			var view_yaw := _hero_yaw + _cam_yaw
 			# fwd = direction vers laquelle le heros regarde (yaw 0=+Z=sud)
-			var fwd      := Vector3(-sin(deg_to_rad(view_yaw)), 0.0, cos(deg_to_rad(view_yaw)))
-			var eye_pos  := wp + Vector3(0, EYE_HEIGHT, 0) + fwd * 0.35
+			var fwd := Vector3(-sin(deg_to_rad(view_yaw)), 0.0, cos(deg_to_rad(view_yaw)))
+			var eye_pos := wp + Vector3(0, EYE_HEIGHT, 0) + fwd * 0.35
 			camera.global_position = eye_pos
 			camera.look_at(eye_pos + fwd, Vector3.UP)
 	_update_wall_transparency()
@@ -421,15 +421,15 @@ func _update_camera() -> void:
 
 # Rend transparents les murs qui se trouvent entre le heros et la camera.
 func _update_wall_transparency() -> void:
-	var hero_wp  := _hero_world() + Vector3(0, 1.0, 0)
-	var cam_wp   := camera.global_position
-	var to_cam   := cam_wp - hero_wp
+	var hero_wp := _hero_world() + Vector3(0, 1.0, 0)
+	var cam_wp := camera.global_position
+	var to_cam := cam_wp - hero_wp
 	var cam_dist := to_cam.length()
 	var to_cam_n := to_cam / cam_dist if cam_dist > 0.01 else Vector3.ZERO
 	for mi: MeshInstance3D in get_tree().get_nodes_in_group("walls"):
-		var to_w   := mi.global_position - hero_wp
-		var proj   := to_w.dot(to_cam_n)
-		var perp   := (to_w - to_cam_n * proj).length()
+		var to_w := mi.global_position - hero_wp
+		var proj := to_w.dot(to_cam_n)
+		var perp := (to_w - to_cam_n * proj).length()
 		var blocking := proj > 0.2 and proj < cam_dist - 0.3 and perp < TILE * 1.0
 		mi.set_surface_override_material(0, _mat_wall_ghost if blocking else _mat_wall)
 
@@ -493,7 +493,7 @@ func _cycle_cam_mode() -> void:
 		_cam_yaw = 0.0
 		var first_hero := _get_hero()
 		if first_hero:
-			first_hero.rotation_degrees.y = -_hero_yaw
+			first_hero.rotation_degrees.y = - _hero_yaw
 	var names := [
 		"Vue isometrique  [PgPrec/PgSuiv:zoom]",
 		"3eme personne  [PgPrec/PgSuiv:zoom]",
@@ -609,7 +609,7 @@ func _rotate_hero(degrees: float) -> void:
 	_hero_yaw = fmod(_hero_yaw + degrees + 360.0, 360.0)
 	var hero := _get_hero()
 	if hero:
-		hero.rotation_degrees.y = -_hero_yaw
+		hero.rotation_degrees.y = - _hero_yaw
 	_update_camera()
 
 ## Saute une case (ou passe par-dessus un baril vers la case suivante).
@@ -639,10 +639,10 @@ func _jump_hero() -> void:
 	if hero == null:
 		_is_moving = false
 		return
-	hero.rotation_degrees.y = -_hero_yaw
+	hero.rotation_degrees.y = - _hero_yaw
 	var world_target := _grid_to_world(target_pos)
 	_play_named_anim(_hero_anim_player, ["Jump", "jump", "Roll", "roll"])
-	var duration := 0.50 if over_barrel else 0.35  # saut baril = 2 cases → plus long
+	var duration := 0.50 if over_barrel else 0.35 # saut baril = 2 cases → plus long
 	var tween := create_tween()
 	tween.tween_property(hero, "position", world_target, duration).set_trans(Tween.TRANS_SPRING)
 	await tween.finished
@@ -689,10 +689,10 @@ func _roll_hero() -> void:
 func _yaw_to_dir(yaw: float) -> Vector2i:
 	var snapped_dir := int(fmod(yaw + 45.0, 360.0) / 90.0) * 90
 	match snapped_dir:
-		0:   return Vector2i(0,  1)   # sud
-		90:  return Vector2i(-1, 0)   # ouest
-		180: return Vector2i(0, -1)   # nord
-		270: return Vector2i( 1, 0)   # est
+		0: return Vector2i(0, 1) # sud
+		90: return Vector2i(-1, 0) # ouest
+		180: return Vector2i(0, -1) # nord
+		270: return Vector2i(1, 0) # est
 	return Vector2i(0, 1)
 
 func _move_hero() -> void:
@@ -700,11 +700,11 @@ func _move_hero() -> void:
 	if hero == null:
 		return
 	_is_moving = true
-	hero.rotation_degrees.y = -_hero_yaw
+	hero.rotation_degrees.y = - _hero_yaw
 	var target := _grid_to_world(_hero_pos)
 	# Run est plus dynamique que Walk pour un déplacement case à case
 	_play_named_anim(_hero_anim_player, ["Run", "Run_Weapon", "Walk", "walk", "Walking"])
-	var tween  := create_tween()
+	var tween := create_tween()
 	tween.tween_property(hero, "position", target, 0.28).set_trans(Tween.TRANS_QUAD)
 	await tween.finished
 	_play_named_anim(_hero_anim_player, ["Idle", "idle", "IDLE", "Stand", "stand", "T-Pose"])
@@ -730,7 +730,7 @@ func _check_pickup() -> void:
 	if not _objects.has(_hero_pos):
 		return
 	var obj: Dictionary = _objects[_hero_pos]
-	var cell_type: int   = obj["type"]
+	var cell_type: int = obj["type"]
 	var data: Dictionary = obj["data"]
 	match cell_type:
 		DungeonGen.CELL_GOLD:
@@ -745,7 +745,7 @@ func _check_pickup() -> void:
 		DungeonGen.CELL_CHEST:
 			_play_named_anim(_hero_anim_player, ["PickUp", "Pickup", "pickup"])
 			var loot: String = data.get("loot", "Parchemin")
-			var gold: int    = data.get("gold", 20)
+			var gold: int = data.get("gold", 20)
 			GameManager.gold += gold
 			info_label.text = "Coffre : %s + %d or !" % [loot, gold]
 			obj["node"].queue_free()
@@ -795,7 +795,7 @@ func _update_ui() -> void:
 		return
 	var text := "Groupe :\n"
 	for h in heroes:
-		text += "• %s — PV %d\n" % [h.get("name","?"), h.get("hp",0)]
+		text += "• %s — PV %d\n" % [h.get("name", "?"), h.get("hp", 0)]
 	party_label.text = text
 
 func _on_test_combat() -> void:

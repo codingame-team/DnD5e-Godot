@@ -8,40 +8,40 @@ const GRID_ROWS := 8
 
 # Modèles 3D par classe de héros
 const CLASS_MODELS: Dictionary = {
-	"fighter":   "res://assets/models/characters/Warrior.gltf",
-	"paladin":   "res://assets/models/characters/Warrior.gltf",
+	"fighter": "res://assets/models/characters/Warrior.gltf",
+	"paladin": "res://assets/models/characters/Warrior.gltf",
 	"barbarian": "res://assets/models/characters/Warrior.gltf",
-	"wizard":    "res://assets/models/characters/Wizard.gltf",
-	"sorcerer":  "res://assets/models/characters/Wizard.gltf",
-	"rogue":     "res://assets/models/characters/Rogue.gltf",
-	"ranger":    "res://assets/models/characters/Ranger.gltf",
-	"monk":      "res://assets/models/characters/Monk.gltf",
-	"cleric":    "res://assets/models/characters/Cleric.gltf",
-	"druid":     "res://assets/models/characters/Cleric.gltf",
+	"wizard": "res://assets/models/characters/Wizard.gltf",
+	"sorcerer": "res://assets/models/characters/Wizard.gltf",
+	"rogue": "res://assets/models/characters/Rogue.gltf",
+	"ranger": "res://assets/models/characters/Ranger.gltf",
+	"monk": "res://assets/models/characters/Monk.gltf",
+	"cleric": "res://assets/models/characters/Cleric.gltf",
+	"druid": "res://assets/models/characters/Cleric.gltf",
 }
 
 # Modèles 3D par index de monstre
 const MONSTER_MODELS: Dictionary = {
 	"goblin": "res://assets/monsters/Goblin/Goblin_Merged.glb",
-	"orc":    "res://assets/monsters/Orc.gltf",
+	"orc": "res://assets/monsters/Orc.gltf",
 }
 
-@onready var grid_root: Node3D              = $GridRoot
-@onready var combatant_root: Node3D         = $CombatantRoot
-@onready var camera: Camera3D               = $Camera3D
-@onready var btn_attack: Button             = $UI/ActionPanel/BtnAttack
-@onready var btn_spell: Button              = $UI/ActionPanel/BtnSpell
-@onready var btn_move: Button               = $UI/ActionPanel/BtnMove
-@onready var btn_end_turn: Button           = $UI/ActionPanel/BtnEndTurn
-@onready var btn_potion: Button             = $UI/ActionPanel/BtnPotion
-@onready var log_text: RichTextLabel        = $UI/LogPanel/LogScroll/LogText
-@onready var turn_label: Label              = $UI/CurrentTurnLabel
+@onready var grid_root: Node3D = $GridRoot
+@onready var combatant_root: Node3D = $CombatantRoot
+@onready var camera: Camera3D = $Camera3D
+@onready var btn_attack: Button = $UI/ActionPanel/BtnAttack
+@onready var btn_spell: Button = $UI/ActionPanel/BtnSpell
+@onready var btn_move: Button = $UI/ActionPanel/BtnMove
+@onready var btn_end_turn: Button = $UI/ActionPanel/BtnEndTurn
+@onready var btn_potion: Button = $UI/ActionPanel/BtnPotion
+@onready var log_text: RichTextLabel = $UI/LogPanel/LogScroll/LogText
+@onready var turn_label: Label = $UI/CurrentTurnLabel
 @onready var initiative_list: VBoxContainer = $UI/InitiativePanel/InitiativeList
 
 var combat_manager: CombatManager
-var heroes:   Array[HeroData]    = []
+var heroes: Array[HeroData] = []
 var monsters: Array[MonsterData] = []
-var _pieces:   Dictionary = {}
+var _pieces: Dictionary = {}
 var _grid_pos: Dictionary = {}
 var _occupied: Dictionary = {}
 var _move_highlights: Array = []
@@ -54,12 +54,12 @@ var _combat_finished: bool = false
 var _anim_players: Dictionary = {}
 
 # Caméra : orbite sphérique (molette = zoom, clic droit = orbite)
-var _cam_zoom:       float = 1.0
-var _cam_dist:       float = 15.0
-var _cam_yaw:        float = 0.0
-var _cam_pitch:      float = 40.0
-var _cam_drag:       bool  = false
-var _cam_drag_last:  Vector2
+var _cam_zoom: float = 1.0
+var _cam_dist: float = 15.0
+var _cam_yaw: float = 0.0
+var _cam_pitch: float = 40.0
+var _cam_drag: bool = false
+var _cam_drag_last: Vector2
 
 # --------------------------------------------------------------------------
 # Ready
@@ -68,7 +68,7 @@ var _cam_drag_last:  Vector2
 func _ready() -> void:
 	var _base := camera.global_position
 	_cam_dist = maxf(_base.length(), 5.0)
-	_cam_yaw   = rad_to_deg(atan2(_base.x, _base.z))
+	_cam_yaw = rad_to_deg(atan2(_base.x, _base.z))
 	_cam_pitch = rad_to_deg(asin(clampf(_base.y / _cam_dist, -1.0, 1.0)))
 	combat_manager = CombatManager.new()
 	add_child(combat_manager)
@@ -181,7 +181,7 @@ func _init_astar() -> void:
 
 func _load_combatants() -> void:
 	var source_party: Array = GameManager.party if not GameManager.party.is_empty() \
-							  else [{"class_index": "fighter", "name": "Guerrier", "hp": 0}]
+							  else [ {"class_index": "fighter", "name": "Guerrier", "hp": 0}]
 	for h_dict in source_party:
 		var cls_data := DataManager.get_class_data(h_dict.get("class_index", "fighter"))
 		if cls_data.is_empty():
@@ -332,7 +332,7 @@ func _adjust_all_combatant_heights() -> void:
 		if aabb.size.y > 0.01:
 			var sf := 1.8 / aabb.size.y
 			model.scale = Vector3(sf, sf, sf)
-			model.position.y = -aabb.position.y * sf
+			model.position.y = - aabb.position.y * sf
 		var ap: AnimationPlayer = _anim_players.get(cname) as AnimationPlayer
 		if ap != null:
 			_play_named_anim(ap, ["Idle", "idle", "IDLE", "Stand", "stand", "T-Pose"])
@@ -499,8 +499,8 @@ func _animate_attack(attacker: Node3D, target: Node3D) -> void:
 		"Standing Melee Attack Downward", "ArmatureAction"
 	])
 	var origin := attacker.position
-	var lunge  := origin.lerp(target.position, 0.38)
-	var tween  := create_tween()
+	var lunge := origin.lerp(target.position, 0.38)
+	var tween := create_tween()
 	tween.set_trans(Tween.TRANS_BACK)
 	tween.tween_property(attacker, "position", lunge, 0.12)
 	tween.tween_property(attacker, "position", origin, 0.14)
@@ -580,11 +580,11 @@ func _update_hp_label(cname: String) -> void:
 	var pct := float(hp_val) / float(hp_max)
 	var label_color: Color
 	if pct > 0.5:
-		label_color = Color(0.2, 1.0, 0.2)   # green
+		label_color = Color(0.2, 1.0, 0.2) # green
 	elif pct > 0.25:
-		label_color = Color(1.0, 0.85, 0.0)  # yellow
+		label_color = Color(1.0, 0.85, 0.0) # yellow
 	else:
-		label_color = Color(1.0, 0.2, 0.2)   # red
+		label_color = Color(1.0, 0.2, 0.2) # red
 	for child in (piece as Node3D).get_children():
 		if child is Label3D:
 			(child as Label3D).text = "%s\n%d/%d PV" % [cname, hp_val, hp_max]
@@ -601,7 +601,7 @@ func _update_all_hp_labels() -> void:
 # --------------------------------------------------------------------------
 
 func _start_combat() -> void:
-	var hero_dicts  := heroes.map(func(h: HeroData): return h.to_dict())
+	var hero_dicts := heroes.map(func(h: HeroData): return h.to_dict())
 	var enemy_dicts := monsters.map(func(m: MonsterData): return {
 		"name": m.name, "abilities": {"dex": m.dex_score}, "speed": m.speed, "hp": m.hp})
 	TurnManager.turn_started.connect(_on_turn_started)
@@ -760,7 +760,7 @@ func _on_combatant_died(cname: String, is_hero: bool) -> void:
 	if is_hero:
 		for h in heroes:
 			if h.name == cname and h.is_alive():
-				return  # still alive, ignore
+				return # still alive, ignore
 	else:
 		for m in monsters:
 			if m.name == cname and m.is_alive():
@@ -808,8 +808,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			_cam_drag_last = mb.position
 			return
 	if event is InputEventMouseMotion and _cam_drag:
-		_cam_yaw   -= event.relative.x * 0.3
-		_cam_pitch  = clampf(_cam_pitch - event.relative.y * 0.2, 10.0, 75.0)
+		_cam_yaw -= event.relative.x * 0.3
+		_cam_pitch = clampf(_cam_pitch - event.relative.y * 0.2, 10.0, 75.0)
 		_update_combat_camera()
 		return
 	if _is_animating or _combat_finished:
@@ -824,8 +824,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 ## Met à jour la caméra via coordonnées sphériques (zoom + orbite).
 func _update_combat_camera() -> void:
-	var dist    := _cam_dist * _cam_zoom
-	var yaw_r   := deg_to_rad(_cam_yaw)
+	var dist := _cam_dist * _cam_zoom
+	var yaw_r := deg_to_rad(_cam_yaw)
 	var pitch_r := deg_to_rad(_cam_pitch)
 	camera.global_position = Vector3(
 		dist * cos(pitch_r) * sin(yaw_r),
@@ -866,7 +866,7 @@ func _try_move_at_mouse(mouse_pos: Vector2) -> void:
 	if cam == null:
 		return
 	var ray_from := cam.project_ray_origin(mouse_pos)
-	var ray_dir  := cam.project_ray_normal(mouse_pos)
+	var ray_dir := cam.project_ray_normal(mouse_pos)
 	if abs(ray_dir.y) < 0.001:
 		return
 	var t := -ray_from.y / ray_dir.y
@@ -907,16 +907,16 @@ func _try_move_at_mouse(mouse_pos: Vector2) -> void:
 func _update_action_buttons(is_hero: bool) -> void:
 	if _combat_finished:
 		btn_attack.disabled = true
-		btn_spell.disabled  = true
-		btn_move.disabled   = true
+		btn_spell.disabled = true
+		btn_move.disabled = true
 		btn_end_turn.visible = false
-		btn_potion.visible   = false
+		btn_potion.visible = false
 		return
-	btn_attack.disabled  = not is_hero
-	btn_spell.disabled   = not is_hero
-	btn_move.disabled    = not is_hero
+	btn_attack.disabled = not is_hero
+	btn_spell.disabled = not is_hero
+	btn_move.disabled = not is_hero
 	btn_end_turn.visible = is_hero
-	btn_potion.visible   = is_hero
+	btn_potion.visible = is_hero
 	if is_hero:
 		var hero := _get_current_hero()
 		if hero != null:

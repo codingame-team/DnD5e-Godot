@@ -7,14 +7,14 @@ const CELL_SIZE := 7
 
 ## Couleurs indexees par type de cellule (DungeonGenerator constantes 0-7).
 const CELL_COLORS := [
-	Color(0.13, 0.11, 0.09),  # 0 WALL
-	Color(0.48, 0.42, 0.36),  # 1 FLOOR
-	Color(0.58, 0.38, 0.14),  # 2 DOOR
-	Color(0.75, 0.55, 0.10),  # 3 CHEST
-	Color(1.00, 0.82, 0.10),  # 4 GOLD
-	Color(0.40, 0.75, 0.25),  # 5 ENTRY
-	Color(0.20, 0.80, 0.30),  # 6 EXIT
-	Color(0.45, 0.28, 0.12),  # 7 BARREL
+	Color(0.13, 0.11, 0.09), # 0 WALL
+	Color(0.48, 0.42, 0.36), # 1 FLOOR
+	Color(0.58, 0.38, 0.14), # 2 DOOR
+	Color(0.75, 0.55, 0.10), # 3 CHEST
+	Color(1.00, 0.82, 0.10), # 4 GOLD
+	Color(0.40, 0.75, 0.25), # 5 ENTRY
+	Color(0.20, 0.80, 0.30), # 6 EXIT
+	Color(0.45, 0.28, 0.12), # 7 BARREL
 ]
 
 var dungeon = null
@@ -43,7 +43,7 @@ func _draw() -> void:
 	var pts := PackedVector2Array([
 		Vector2(0.0, -s * 1.3),
 		Vector2(-s * 0.9, s * 0.7),
-		Vector2( s * 0.9, s * 0.7),
+		Vector2(s * 0.9, s * 0.7),
 	])
 	# Rotation autour de (0,0)
 	var rotated := PackedVector2Array()
@@ -52,5 +52,5 @@ func _draw() -> void:
 		var ry = pt.x * sin_a + pt.y * cos_a
 		rotated.append(Vector2(rx, ry))
 	draw_colored_polygon(rotated, Color(0.25, 0.65, 1.0, 1.0))
-	rotated.append(rotated[0])  # fermer la polyline
+	rotated.append(rotated[0]) # fermer la polyline
 	draw_polyline(rotated, Color(1.0, 1.0, 1.0, 0.85), 1.0)

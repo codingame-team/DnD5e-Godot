@@ -2,11 +2,11 @@
 ## Contrôleur du menu principal.
 extends Control
 
-@onready var btn_new_game: Button   = $VBox/BtnNewGame
-@onready var btn_load_game: Button  = $VBox/BtnLoadGame
+@onready var btn_new_game: Button = $VBox/BtnNewGame
+@onready var btn_load_game: Button = $VBox/BtnLoadGame
 @onready var btn_test_combat: Button = $VBox/BtnTestCombat
-@onready var btn_settings: Button   = $VBox/BtnSettings
-@onready var btn_quit: Button       = $VBox/BtnQuit
+@onready var btn_settings: Button = $VBox/BtnSettings
+@onready var btn_quit: Button = $VBox/BtnQuit
 
 func _ready() -> void:
 	btn_new_game.pressed.connect(_on_new_game)

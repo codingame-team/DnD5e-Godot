@@ -37,12 +37,12 @@ func start_combat(heroes: Array, enemies: Array) -> void:
 	initiative_order.clear()
 
 	for hero in heroes:
-		var init_roll := _roll_initiative(hero.get("abilities", { }).get("dex", 10))
-		initiative_order.append(hero.merged({ "_initiative": init_roll, "_is_hero": true }))
+		var init_roll := _roll_initiative(hero.get("abilities", {}).get("dex", 10))
+		initiative_order.append(hero.merged({"_initiative": init_roll, "_is_hero": true}))
 
 	for enemy in enemies:
-		var init_roll := _roll_initiative(enemy.get("abilities", { }).get("dex", 10))
-		initiative_order.append(enemy.merged({ "_initiative": init_roll, "_is_hero": false }))
+		var init_roll := _roll_initiative(enemy.get("abilities", {}).get("dex", 10))
+		initiative_order.append(enemy.merged({"_initiative": init_roll, "_is_hero": false}))
 
 	initiative_order.sort_custom(func(a, b): return a["_initiative"] > b["_initiative"])
 	combat_order_ready.emit(initiative_order)
@@ -95,7 +95,7 @@ func end_current_turn() -> void:
 
 func _current_combatant() -> Dictionary:
 	if initiative_order.is_empty() or current_index >= initiative_order.size():
-		return { }
+		return {}
 	return initiative_order[current_index]
 
 
@@ -139,7 +139,7 @@ func roll_damage(dice_str: String) -> int:
 	elif "-" in expr and "d" in expr:
 		var parts := expr.split("-", false, 1)
 		expr = parts[0]
-		bonus = -int(parts[1])
+		bonus = - int(parts[1])
 	if "d" in expr:
 		var parts := expr.split("d")
 		var count := int(parts[0]) if parts[0] != "" else 1
