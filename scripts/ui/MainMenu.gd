@@ -33,7 +33,7 @@ func _on_test_combat() -> void:
 	get_tree().change_scene_to_file("res://scenes/combat/combat_scene.tscn")
 
 func _on_settings() -> void:
-	push_warning("Écran Options à implémenter")
+	get_tree().change_scene_to_file("res://scenes/ui/options_menu.tscn")
 
 func _on_quit() -> void:
 	get_tree().quit()

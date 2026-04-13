@@ -93,8 +93,10 @@ static func from_class_data(class_data: Dictionary, hero_name: String = "", lvl:
 	h.name = hero_name if hero_name != "" else class_data.get("name", "Héros")
 	h.level = lvl
 	h.hit_die = class_data.get("hit_die", 10)
-	# HP de base niveau 1 : max du dé de vie + mod CON
+	# HP D&D 5e : niveau 1 = max dé + mod CON ; niveau suivants = (dé/2+1) + mod CON
 	h.max_hp = h.hit_die + h.con_mod()
+	for _i in range(1, lvl):
+		h.max_hp += maxi(1, h.hit_die / 2 + 1) + h.con_mod()
 	h.hp = h.max_hp
 	h.proficiency_bonus = (lvl - 1) / 4 + 2
 	# Équipement de base : Cotte de mailles + Épée longue + 2 potions

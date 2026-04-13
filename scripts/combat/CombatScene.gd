@@ -27,6 +27,7 @@ var _move_highlights: Array = []
 var _pending_action: String = ""
 var _astar: AStarGrid2D
 var _is_animating: bool = false
+var _combat_finished: bool = false
 
 # --------------------------------------------------------------------------
 # Ready
@@ -43,6 +44,13 @@ func _ready() -> void:
 	_load_combatants()
 	_start_combat()
 	AudioManager.play_combat_music()
+
+func _exit_tree() -> void:
+	if TurnManager.turn_started.is_connected(_on_turn_started):
+		TurnManager.turn_started.disconnect(_on_turn_started)
+	if TurnManager.round_started.is_connected(_on_round_started):
+		TurnManager.round_started.disconnect(_on_round_started)
+	TurnManager.stop_combat()
 
 func _connect_buttons() -> void:
 	btn_attack.pressed.connect(_on_btn_attack)
@@ -91,21 +99,32 @@ func _on_btn_move() -> void:
 func _build_grid() -> void:
 	var cx := (GRID_COLS - 1) * TILE_SIZE / 2.0
 	var cz := (GRID_ROWS - 1) * TILE_SIZE / 2.0
+	var wall_mesh := BoxMesh.new()
+	wall_mesh.size = Vector3(TILE_SIZE - 0.05, 2.0, TILE_SIZE - 0.05)
+	var floor_mesh := BoxMesh.new()
+	floor_mesh.size = Vector3(TILE_SIZE - 0.06, 0.15, TILE_SIZE - 0.06)
 	for row in GRID_ROWS:
 		for col in GRID_COLS:
+			var is_wall := (row == 0 or row == GRID_ROWS - 1 or col == 0 or col == GRID_COLS - 1)
 			var inst := MeshInstance3D.new()
-			var floor_mesh := BoxMesh.new()
-			floor_mesh.size = Vector3(TILE_SIZE - 0.06, 0.15, TILE_SIZE - 0.06)
-			inst.mesh = floor_mesh
+			inst.mesh = wall_mesh if is_wall else floor_mesh
 			var mat := StandardMaterial3D.new()
-			if (row + col) % 2 == 0:
+			if is_wall:
+				mat.albedo_color = Color(0.30, 0.26, 0.22)
+				mat.roughness = 0.95
+			elif (row + col) % 2 == 0:
 				mat.albedo_color = Color(0.72, 0.68, 0.62)
+				mat.roughness = 0.9
 			else:
 				mat.albedo_color = Color(0.60, 0.56, 0.50)
-			mat.roughness = 0.9
+				mat.roughness = 0.9
 			inst.set_surface_override_material(0, mat)
-			inst.position = Vector3(col * TILE_SIZE - cx, 0.0, row * TILE_SIZE - cz)
-			inst.set_meta("grid_pos", Vector2i(col, row))
+			var pos := Vector3(col * TILE_SIZE - cx, 0.0, row * TILE_SIZE - cz)
+			if is_wall:
+				pos.y = 0.9
+			inst.position = pos
+			if not is_wall:
+				inst.set_meta("grid_pos", Vector2i(col, row))
 			grid_root.add_child(inst)
 
 func _init_astar() -> void:
@@ -114,6 +133,11 @@ func _init_astar() -> void:
 	_astar.cell_size = Vector2(TILE_SIZE, TILE_SIZE)
 	_astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	_astar.update()
+	# Mark border wall cells as solid so pathfinding won't route through them
+	for row in GRID_ROWS:
+		for col in GRID_COLS:
+			if row == 0 or row == GRID_ROWS - 1 or col == 0 or col == GRID_COLS - 1:
+				_astar.set_point_solid(Vector2i(col, row), true)
 
 # --------------------------------------------------------------------------
 # Combatants
@@ -126,20 +150,27 @@ func _load_combatants() -> void:
 		var cls_data := DataManager.get_class_data(h_dict.get("class_index", "fighter"))
 		if cls_data.is_empty():
 			continue
-		var hero := HeroData.from_class_data(cls_data, h_dict.get("name", "Heros"))
+		var hero := HeroData.from_class_data(cls_data, h_dict.get("name", "Heros"), 3)
 		hero.hp = h_dict.get("hp", hero.max_hp) if h_dict.get("hp", 0) > 0 else hero.max_hp
 		heroes.append(hero)
-		_log("[color=aqua]%s equipe : Epee longue (1d8), Cotte de mailles (CA %d), %d potion(s) — PV %d[/color]" \
+		_log("[color=aqua]%s (niv.3) equipe : Epee longue (1d8), Cotte de mailles (CA %d), %d potion(s) — PV %d[/color]" \
 			% [hero.name, hero.ac, hero.potions, hero.max_hp])
 	var enemy_list: Array = GameManager.current_scenario.get("enemies", []) \
 						 if not GameManager.current_scenario.is_empty() \
 						 else ["goblin", "goblin"]
+	# Count occurrences of each monster index to assign unique names
+	var name_count: Dictionary = {}
 	for i in enemy_list.size():
 		var m_data := DataManager.get_monster(enemy_list[i])
-		if not m_data.is_empty():
-			var monster := MonsterData.from_data(m_data)
-			monster.grid_pos = Vector2i(5 + i % 3, 2 + i / 3)
-			monsters.append(monster)
+		if m_data.is_empty():
+			continue
+		var monster := MonsterData.from_data(m_data)
+		monster.grid_pos = Vector2i(5 + i % 3, 2 + i / 3)
+		# Ensure unique name for duplicates (e.g. "Goblin 1", "Goblin 2")
+		var base_name: String = monster.name
+		name_count[base_name] = name_count.get(base_name, 0) + 1
+		monster.name = "%s %d" % [base_name, name_count[base_name]]
+		monsters.append(monster)
 	_spawn_pieces()
 
 func _spawn_pieces() -> void:
@@ -152,6 +183,7 @@ func _spawn_pieces() -> void:
 		_pieces[heroes[i].name] = piece
 		piece.position = _grid_to_world(gpos)
 		combatant_root.add_child(piece)
+		_update_hp_label(heroes[i].name)
 	for i in monsters.size():
 		var gpos := monsters[i].grid_pos
 		_occupied[gpos] = monsters[i].name
@@ -160,6 +192,7 @@ func _spawn_pieces() -> void:
 		_pieces[monsters[i].name] = piece
 		piece.position = _grid_to_world(gpos)
 		combatant_root.add_child(piece)
+		_update_hp_label(monsters[i].name)
 
 func _create_combatant_node(cname: String, is_hero: bool) -> Node3D:
 	var root := Node3D.new()
@@ -382,9 +415,18 @@ func _update_hp_label(cname: String) -> void:
 			hp_val = m.hp; hp_max = m.max_hp; break
 	if hp_max <= 0:
 		return
+	var pct := float(hp_val) / float(hp_max)
+	var label_color: Color
+	if pct > 0.5:
+		label_color = Color(0.2, 1.0, 0.2)   # green
+	elif pct > 0.25:
+		label_color = Color(1.0, 0.85, 0.0)  # yellow
+	else:
+		label_color = Color(1.0, 0.2, 0.2)   # red
 	for child in (piece as Node3D).get_children():
 		if child is Label3D:
-			(child as Label3D).text = "%s\n%d/%d" % [cname, hp_val, hp_max]
+			(child as Label3D).text = "%s\n%d/%d PV" % [cname, hp_val, hp_max]
+			(child as Label3D).modulate = label_color
 
 func _update_all_hp_labels() -> void:
 	for h in heroes:
@@ -407,6 +449,17 @@ func _start_combat() -> void:
 
 func _on_turn_started(combatant: Dictionary) -> void:
 	var cname: String = combatant.get("name", "?")
+	# Skip dead combatants (TurnManager hp may lag behind actual state)
+	for h in heroes:
+		if h.name == cname and not h.is_alive():
+			TurnManager.end_current_turn()
+			return
+	for m in monsters:
+		if m.name == cname and not m.is_alive():
+			TurnManager.end_current_turn()
+			return
+	if _combat_finished:
+		return
 	turn_label.text = "Tour de : %s" % cname
 	var is_hero: bool = combatant.get("_is_hero", false)
 	_log("[b]%s[/b] commence son tour." % cname)
@@ -509,16 +562,28 @@ func _end_turn() -> void:
 	_check_victory()
 
 func _check_victory() -> void:
+	if _combat_finished:
+		return
 	var alive_m: Array = monsters.filter(func(m: MonsterData): return m.is_alive())
 	var alive_h: Array = heroes.filter(func(h: HeroData): return h.is_alive())
 	if alive_m.is_empty():
+		_combat_finished = true
+		_update_action_buttons(false)
 		_log("[color=lime][b]Victoire ! Tous les ennemis sont vaincus.[/b][/color]")
-		await get_tree().create_timer(2.0).timeout
+		turn_label.text = "⚔ Victoire !"
+		TurnManager.stop_combat()
+		await get_tree().create_timer(3.0).timeout
 		GameManager.end_combat(true)
+		get_tree().change_scene_to_file("res://scenes/dungeon/dungeon_scene.tscn")
 	elif alive_h.is_empty():
-		_log("[color=red][b]Defaite...[/b][/color]")
-		await get_tree().create_timer(2.0).timeout
+		_combat_finished = true
+		_update_action_buttons(false)
+		_log("[color=red][b]Défaite... Votre groupe est anéanti.[/b][/color]")
+		turn_label.text = "☠ Défaite"
+		TurnManager.stop_combat()
+		await get_tree().create_timer(3.0).timeout
 		GameManager.end_combat(false)
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 # --------------------------------------------------------------------------
 # Callbacks
@@ -538,6 +603,11 @@ func _on_combatant_died(cname: String, is_hero: bool) -> void:
 		for m in monsters:
 			if m.name == cname and m.is_alive():
 				return
+	# Sync hp=0 into TurnManager's initiative_order so dead-skip works
+	for entry in TurnManager.initiative_order:
+		if entry.get("name", "") == cname:
+			entry["hp"] = 0
+			break
 	_log("[color=gray][i]%s est elimine.[/i][/color]" % cname)
 	var piece: Variant = _pieces.get(cname)
 	if piece != null:
@@ -550,7 +620,7 @@ func _on_combatant_died(cname: String, is_hero: bool) -> void:
 # --------------------------------------------------------------------------
 
 func _unhandled_input(event: InputEvent) -> void:
-	if _is_animating:
+	if _is_animating or _combat_finished:
 		return
 	if not (event is InputEventMouseButton and event.pressed and
 			event.button_index == MOUSE_BUTTON_LEFT):
@@ -601,6 +671,11 @@ func _try_move_at_mouse(mouse_pos: Vector2) -> void:
 	if _occupied.has(target_gpos):
 		_log("[color=orange]Case occupee.[/color]")
 		return
+	# Block movement onto wall cells (border)
+	if target_gpos.x == 0 or target_gpos.x == GRID_COLS - 1 or \
+	   target_gpos.y == 0 or target_gpos.y == GRID_ROWS - 1:
+		_log("[color=orange]Mur !")
+		return
 	var from_gpos: Vector2i = _grid_pos.get(hero.name, Vector2i(-1, -1))
 	var remaining := (hero.speed - hero.movement_used) / 5
 	var path := _get_path(from_gpos, target_gpos, remaining)
@@ -626,6 +701,13 @@ func _try_move_at_mouse(mouse_pos: Vector2) -> void:
 # --------------------------------------------------------------------------
 
 func _update_action_buttons(is_hero: bool) -> void:
+	if _combat_finished:
+		btn_attack.disabled = true
+		btn_spell.disabled  = true
+		btn_move.disabled   = true
+		btn_end_turn.visible = false
+		btn_potion.visible   = false
+		return
 	btn_attack.disabled  = not is_hero
 	btn_spell.disabled   = not is_hero
 	btn_move.disabled    = not is_hero

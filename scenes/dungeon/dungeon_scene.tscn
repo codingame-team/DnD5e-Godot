@@ -1,42 +1,79 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnd_dungeon"]
+[gd_scene load_steps=3 format=3 uid="uid://dnd_dungeon"]
 
 [ext_resource type="Script" path="res://scripts/dungeon/DungeonScene.gd" id="1_dungeon"]
+
+[sub_resource type="Environment" id="1_env"]
+background_mode = 0
+background_color = Color(0.06, 0.04, 0.04, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.9, 0.85, 0.75, 1)
+ambient_light_energy = 0.8
 
 [node name="DungeonScene" type="Node3D"]
 script = ExtResource("1_dungeon")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("1_env")
 
 [node name="DirectionalLight" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.866, -0.35, 0.354, 0, 0.71, 0.704, -0.5, -0.606, 0.612, 0, 10, 0)
-light_energy = 1.2
+transform = Transform3D(0.866, -0.35, 0.354, 0, 0.71, 0.704, -0.5, -0.606, 0.612, 0, 15, 0)
+light_energy = 1.0
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707, 0, 12, 12)
-fov = 50.0
+transform = Transform3D(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707, 0, 48, 24)
+fov = 55.0
+current = true
 
 [node name="TileRoot" type="Node3D" parent="."]
+
+[node name="ObjectRoot" type="Node3D" parent="."]
+
+[node name="HeroRoot" type="Node3D" parent="."]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="VBoxContainer" parent="UI"]
 layout_mode = 1
-anchor_right = 0.25
-anchor_bottom = 0.3
-offset_left = 10
-offset_top = 10
+anchor_right = 0.30
+anchor_bottom = 0.45
+offset_left = 12
+offset_top = 12
 
 [node name="PartyLabel" type="Label" parent="UI/HUD"]
 layout_mode = 2
 text = "Groupe :"
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
+
+[node name="GoldLabel" type="Label" parent="UI/HUD"]
+layout_mode = 2
+text = "Or : 0"
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(1.0, 0.85, 0.1, 1)
+
+[node name="InfoLabel" type="Label" parent="UI/HUD"]
+layout_mode = 2
+text = ""
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.3, 1.0, 0.4, 1)
+
+[node name="CamLabel" type="Label" parent="UI/HUD"]
+layout_mode = 2
+text = "Vue isometrique  [V]"
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.8, 0.8, 1.0, 1)
+
+[node name="Controls" type="Label" parent="UI/HUD"]
+layout_mode = 2
+text = "ZQSD/Fleches:bouger  Q/E:orbite  Molette:zoom  Clic milieu:orbite libre"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
 
 [node name="BtnCombat" type="Button" parent="UI"]
 layout_mode = 1
-anchor_left = 0.4
-anchor_top = 0.9
-anchor_right = 0.6
+anchor_left = 0.38
+anchor_top = 0.90
+anchor_right = 0.62
 anchor_bottom = 0.98
-text = "⚔  Tester le Combat"
+text = "Tester le Combat"
 theme_override_font_sizes/font_size = 20

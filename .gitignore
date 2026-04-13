@@ -1,0 +1,35 @@
+# Godot editor/runtime cache
+.godot/
+
+# OS/editor clutter
+.DS_Store
+*.tmp
+*.log
+
+# Export artifacts (desktop/web)
+*.exe
+*.pck
+*.wasm
+*.zip
+*.apk
+*.x86_64
+*.app
+
+# Export bundles generated at project root
+DnD Tactics.html
+DnD Tactics.js
+DnD Tactics.audio.worklet.js
+DnD Tactics.audio.position.worklet.js
+DnD Tactics.icon.png
+DnD Tactics.icon.png.import
+DnD Tactics.apple-touch-icon.png
+DnD Tactics.apple-touch-icon.png.import
+DnD Tactics.png
+DnD Tactics.png.import
+DnD Tactics.console.exe
+DnD Tactics.exe
+DnD Tactics.pck
+DnD Tactics.wasm
+
+# Temporary captures
+captures/

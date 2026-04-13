@@ -1,0 +1,160 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnd_options_menu"]
+
+[ext_resource type="Script" path="res://scripts/ui/OptionsMenu.gd" id="1_options"]
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_options")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.03, 0.04, 0.08, 1)
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchor_left = 0.13
+anchor_top = 0.06
+anchor_right = 0.87
+anchor_bottom = 0.95
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "Options"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 40
+
+[node name="AudioTitle" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "Audio"
+theme_override_font_sizes/font_size = 24
+
+[node name="ChkMusic" type="CheckBox" parent="Panel/VBox"]
+layout_mode = 2
+text = "Musique activee"
+
+[node name="MusicRow" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="LblMusic" type="Label" parent="Panel/VBox/MusicRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(170, 0)
+text = "Volume musique"
+
+[node name="SldMusic" type="HSlider" parent="Panel/VBox/MusicRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -40.0
+max_value = 6.0
+step = 1.0
+value = -10.0
+
+[node name="LblMusicValue" type="Label" parent="Panel/VBox/MusicRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(90, 0)
+text = "-10 dB"
+horizontal_alignment = 2
+
+[node name="ChkSfx" type="CheckBox" parent="Panel/VBox"]
+layout_mode = 2
+text = "Effets sonores actifs"
+
+[node name="SfxRow" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="LblSfx" type="Label" parent="Panel/VBox/SfxRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(170, 0)
+text = "Volume SFX"
+
+[node name="SldSfx" type="HSlider" parent="Panel/VBox/SfxRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -40.0
+max_value = 6.0
+step = 1.0
+
+[node name="LblSfxValue" type="Label" parent="Panel/VBox/SfxRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(90, 0)
+text = "0 dB"
+horizontal_alignment = 2
+
+[node name="CamTitle" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "Camera"
+theme_override_font_sizes/font_size = 24
+
+[node name="SensRow" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="LblSens" type="Label" parent="Panel/VBox/SensRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(170, 0)
+text = "Sensibilite orbitale"
+
+[node name="SldSens" type="HSlider" parent="Panel/VBox/SensRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.1
+max_value = 1.2
+step = 0.05
+value = 0.4
+
+[node name="LblSensValue" type="Label" parent="Panel/VBox/SensRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(90, 0)
+text = "0.40"
+horizontal_alignment = 2
+
+[node name="ChkInvertX" type="CheckBox" parent="Panel/VBox"]
+layout_mode = 2
+text = "Inverser rotation camera X (drag souris)"
+
+[node name="ControlsTitle" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "Commandes"
+theme_override_font_sizes/font_size = 24
+
+[node name="Hint" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "Cliquez sur une touche pour la remapper (Echap pour annuler)."
+theme_override_colors/font_color = Color(0.7, 0.7, 0.8, 1)
+
+[node name="KeybindScroll" type="ScrollContainer" parent="Panel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+custom_minimum_size = Vector2(0, 260)
+
+[node name="KeybindGrid" type="GridContainer" parent="Panel/VBox/KeybindScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="Buttons" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="BtnReset" type="Button" parent="Panel/VBox/Buttons"]
+layout_mode = 2
+custom_minimum_size = Vector2(160, 46)
+text = "Reinitialiser"
+
+[node name="BtnApply" type="Button" parent="Panel/VBox/Buttons"]
+layout_mode = 2
+custom_minimum_size = Vector2(160, 46)
+text = "Appliquer"
+
+[node name="BtnBack" type="Button" parent="Panel/VBox/Buttons"]
+layout_mode = 2
+custom_minimum_size = Vector2(160, 46)
+text = "Retour"

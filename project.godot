@@ -22,6 +22,7 @@ GameManager="*res://scripts/autoload/GameManager.gd"
 DataManager="*res://scripts/autoload/DataManager.gd"
 TurnManager="*res://scripts/autoload/TurnManager.gd"
 AudioManager="*res://scripts/autoload/AudioManager.gd"
+SettingsManager="*res://scripts/autoload/SettingsManager.gd"
 
 [configuration]
 
@@ -63,4 +64,5 @@ end_turn={
 
 [rendering]
 
+textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0.05, 0.05, 0.08, 1)
