@@ -495,8 +495,8 @@ func _cycle_cam_mode() -> void:
 		if first_hero:
 			first_hero.rotation_degrees.y = -_hero_yaw
 	var names := [
-		"Vue isometrique  [+/-:zoom]",
-		"3eme personne  [+/-:zoom]",
+		"Vue isometrique  [PgPrec/PgSuiv:zoom]",
+		"3eme personne  [PgPrec/PgSuiv:zoom]",
 		"1ere personne  [Q/D:tourner]"
 	]
 	cam_label.text = "[V] " + names[_cam_mode]
@@ -507,18 +507,30 @@ func _cycle_cam_mode() -> void:
 # --------------------------------------------------------------------------
 
 func _input(event: InputEvent) -> void:
-	# Molette : zoom
+	# Molette classique OU défilement souris/trackpad → zoom
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			_cam_zoom = maxf(0.3, _cam_zoom - 0.1)
 			_update_camera()
+			return
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			_cam_zoom = minf(3.0, _cam_zoom + 0.1)
 			_update_camera()
+			return
 		elif (event.button_index == MOUSE_BUTTON_MIDDLE
 				or event.button_index == MOUSE_BUTTON_RIGHT):
 			_cam_drag = event.pressed
 			_cam_drag_last = event.position
+	# Geste de défilement (souris sans molette classique, trackpad, IntelliMouse)
+	elif event is InputEventPanGesture:
+		_cam_zoom = clampf(_cam_zoom + event.delta.y * 0.05, 0.3, 3.0)
+		_update_camera()
+		return
+	# Geste de pincement (trackpad macOS)
+	elif event is InputEventMagnifyGesture:
+		_cam_zoom = clampf(_cam_zoom / event.factor, 0.3, 3.0)
+		_update_camera()
+		return
 	# Orbite : bouton milieu ou droit (ISO + 3ème personne, pas 1ère)
 	if event is InputEventMouseMotion and _cam_drag and _cam_mode != CamMode.FIRST:
 		var delta: float = event.relative.x
@@ -546,12 +558,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		_cam_yaw = fmod(_cam_yaw + 15.0, 360.0)
 		_update_camera()
 		return
-	# Zoom clavier : + / - (pour ceux sans molette)
-	if keycode == _settings_manager().get_keybind("cam_zoom_in") or keycode == KEY_KP_ADD:
+	# Zoom clavier : Pg.Prec/Pg.Suiv ou +/- (pour souris sans molette)
+	if keycode == _settings_manager().get_keybind("cam_zoom_in") \
+			or keycode == KEY_KP_ADD or keycode == KEY_PAGEUP:
 		_cam_zoom = maxf(0.25, _cam_zoom - 0.15)
 		_update_camera()
 		return
-	if keycode == _settings_manager().get_keybind("cam_zoom_out") or keycode == KEY_KP_SUBTRACT:
+	if keycode == _settings_manager().get_keybind("cam_zoom_out") \
+			or keycode == KEY_KP_SUBTRACT or keycode == KEY_PAGEDOWN:
 		_cam_zoom = minf(3.5, _cam_zoom + 0.15)
 		_update_camera()
 		return

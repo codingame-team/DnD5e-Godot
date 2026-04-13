@@ -6,8 +6,29 @@ const TILE_SIZE := 2.0
 const GRID_COLS := 8
 const GRID_ROWS := 8
 
+# Modèles 3D par classe de héros
+const CLASS_MODELS: Dictionary = {
+	"fighter":   "res://assets/models/characters/Warrior.gltf",
+	"paladin":   "res://assets/models/characters/Warrior.gltf",
+	"barbarian": "res://assets/models/characters/Warrior.gltf",
+	"wizard":    "res://assets/models/characters/Wizard.gltf",
+	"sorcerer":  "res://assets/models/characters/Wizard.gltf",
+	"rogue":     "res://assets/models/characters/Rogue.gltf",
+	"ranger":    "res://assets/models/characters/Ranger.gltf",
+	"monk":      "res://assets/models/characters/Monk.gltf",
+	"cleric":    "res://assets/models/characters/Cleric.gltf",
+	"druid":     "res://assets/models/characters/Cleric.gltf",
+}
+
+# Modèles 3D par index de monstre
+const MONSTER_MODELS: Dictionary = {
+	"goblin": "res://assets/monsters/Goblin/Goblin_Merged.glb",
+	"orc":    "res://assets/monsters/Orc.gltf",
+}
+
 @onready var grid_root: Node3D              = $GridRoot
 @onready var combatant_root: Node3D         = $CombatantRoot
+@onready var camera: Camera3D               = $Camera3D
 @onready var btn_attack: Button             = $UI/ActionPanel/BtnAttack
 @onready var btn_spell: Button              = $UI/ActionPanel/BtnSpell
 @onready var btn_move: Button               = $UI/ActionPanel/BtnMove
@@ -29,11 +50,26 @@ var _astar: AStarGrid2D
 var _is_animating: bool = false
 var _combat_finished: bool = false
 
+# Animations : AnimationPlayer par combattant (name → AnimationPlayer)
+var _anim_players: Dictionary = {}
+
+# Caméra : orbite sphérique (molette = zoom, clic droit = orbite)
+var _cam_zoom:       float = 1.0
+var _cam_dist:       float = 15.0
+var _cam_yaw:        float = 0.0
+var _cam_pitch:      float = 40.0
+var _cam_drag:       bool  = false
+var _cam_drag_last:  Vector2
+
 # --------------------------------------------------------------------------
 # Ready
 # --------------------------------------------------------------------------
 
 func _ready() -> void:
+	var _base := camera.global_position
+	_cam_dist = maxf(_base.length(), 5.0)
+	_cam_yaw   = rad_to_deg(atan2(_base.x, _base.z))
+	_cam_pitch = rad_to_deg(asin(clampf(_base.y / _cam_dist, -1.0, 1.0)))
 	combat_manager = CombatManager.new()
 	add_child(combat_manager)
 	combat_manager.attack_resolved.connect(_on_attack_resolved)
@@ -193,13 +229,113 @@ func _spawn_pieces() -> void:
 		piece.position = _grid_to_world(gpos)
 		combatant_root.add_child(piece)
 		_update_hp_label(monsters[i].name)
+	# Normalisation de hauteur + idle en différé (AABB disponible après add_child)
+	call_deferred("_adjust_all_combatant_heights")
 
 func _create_combatant_node(cname: String, is_hero: bool) -> Node3D:
 	var root := Node3D.new()
 	root.name = cname
-	root.add_child(_build_procedural_figure(is_hero))
+	var model := _load_combatant_model(cname, is_hero)
+	root.add_child(model)
 	_add_name_label(root, cname, is_hero)
 	return root
+
+## Charge le modèle 3D correspondant au combattant.
+## Repli sur la figure procédurale si aucun asset trouvé.
+func _load_combatant_model(cname: String, is_hero: bool) -> Node3D:
+	var model_path := ""
+	var monster_index := ""
+	if is_hero:
+		for h in heroes:
+			if h.name == cname:
+				model_path = CLASS_MODELS.get(h.class_index, "")
+				break
+	else:
+		for m in monsters:
+			if m.name == cname:
+				monster_index = m.index
+				model_path = MONSTER_MODELS.get(monster_index, "")
+				break
+	if model_path.is_empty():
+		return _build_procedural_figure(is_hero)
+	var packed := load(model_path) as PackedScene
+	if packed == null:
+		return _build_procedural_figure(is_hero)
+	var instance := packed.instantiate() as Node3D
+	if instance == null:
+		return _build_procedural_figure(is_hero)
+	# Stockage de l'AnimationPlayer pour ce combattant
+	var ap := _find_anim_player(instance)
+	if ap != null:
+		_anim_players[cname] = ap
+	return instance
+
+## Cherche récursivement un AnimationPlayer dans le sous-arbre.
+func _find_anim_player(node: Node) -> AnimationPlayer:
+	if node is AnimationPlayer:
+		return node as AnimationPlayer
+	for child in node.get_children():
+		var result := _find_anim_player(child)
+		if result != null:
+			return result
+	return null
+
+## Joue la première animation reconnue parmi les noms proposés.
+## Essaie "mixamo.com" (nom Mixamo natif) avant le repli sur list[0].
+func _play_named_anim(ap: AnimationPlayer, names: Array) -> void:
+	if ap == null or not is_instance_valid(ap):
+		return
+	for anim_name in (names + ["mixamo.com"]):
+		if ap.has_animation(anim_name):
+			ap.play(anim_name)
+			return
+	var list := ap.get_animation_list()
+	if list.size() > 0:
+		ap.play(list[0])
+
+## Collecte récursivement tous les MeshInstance3D dans le sous-arbre.
+func _find_all_meshes(node: Node) -> Array:
+	var results: Array = []
+	if node is MeshInstance3D:
+		results.append(node as MeshInstance3D)
+	for child in node.get_children():
+		results.append_array(_find_all_meshes(child))
+	return results
+
+## Calcule l'AABB dans l'espace local du model root en tenant compte
+## de toute la hiérarchie de transforms (bones, sockets, etc.).
+func _compute_aabb(node: Node, ref_inv: Transform3D) -> AABB:
+	var result := AABB()
+	if node is MeshInstance3D:
+		var mi := node as MeshInstance3D
+		var rel := ref_inv * mi.global_transform
+		result = rel * mi.get_aabb()
+	for child in node.get_children():
+		var child_aabb := _compute_aabb(child, ref_inv)
+		if result.size == Vector3.ZERO:
+			result = child_aabb
+		elif child_aabb.size != Vector3.ZERO:
+			result = result.merge(child_aabb)
+	return result
+
+## Ajuste la hauteur de tous les modèles combattants et démarre leur animation idle.
+## À appeler en différé après ajout à la scène (AABB disponible).
+func _adjust_all_combatant_heights() -> void:
+	for cname in _pieces.keys():
+		var piece := _pieces[cname] as Node3D
+		if piece == null or piece.get_child_count() == 0:
+			continue
+		var model := piece.get_child(0) as Node3D
+		if model == null:
+			continue
+		var aabb := _compute_aabb(model, model.global_transform.affine_inverse())
+		if aabb.size.y > 0.01:
+			var sf := 1.8 / aabb.size.y
+			model.scale = Vector3(sf, sf, sf)
+			model.position.y = -aabb.position.y * sf
+		var ap: AnimationPlayer = _anim_players.get(cname) as AnimationPlayer
+		if ap != null:
+			_play_named_anim(ap, ["Idle", "idle", "IDLE", "Stand", "stand", "T-Pose"])
 
 func _build_procedural_figure(is_hero: bool) -> Node3D:
 	var figure := Node3D.new()
@@ -333,13 +469,15 @@ func _world_to_grid(world_pos: Vector3) -> Vector2i:
 	return Vector2i(clamp(col, 0, GRID_COLS - 1), clamp(row, 0, GRID_ROWS - 1))
 
 # --------------------------------------------------------------------------
-# Animations (Tween-based)
+# Animations
 # --------------------------------------------------------------------------
 
 func _animate_move(piece: Node3D, path: Array[Vector2i]) -> void:
 	if path.is_empty() or not is_instance_valid(piece):
 		return
 	_is_animating = true
+	var ap: AnimationPlayer = _anim_players.get(piece.name) as AnimationPlayer
+	_play_named_anim(ap, ["Walk", "walk", "Walking", "walking", "Run", "run"])
 	var tween := create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
@@ -347,12 +485,19 @@ func _animate_move(piece: Node3D, path: Array[Vector2i]) -> void:
 		var world_pos := _grid_to_world(gpos)
 		tween.tween_property(piece, "position", world_pos, 0.16)
 	await tween.finished
+	_play_named_anim(ap, ["Idle", "idle", "IDLE", "Stand", "stand", "T-Pose"])
 	_is_animating = false
 
 func _animate_attack(attacker: Node3D, target: Node3D) -> void:
 	if not is_instance_valid(attacker) or not is_instance_valid(target):
 		return
 	_is_animating = true
+	var ap: AnimationPlayer = _anim_players.get(attacker.name) as AnimationPlayer
+	_play_named_anim(ap, [
+			"Sword_Attack", "Sword_Attack2", "Attack", "attack",
+			"Melee_Attack", "MeleeAttack", "Punch",
+		"Standing Melee Attack Downward", "ArmatureAction"
+	])
 	var origin := attacker.position
 	var lunge  := origin.lerp(target.position, 0.38)
 	var tween  := create_tween()
@@ -360,19 +505,36 @@ func _animate_attack(attacker: Node3D, target: Node3D) -> void:
 	tween.tween_property(attacker, "position", lunge, 0.12)
 	tween.tween_property(attacker, "position", origin, 0.14)
 	await tween.finished
+	_play_named_anim(ap, ["Idle", "idle", "IDLE", "Stand", "stand", "T-Pose"])
 	_is_animating = false
 
 func _animate_flash(piece: Node3D, flash_color: Color) -> void:
 	if not is_instance_valid(piece):
 		return
-	_set_figure_color(piece, flash_color)
-	await get_tree().create_timer(0.18).timeout
-	if is_instance_valid(piece):
-		_restore_figure_color(piece)
+	# Flash via lumière colorée temporaire (compatible modèles texturés et procéduraux)
+	var light := OmniLight3D.new()
+	light.light_color = flash_color
+	light.light_energy = 8.0
+	light.omni_range = 2.0
+	light.position = Vector3(0, 1.0, 0)
+	piece.add_child(light)
+	await get_tree().create_timer(0.20).timeout
+	if is_instance_valid(light):
+		light.queue_free()
 
 func _animate_death(piece: Node3D) -> void:
 	if not is_instance_valid(piece):
 		return
+	var ap: AnimationPlayer = _anim_players.get(piece.name) as AnimationPlayer
+	if ap != null:
+		_play_named_anim(ap, ["Death", "death", "Die", "die", "Dying", "dying"])
+		# Attente de la longueur de l'animation si elle a démarré
+		if ap.is_playing():
+			await get_tree().create_timer(ap.current_animation_length).timeout
+			if is_instance_valid(piece):
+				piece.visible = false
+			return
+	# Repli : tween (basculement)
 	var tween := create_tween()
 	tween.tween_property(piece, "rotation_degrees:z", 85.0, 0.35)
 	tween.parallel().tween_property(piece, "position:y", -0.3, 0.35)
@@ -620,6 +782,36 @@ func _on_combatant_died(cname: String, is_hero: bool) -> void:
 # --------------------------------------------------------------------------
 
 func _unhandled_input(event: InputEvent) -> void:
+	# Zoom molette + orbite clic droit (disponibles à tout moment)
+	if event is InputEventPanGesture:
+		# Défilement souris sans molette classique / trackpad
+		_cam_zoom = clampf(_cam_zoom + event.delta.y * 0.05, 0.3, 3.0)
+		_update_combat_camera()
+		return
+	if event is InputEventMagnifyGesture:
+		# Pincement trackpad macOS
+		_cam_zoom = clampf(_cam_zoom / event.factor, 0.3, 3.0)
+		_update_combat_camera()
+		return
+	if event is InputEventMouseButton:
+		var mb := event as InputEventMouseButton
+		if mb.pressed and mb.button_index == MOUSE_BUTTON_WHEEL_UP:
+			_cam_zoom = maxf(0.3, _cam_zoom - 0.1)
+			_update_combat_camera()
+			return
+		if mb.pressed and mb.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			_cam_zoom = minf(3.0, _cam_zoom + 0.1)
+			_update_combat_camera()
+			return
+		if mb.button_index == MOUSE_BUTTON_RIGHT:
+			_cam_drag = mb.pressed
+			_cam_drag_last = mb.position
+			return
+	if event is InputEventMouseMotion and _cam_drag:
+		_cam_yaw   -= event.relative.x * 0.3
+		_cam_pitch  = clampf(_cam_pitch - event.relative.y * 0.2, 10.0, 75.0)
+		_update_combat_camera()
+		return
 	if _is_animating or _combat_finished:
 		return
 	if not (event is InputEventMouseButton and event.pressed and
@@ -629,6 +821,18 @@ func _unhandled_input(event: InputEvent) -> void:
 		_try_attack_at_mouse()
 	elif _pending_action == "move":
 		_try_move_at_mouse(event.position)
+
+## Met à jour la caméra via coordonnées sphériques (zoom + orbite).
+func _update_combat_camera() -> void:
+	var dist    := _cam_dist * _cam_zoom
+	var yaw_r   := deg_to_rad(_cam_yaw)
+	var pitch_r := deg_to_rad(_cam_pitch)
+	camera.global_position = Vector3(
+		dist * cos(pitch_r) * sin(yaw_r),
+		dist * sin(pitch_r),
+		dist * cos(pitch_r) * cos(yaw_r)
+	)
+	camera.look_at(Vector3.ZERO, Vector3.UP)
 
 func _try_attack_at_mouse() -> void:
 	var hero := _get_current_hero()
@@ -658,11 +862,11 @@ func _try_move_at_mouse(mouse_pos: Vector2) -> void:
 	if hero == null:
 		_pending_action = ""
 		return
-	var camera := get_viewport().get_camera_3d()
-	if camera == null:
+	var cam := camera
+	if cam == null:
 		return
-	var ray_from := camera.project_ray_origin(mouse_pos)
-	var ray_dir  := camera.project_ray_normal(mouse_pos)
+	var ray_from := cam.project_ray_origin(mouse_pos)
+	var ray_dir  := cam.project_ray_normal(mouse_pos)
 	if abs(ray_dir.y) < 0.001:
 		return
 	var t := -ray_from.y / ray_dir.y
