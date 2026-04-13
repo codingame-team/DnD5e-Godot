@@ -23,6 +23,7 @@ const ACTIONS := [
 @onready var sld_sens: HSlider = $Panel/VBox/SensRow/SldSens
 @onready var lbl_sens: Label = $Panel/VBox/SensRow/LblSensValue
 @onready var chk_invert_x: CheckBox = $Panel/VBox/ChkInvertX
+@onready var opt_preset: OptionButton = $Panel/VBox/PresetRow/OptPreset
 @onready var keybind_grid: GridContainer = $Panel/VBox/KeybindScroll/KeybindGrid
 @onready var btn_back: Button = $Panel/VBox/Buttons/BtnBack
 @onready var btn_apply: Button = $Panel/VBox/Buttons/BtnApply
@@ -70,15 +71,37 @@ func _load_values() -> void:
 	_update_labels()
 
 func _connect_signals() -> void:
-	sld_music.value_changed.connect(_on_slider_changed)
-	sld_sfx.value_changed.connect(_on_slider_changed)
+	sld_music.value_changed.connect(_on_music_volume_changed)
+	sld_sfx.value_changed.connect(_on_sfx_volume_changed)
 	sld_sens.value_changed.connect(_on_slider_changed)
+	chk_music.toggled.connect(_on_music_toggled)
+	chk_sfx.toggled.connect(_on_sfx_toggled)
+	opt_preset.item_selected.connect(_on_preset_selected)
 	btn_apply.pressed.connect(_on_apply)
 	btn_back.pressed.connect(_on_back)
 	btn_reset.pressed.connect(_on_reset)
 
 func _on_slider_changed(_value: float) -> void:
 	_update_labels()
+
+func _on_music_volume_changed(value: float) -> void:
+	_update_labels()
+	AudioManager.set_music_volume(value)
+
+func _on_sfx_volume_changed(value: float) -> void:
+	_update_labels()
+	AudioManager.set_sfx_volume(value)
+
+func _on_music_toggled(pressed: bool) -> void:
+	AudioManager.music_enabled = pressed
+
+func _on_sfx_toggled(pressed: bool) -> void:
+	AudioManager.sfx_enabled = pressed
+
+func _on_preset_selected(index: int) -> void:
+	var preset_name := "AZERTY" if index == 0 else "QWERTY"
+	_settings_manager().apply_preset(preset_name)
+	_build_keybind_ui()
 
 func _update_labels() -> void:
 	lbl_music.text = "%d dB" % int(round(sld_music.value))
@@ -94,6 +117,13 @@ func _on_rebind_pressed(action_id: String) -> void:
 	btn.disabled = false
 	btn.text = "Appuyez sur une touche..."
 
+func _find_action_with_keycode(keycode: int) -> String:
+	for item in ACTIONS:
+		var action_id: String = item["id"]
+		if _settings_manager().get_keybind(action_id) == keycode:
+			return action_id
+	return ""
+
 func _unhandled_input(event: InputEvent) -> void:
 	if _pending_action.is_empty():
 		return
@@ -104,6 +134,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if keycode == KEY_ESCAPE:
 		_cancel_rebind()
 		return
+	var conflicting := _find_action_with_keycode(keycode)
+	if conflicting != "" and conflicting != _pending_action:
+		var old_key: int = _settings_manager().get_keybind(_pending_action)
+		_settings_manager().set_keybind(conflicting, old_key)
+		var conflict_btn: Button = _binding_buttons[conflicting]
+		conflict_btn.text = _key_to_text(old_key)
 	_settings_manager().set_keybind(_pending_action, keycode)
 	var btn: Button = _binding_buttons[_pending_action]
 	btn.text = _key_to_text(keycode)

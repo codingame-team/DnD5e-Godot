@@ -24,6 +24,18 @@ const DEFAULT_SETTINGS := {
 	}
 }
 
+const PRESET_QWERTY := {
+	"move_forward": KEY_W,
+	"move_back": KEY_S,
+	"turn_left": KEY_A,
+	"turn_right": KEY_D,
+	"cam_cycle_mode": KEY_V,
+	"cam_rotate_left": KEY_Q,
+	"cam_rotate_right": KEY_E,
+	"cam_zoom_in": KEY_EQUAL,
+	"cam_zoom_out": KEY_MINUS
+}
+
 var _settings: Dictionary = {}
 
 func _ready() -> void:
@@ -75,6 +87,20 @@ func set_keybind(action: String, keycode: int) -> void:
 func reset_defaults() -> void:
 	_settings = _deep_copy(DEFAULT_SETTINGS)
 	save_settings()
+
+func apply_preset(preset_name: String) -> void:
+	var preset: Dictionary
+	match preset_name:
+		"AZERTY":
+			preset = DEFAULT_SETTINGS["keybinds"]
+		"QWERTY":
+			preset = PRESET_QWERTY
+		_:
+			return
+	if not _settings.has("keybinds"):
+		_settings["keybinds"] = {}
+	for action in preset.keys():
+		_settings["keybinds"][action] = int(preset[action])
 
 func _deep_copy(source: Dictionary) -> Dictionary:
 	var output := {}

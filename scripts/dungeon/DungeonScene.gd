@@ -67,6 +67,9 @@ var _cam_drag_last: Vector2
 var _mouse_sensitivity: float = 0.4
 var _invert_camera_x: bool = false
 
+# Minimap 2D
+var _minimap: Node2D = null
+
 # --------------------------------------------------------------------------
 # Initialisation
 # --------------------------------------------------------------------------
@@ -91,6 +94,7 @@ func _ready() -> void:
 	_update_ui()
 	btn_combat.pressed.connect(_on_test_combat)
 	info_label.text = ""
+	_setup_minimap()
 	# Vue initiale : survol du donjon entier
 	_overview_camera()
 
@@ -348,6 +352,9 @@ func _update_camera() -> void:
 	# Cacher le heros en vue 1ere personne (evite clipping)
 	if hero:
 		hero.visible = (_cam_mode != CamMode.FIRST)
+	# Le monde reste fixe: evite les effets visuels de demi-tour en 3eme personne.
+	tile_root.rotation_degrees.y = 0.0
+	object_root.rotation_degrees.y = 0.0
 	match _cam_mode:
 		CamMode.ISO:
 			camera.near = 0.05
@@ -359,13 +366,11 @@ func _update_camera() -> void:
 			camera.look_at(wp + Vector3(0, 0.9, 0), Vector3.UP)
 		CamMode.THIRD:
 			camera.near = 0.05
-			var dist      := DIST_THIRD * _cam_zoom
-			var total_yaw := _cam_yaw + _hero_yaw
-			# Offset (0, d, -d) = nord du heros quand total_yaw=0 (hero face sud)
-			var offset := Basis(Vector3.UP, deg_to_rad(total_yaw)) \
-				* Vector3(0.0, dist * 0.35, -dist)
+			var dist := DIST_THIRD * _cam_zoom
+			# Même direction de visée qu'en 1ere personne, puis position "derrière".
+			var fwd := Vector3(-sin(deg_to_rad(_hero_yaw)), 0.0, cos(deg_to_rad(_hero_yaw)))
 			var pivot      := wp + Vector3(0, 1.1, 0)
-			var raw_cam    := pivot + offset
+			var raw_cam    := pivot - fwd * dist + Vector3(0, dist * 0.35, 0)
 			camera.global_position = _push_cam_from_wall(pivot, raw_cam)
 			camera.look_at(wp + Vector3(0, 0.9, 0), Vector3.UP)
 		CamMode.FIRST:
@@ -377,6 +382,8 @@ func _update_camera() -> void:
 			camera.global_position = eye_pos
 			camera.look_at(eye_pos + fwd, Vector3.UP)
 	_update_wall_transparency()
+
+	_update_minimap()
 
 # Rend transparents les murs qui se trouvent entre le heros et la camera.
 func _update_wall_transparency() -> void:
@@ -409,8 +416,55 @@ func _world_to_grid(world_pos: Vector3) -> Vector2i:
 		roundi((world_pos.z + _cz) / TILE)
 	)
 
+# --------------------------------------------------------------------------
+# Minimap
+# --------------------------------------------------------------------------
+
+func _setup_minimap() -> void:
+	var vp_size := get_viewport().get_visible_rect().size
+	var container := Control.new()
+	container.name = "MinimapContainer"
+	container.position = Vector2(vp_size.x - 190.0, 10.0)
+	container.size = Vector2(180.0, 180.0)
+	container.clip_contents = true
+	var bg := ColorRect.new()
+	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
+	bg.color = Color(0.04, 0.03, 0.02, 0.80)
+	container.add_child(bg)
+	_minimap = load("res://scripts/dungeon/MinimapDraw.gd").new()
+	_minimap.name = "MinimapDraw"
+	_minimap.position = Vector2(90.0, 90.0)
+	_minimap.set("dungeon", _dungeon)
+	_minimap.set("hero_pos", _hero_pos)
+	_minimap.set("hero_yaw", _hero_yaw)
+	container.add_child(_minimap)
+	$UI.add_child(container)
+
+func _update_minimap() -> void:
+	if _minimap == null:
+		return
+	_minimap.set("hero_pos", _hero_pos)
+	_minimap.set("hero_yaw", _hero_yaw)
+	# Rotation selon le mode camera.
+	# ISO : nord en haut (pas de rotation)
+	# THIRD, FIRST : direction de regard du heros pointe vers le haut
+	# yaw=0=sud (+row dans grille), rotation = 180 - _hero_yaw.
+	if _cam_mode == CamMode.ISO:
+		_minimap.rotation = 0.0
+	else:  # THIRD et FIRST
+		_minimap.rotation = deg_to_rad(180.0 - _hero_yaw)
+	_minimap.queue_redraw()
+
 func _cycle_cam_mode() -> void:
 	_cam_mode = ((_cam_mode + 1) % 3) as CamMode
+	# En 1ere personne : absorber _cam_yaw dans _hero_yaw pour aligner
+	# la direction visuelle (view_yaw) et la direction de deplacement (_hero_yaw).
+	if _cam_mode == CamMode.FIRST:
+		_hero_yaw = fmod(_hero_yaw + _cam_yaw + 360.0, 360.0)
+		_cam_yaw = 0.0
+		var first_hero := _get_hero()
+		if first_hero:
+			first_hero.rotation_degrees.y = -_hero_yaw
 	var names := [
 		"Vue isometrique  [+/-:zoom]",
 		"3eme personne  [+/-:zoom]",
@@ -436,7 +490,8 @@ func _input(event: InputEvent) -> void:
 			_cam_drag = event.pressed
 			_cam_drag_last = event.position
 	# Orbite : glisser bouton milieu (ISO + 3ème personne uniquement)
-	if event is InputEventMouseMotion and _cam_drag and _cam_mode != CamMode.FIRST:
+	# (En THIRD la camera reste de dos au heros)
+	if event is InputEventMouseMotion and _cam_drag and _cam_mode == CamMode.ISO:
 		var delta: float = event.relative.x
 		var direction_sign := -1.0 if _invert_camera_x else 1.0
 		_cam_yaw = fmod(_cam_yaw + delta * _mouse_sensitivity * direction_sign, 360.0)
@@ -452,13 +507,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		_cycle_cam_mode()
 		return
 	# A / E : orbite clavier (AZERTY : A=touche A, E=touche E)
-	# Disponible uniquement en ISO et 3eme personne
-	if keycode == _settings_manager().get_keybind("cam_rotate_left") and _cam_mode != CamMode.FIRST:
+	# Disponible uniquement en ISO (en THIRD la camera reste de dos au heros)
+	if keycode == _settings_manager().get_keybind("cam_rotate_left") and _cam_mode == CamMode.ISO:
 		_cam_yaw = fmod(_cam_yaw - 15.0, 360.0)
 		_update_camera()
 		return
 	if keycode == _settings_manager().get_keybind("cam_rotate_right") \
-			and _cam_mode != CamMode.FIRST:
+			and _cam_mode == CamMode.ISO:
 		_cam_yaw = fmod(_cam_yaw + 15.0, 360.0)
 		_update_camera()
 		return
@@ -503,11 +558,6 @@ func _try_move_forward(direction: int) -> void:
 # Rotation du heros de +/- 90 degrees (sans deplacement).
 func _rotate_hero(degrees: float) -> void:
 	_hero_yaw = fmod(_hero_yaw + degrees + 360.0, 360.0)
-	# En vue 3eme personne : compenser cam_yaw pour que la camera reste fixe en espace monde
-	# (le heros tourne a l'ecran sans que la camera orbite).
-	# En ISO et 1ere personne : ne pas toucher cam_yaw (evite la rotation de la carte).
-	if _cam_mode == CamMode.THIRD:
-		_cam_yaw = fmod(_cam_yaw - degrees + 360.0, 360.0)
 	var hero := _get_hero()
 	if hero:
 		hero.rotation_degrees.y = -_hero_yaw
