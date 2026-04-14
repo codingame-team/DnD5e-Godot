@@ -94,8 +94,8 @@ func _refresh_stats() -> void:
 
 	# Équipement actuel
 	txt += "\n[b]─── Équipement ───[/b]\n"
-	var wpn := h.get("weapon_index", "")
-	var arm := h.get("armor_index", "")
+	var wpn: String = h.get("weapon_index", "")
+	var arm: String = h.get("armor_index", "")
 	txt += "  Arme    : %s\n" % (wpn if wpn != "" else "Aucune")
 	txt += "  Armure  : %s\n" % (arm if arm != "" else "Aucune")
 	txt += "  Potions : %d\n" % h.get("potions", 0)
