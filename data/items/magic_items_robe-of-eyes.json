@@ -1,9 +1,20 @@
 {
   "index": "robe-of-eyes",
   "name": "Robe of Eyes",
-  "category": "magic-item",
-  "cost": {},
-  "weight": 0,
+  "category": "magic-items",
+  "item_type": "wondrous",
+  "rarity": "rare",
+  "requires_attunement": true,
+  "attuned": false,
+  "ac_bonus": 0,
+  "saving_throw_bonus": 0,
+  "ability_bonuses": {},
+  "actions": [],
+  "effects": [],
+  "cost": "100 gp",
+  "price": 10000,
+  "sell_price": 5000,
+  "weight": 1,
   "desc": [
     "Wondrous item, rare (requires attunement)",
     "This robe is adorned with eyelike patterns. While you wear the robe, you gain the following benefits:",
@@ -12,11 +23,5 @@
     "You can see invisible creatures and objects, as well as see into the Ethereal Plane, out to a range of 120 feet.",
     "The eyes on the robe can't be closed or averted. Although you can close or avert your own eyes, you are never considered to be doing so while wearing this robe.",
     "A light spell cast on the robe or a daylight spell cast within 5 feet of the robe causes you to be blinded for 1 minute. At the end of each of your turns, you can make a Constitution saving throw (DC 11 for light or DC 15 for daylight), ending the blindness on a success."
-  ],
-  "damage": {},
-  "armor_class": {},
-  "properties": [],
-  "weapon_range": "",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  ]
 }

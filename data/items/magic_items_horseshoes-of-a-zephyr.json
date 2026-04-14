@@ -1,17 +1,22 @@
 {
   "index": "horseshoes-of-a-zephyr",
   "name": "Horseshoes of a Zephyr",
-  "category": "magic-item",
-  "cost": {},
-  "weight": 0,
+  "category": "magic-items",
+  "item_type": "wondrous",
+  "rarity": "rare",
+  "requires_attunement": false,
+  "attuned": false,
+  "ac_bonus": 0,
+  "saving_throw_bonus": 0,
+  "ability_bonuses": {},
+  "actions": [],
+  "effects": [],
+  "cost": "100 gp",
+  "price": 10000,
+  "sell_price": 5000,
+  "weight": 1,
   "desc": [
     "Wondrous item, very rare",
     "These iron horseshoes come in a set of four. While all four shoes are affixed to the hooves of a horse or similar creature, they allow the creature to move normally while floating 4 inches above the ground. This effect means the creature can cross or stand above nonsolid or unstable surfaces, such as water or lava. The creature leaves no tracks and ignores difficult terrain. In addition, the creature can move at normal speed for up to 12 hours a day without suffering exhaustion from a forced march."
-  ],
-  "damage": {},
-  "armor_class": {},
-  "properties": [],
-  "weapon_range": "",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  ]
 }

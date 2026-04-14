@@ -1,9 +1,20 @@
 {
   "index": "sphere-of-annihilation",
   "name": "Sphere of Annihilation",
-  "category": "magic-item",
-  "cost": {},
-  "weight": 0,
+  "category": "magic-items",
+  "item_type": "wondrous",
+  "rarity": "legendary",
+  "requires_attunement": false,
+  "attuned": false,
+  "ac_bonus": 0,
+  "saving_throw_bonus": 0,
+  "ability_bonuses": {},
+  "actions": [],
+  "effects": [],
+  "cost": "100 gp",
+  "price": 10000,
+  "sell_price": 5000,
+  "weight": 1,
   "desc": [
     "Wondrous item, legendary",
     "This 2-foot-diameter black sphere is a hole in the multiverse, hovering in space and stabilized by a magical field surrounding it.",
@@ -16,11 +27,5 @@
     "| 01-50 | The sphere is destroyed. |",
     "| 51-85 | The sphere moves through the portal or into the extradimensional space. |",
     "| 86-00 | A spatial rift sends each creature and object within 180 feet of the sphere, including the sphere, to a random plane of existence. |"
-  ],
-  "damage": {},
-  "armor_class": {},
-  "properties": [],
-  "weapon_range": "",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  ]
 }

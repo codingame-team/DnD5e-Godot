@@ -1,17 +1,22 @@
 {
   "index": "dwarven-plate",
   "name": "Dwarven Plate",
-  "category": "magic-item",
-  "cost": {},
-  "weight": 0,
+  "category": "magic-items",
+  "item_type": "armor",
+  "rarity": "rare",
+  "requires_attunement": false,
+  "attuned": false,
+  "ac_bonus": 2,
+  "saving_throw_bonus": 0,
+  "ability_bonuses": {},
+  "actions": [],
+  "effects": [],
+  "cost": "100 gp",
+  "price": 10000,
+  "sell_price": 5000,
+  "weight": 1,
   "desc": [
     "Armor (plate), very rare",
     "While wearing this armor, you gain a +2 bonus to AC. In addition, if an effect moves you against your will along the ground, you can use your reaction to reduce the distance you are moved by up to 10 feet."
-  ],
-  "damage": {},
-  "armor_class": {},
-  "properties": [],
-  "weapon_range": "",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  ]
 }

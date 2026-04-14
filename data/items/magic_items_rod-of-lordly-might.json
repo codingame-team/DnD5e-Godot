@@ -1,9 +1,20 @@
 {
   "index": "rod-of-lordly-might",
   "name": "Rod of Lordly Might",
-  "category": "magic-item",
-  "cost": {},
-  "weight": 0,
+  "category": "magic-items",
+  "item_type": "rod",
+  "rarity": "legendary",
+  "requires_attunement": true,
+  "attuned": false,
+  "ac_bonus": 0,
+  "saving_throw_bonus": 0,
+  "ability_bonuses": {},
+  "actions": [],
+  "effects": [],
+  "cost": "100 gp",
+  "price": 10000,
+  "sell_price": 5000,
+  "weight": 1,
   "desc": [
     "Rod, legendary (requires attunement)",
     "This rod has a flanged head, and it functions as a magic mace that grants a +3 bonus to attack and damage rolls made with it. The rod has properties associated with six different buttons that are set in a row along the haft. It has three other properties as well, detailed below.",
@@ -17,11 +28,5 @@
     "***Drain Life.*** When you hit a creature with a melee attack using the rod, you can force the target to make a DC 17 Constitution saving throw. On a failure, the target takes an extra 4d6 necrotic damage, and you regain a number of hit points equal to half that necrotic damage. This property can't be used again until the next dawn.",
     "***Paralyze.*** When you hit a creature with a melee attack using the rod, you can force the target to make a DC 17 Strength saving throw. On a failure, the target is paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on a success. This property can't be used again until the next dawn.",
     "***Terrify.*** While holding the rod, you can use an action to force each creature you can see within 30 feet of you to make a DC 17 Wisdom saving throw. On a failure, a target is frightened of you for 1 minute. A frightened target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. This property can't be used again until the next dawn."
-  ],
-  "damage": {},
-  "armor_class": {},
-  "properties": [],
-  "weapon_range": "",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  ]
 }

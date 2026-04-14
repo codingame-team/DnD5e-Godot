@@ -1,9 +1,20 @@
 {
   "index": "necklace-of-prayer-beads",
   "name": "Necklace of Prayer Beads",
-  "category": "magic-item",
-  "cost": {},
-  "weight": 0,
+  "category": "magic-items",
+  "item_type": "wondrous",
+  "rarity": "rare",
+  "requires_attunement": true,
+  "attuned": false,
+  "ac_bonus": 0,
+  "saving_throw_bonus": 0,
+  "ability_bonuses": {},
+  "actions": [],
+  "effects": [],
+  "cost": "100 gp",
+  "price": 10000,
+  "sell_price": 5000,
+  "weight": 1,
   "desc": [
     "Wondrous item, rare (requires attunement by a cleric, druid, or paladin)",
     "This necklace has 1d4 + 2 magic beads made from aquamarine, black pearl, or topaz. It also has many nonmagical beads made from stones such as amber, bloodstone, citrine, coral, jade, pearl, or quartz. If a magic bead is removed from the necklace, that bead loses its magic.",
@@ -16,11 +27,5 @@
     "| 17-18 | Smiting | Branding smite |",
     "| 19 | Summons | Planar ally |",
     "| 20 | Wind walking | Wind walk |"
-  ],
-  "damage": {},
-  "armor_class": {},
-  "properties": [],
-  "weapon_range": "",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  ]
 }

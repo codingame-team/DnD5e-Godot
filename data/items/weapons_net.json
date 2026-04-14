@@ -1,20 +1,34 @@
 {
   "index": "net",
   "name": "Net",
-  "category": "weapon",
-  "cost": {
-    "quantity": 1,
-    "unit": "gp"
+  "category": "weapons",
+  "damage": {
+    "damage_dice": "1d4",
+    "damage_type": {
+      "index": "slashing",
+      "name": "Slashing"
+    },
+    "damage_dice_two_handed": null
   },
-  "weight": 3,
-  "desc": [],
-  "damage": {},
-  "armor_class": {},
+  "range": "5/15",
+  "throw_range": null,
   "properties": [
-    "thrown",
-    "special"
+    "Thrown",
+    "Special"
   ],
-  "weapon_range": "Ranged",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  "special_properties": [],
+  "attack_bonus": 0,
+  "damage_bonus": 0,
+  "is_magic": false,
+  "is_martial": true,
+  "is_melee": false,
+  "is_ranged": true,
+  "is_simple": false,
+  "category_type": "martial",
+  "category_range": "Martial Ranged",
+  "cost": "1 gp",
+  "price": 100,
+  "sell_price": 50,
+  "weight": 3,
+  "desc": []
 }

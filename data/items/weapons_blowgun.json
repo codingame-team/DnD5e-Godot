@@ -1,27 +1,34 @@
 {
   "index": "blowgun",
   "name": "Blowgun",
-  "category": "weapon",
-  "cost": {
-    "quantity": 10,
-    "unit": "gp"
-  },
-  "weight": 1,
-  "desc": [],
+  "category": "weapons",
   "damage": {
     "damage_dice": "1d1",
     "damage_type": {
       "index": "piercing",
-      "name": "Piercing",
-      "url": "/api/damage-types/piercing"
-    }
+      "name": "Piercing"
+    },
+    "damage_dice_two_handed": null
   },
-  "armor_class": {},
+  "range": "25/100",
+  "throw_range": null,
   "properties": [
-    "ammunition",
-    "loading"
+    "Ammunition",
+    "Loading"
   ],
-  "weapon_range": "Ranged",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  "special_properties": [],
+  "attack_bonus": 0,
+  "damage_bonus": 0,
+  "is_magic": false,
+  "is_martial": true,
+  "is_melee": false,
+  "is_ranged": true,
+  "is_simple": false,
+  "category_type": "martial",
+  "category_range": "Martial Ranged",
+  "cost": "10 gp",
+  "price": 1000,
+  "sell_price": 500,
+  "weight": 1,
+  "desc": []
 }

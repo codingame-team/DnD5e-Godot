@@ -1,9 +1,20 @@
 {
   "index": "staff-of-power",
   "name": "Staff of Power",
-  "category": "magic-item",
-  "cost": {},
-  "weight": 0,
+  "category": "magic-items",
+  "item_type": "staff",
+  "rarity": "rare",
+  "requires_attunement": true,
+  "attuned": false,
+  "ac_bonus": 0,
+  "saving_throw_bonus": 2,
+  "ability_bonuses": {},
+  "actions": [],
+  "effects": [],
+  "cost": "100 gp",
+  "price": 10000,
+  "sell_price": 5000,
+  "weight": 1,
   "desc": [
     "Staff, very rare (requires attunement by a sorcerer, warlock, or wizard)",
     "This staff can be wielded as a magic quarterstaff that grants a +2 bonus to attack and damage rolls made with it. While holding it, you gain a +2 bonus to Armor Class, saving throws, and spell attack rolls.",
@@ -17,11 +28,5 @@
     "| 10 ft. away or closer | 8 × the number of charges in the staff |",
     "| 11 to 20 ft. away | 6 × the number of charges in the staff |",
     "| 21 to 30 ft. away | 4 × the number of charges in the staff |"
-  ],
-  "damage": {},
-  "armor_class": {},
-  "properties": [],
-  "weapon_range": "",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  ]
 }

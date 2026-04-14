@@ -1,21 +1,23 @@
 {
   "index": "chain-mail",
   "name": "Chain Mail",
-  "category": "armor",
-  "cost": {
-    "quantity": 75,
-    "unit": "gp"
-  },
-  "weight": 55,
-  "desc": [],
-  "damage": {},
+  "category": "armors",
   "armor_class": {
     "base": 16,
-    "dex_bonus": "False",
-    "max_bonus": "None"
+    "dex_bonus": false,
+    "max_bonus": null
   },
-  "properties": [],
-  "weapon_range": "",
+  "armor_bonus": 0,
   "str_minimum": 13,
-  "stealth_disadvantage": "True"
+  "stealth_disadvantage": true,
+  "saving_throw_bonus": 0,
+  "damage_immunities": [],
+  "damage_resistances": [],
+  "condition_immunities": [],
+  "special_properties": [],
+  "cost": "75 gp",
+  "price": 7500,
+  "sell_price": 3750,
+  "weight": 55,
+  "desc": []
 }

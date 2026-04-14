@@ -1,21 +1,23 @@
 {
   "index": "breastplate",
   "name": "Breastplate",
-  "category": "armor",
-  "cost": {
-    "quantity": 400,
-    "unit": "gp"
-  },
-  "weight": 20,
-  "desc": [],
-  "damage": {},
+  "category": "armors",
   "armor_class": {
     "base": 14,
-    "dex_bonus": "True",
+    "dex_bonus": true,
     "max_bonus": 2
   },
-  "properties": [],
-  "weapon_range": "",
+  "armor_bonus": 0,
   "str_minimum": 0,
-  "stealth_disadvantage": "False"
+  "stealth_disadvantage": false,
+  "saving_throw_bonus": 0,
+  "damage_immunities": [],
+  "damage_resistances": [],
+  "condition_immunities": [],
+  "special_properties": [],
+  "cost": "400 gp",
+  "price": 40000,
+  "sell_price": 20000,
+  "weight": 20,
+  "desc": []
 }

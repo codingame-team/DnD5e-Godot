@@ -1,17 +1,24 @@
 {
   "index": "spellguard-shield",
   "name": "Spellguard Shield",
-  "category": "armor",
-  "cost": {},
+  "category": "armors",
+  "armor_class": {
+    "base": 10
+  },
+  "armor_bonus": 0,
+  "str_minimum": 0,
+  "stealth_disadvantage": false,
+  "saving_throw_bonus": 0,
+  "damage_immunities": [],
+  "damage_resistances": [],
+  "condition_immunities": [],
+  "special_properties": [],
+  "cost": "0 gp",
+  "price": 0,
+  "sell_price": 0,
   "weight": 0,
   "desc": [
     "Armor (shield), very rare (requires attunement)",
     "While holding this shield, you have advantage on saving throws against spells and other magical effects, and spell attacks have disadvantage against you."
-  ],
-  "damage": {},
-  "armor_class": {},
-  "properties": [],
-  "weapon_range": "",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  ]
 }

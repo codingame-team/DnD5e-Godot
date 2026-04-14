@@ -1,17 +1,24 @@
 {
   "index": "mithral-armor",
   "name": "Mithral Armor",
-  "category": "armor",
-  "cost": {},
+  "category": "armors",
+  "armor_class": {
+    "base": 10
+  },
+  "armor_bonus": 0,
+  "str_minimum": 0,
+  "stealth_disadvantage": false,
+  "saving_throw_bonus": 0,
+  "damage_immunities": [],
+  "damage_resistances": [],
+  "condition_immunities": [],
+  "special_properties": [],
+  "cost": "0 gp",
+  "price": 0,
+  "sell_price": 0,
   "weight": 0,
   "desc": [
     "Armor (medium or heavy, uncommon",
     "Mithral is a light, flexible metal. A mithral chain shirt or breastplate can be worn under normal clothes. If the armor normally imposes disadvantage on Dexterity (Stealth) checks or has a Strength requirement, the mithral version of the armor doesn't."
-  ],
-  "damage": {},
-  "armor_class": {},
-  "properties": [],
-  "weapon_range": "",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  ]
 }

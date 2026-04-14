@@ -1,17 +1,22 @@
 {
   "index": "bracers-of-defense",
   "name": "Bracers of Defense",
-  "category": "magic-item",
-  "cost": {},
-  "weight": 0,
+  "category": "magic-items",
+  "item_type": "wondrous",
+  "rarity": "rare",
+  "requires_attunement": true,
+  "attuned": false,
+  "ac_bonus": 2,
+  "saving_throw_bonus": 0,
+  "ability_bonuses": {},
+  "actions": [],
+  "effects": [],
+  "cost": "100 gp",
+  "price": 10000,
+  "sell_price": 5000,
+  "weight": 1,
   "desc": [
     "Wondous item, rare (requires attunement)",
     "While wearing these bracers, you gain a +2 bonus to AC if you are wearing no armor and using no shield."
-  ],
-  "damage": {},
-  "armor_class": {},
-  "properties": [],
-  "weapon_range": "",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  ]
 }

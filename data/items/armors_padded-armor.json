@@ -1,21 +1,23 @@
 {
   "index": "padded-armor",
   "name": "Padded Armor",
-  "category": "armor",
-  "cost": {
-    "quantity": 5,
-    "unit": "gp"
-  },
-  "weight": 8,
-  "desc": [],
-  "damage": {},
+  "category": "armors",
   "armor_class": {
     "base": 11,
-    "dex_bonus": "True",
-    "max_bonus": "None"
+    "dex_bonus": true,
+    "max_bonus": null
   },
-  "properties": [],
-  "weapon_range": "",
+  "armor_bonus": 0,
   "str_minimum": 0,
-  "stealth_disadvantage": "True"
+  "stealth_disadvantage": true,
+  "saving_throw_bonus": 0,
+  "damage_immunities": [],
+  "damage_resistances": [],
+  "condition_immunities": [],
+  "special_properties": [],
+  "cost": "5 gp",
+  "price": 500,
+  "sell_price": 250,
+  "weight": 8,
+  "desc": []
 }

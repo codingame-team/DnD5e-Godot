@@ -1,9 +1,20 @@
 {
   "index": "cloak-of-arachnida",
   "name": "Cloak of Arachnida",
-  "category": "magic-item",
-  "cost": {},
-  "weight": 0,
+  "category": "magic-items",
+  "item_type": "wondrous",
+  "rarity": "rare",
+  "requires_attunement": true,
+  "attuned": false,
+  "ac_bonus": 0,
+  "saving_throw_bonus": 0,
+  "ability_bonuses": {},
+  "actions": [],
+  "effects": [],
+  "cost": "100 gp",
+  "price": 10000,
+  "sell_price": 5000,
+  "weight": 1,
   "desc": [
     "Wondrous item, very rare (requires attunement)",
     "This fine garment is made of black silk interwoven with faint silvery threads. While wearing it, you gain the following benefits:",
@@ -12,11 +23,5 @@
     "* You can move up, down, and across vertical surfaces and upside down along ceilings, while leaving your hands free.",
     "* You can't be caught in webs of any sort and can move through webs as if they were difficult terrain.",
     "* You can use an action to cast the web spell (save DC 13). The web created by the spell fills twice its normal area. Once used, this property of the cloak can't be used again until the next dawn."
-  ],
-  "damage": {},
-  "armor_class": {},
-  "properties": [],
-  "weapon_range": "",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  ]
 }

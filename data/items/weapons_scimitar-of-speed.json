@@ -1,17 +1,34 @@
 {
   "index": "scimitar-of-speed",
   "name": "Scimitar of Speed",
-  "category": "weapon",
-  "cost": {},
+  "category": "weapons",
+  "damage": {
+    "damage_dice": "1d4",
+    "damage_type": {
+      "index": "slashing",
+      "name": "Slashing"
+    },
+    "damage_dice_two_handed": null
+  },
+  "range": "None",
+  "throw_range": null,
+  "properties": [],
+  "special_properties": [],
+  "attack_bonus": 0,
+  "damage_bonus": 0,
+  "is_magic": false,
+  "is_martial": false,
+  "is_melee": true,
+  "is_ranged": false,
+  "is_simple": true,
+  "category_type": "simple",
+  "category_range": "Simple Melee",
+  "cost": "0 gp",
+  "price": 0,
+  "sell_price": 0,
   "weight": 0,
   "desc": [
     "Weapon (scimitar), very rare (requires attunement)",
     "You gain a +2 bonus to attack and damage rolls made with this magic weapon. In addition, you can make one attack with it as a bonus action on each of your turns."
-  ],
-  "damage": {},
-  "armor_class": {},
-  "properties": [],
-  "weapon_range": "",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  ]
 }

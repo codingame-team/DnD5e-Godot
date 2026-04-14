@@ -287,47 +287,202 @@ def export_spells(output: Path = OUTPUT_DIR / "spells") -> int:
     return exported
 
 
-def export_items(output: Path = OUTPUT_DIR / "items") -> int:
-    """Exporte les équipements (armes, armures, objets magiques)."""
+_BOOL_MAP = {"false": False, "true": True, "none": None}
+
+
+def _normalize_ac(ac_dict: dict) -> dict:
+    """Normalise armor_class dict : convertit les string 'False'/'True'/'None' en vrais types Python."""
+    result = {}
+    for k, v in ac_dict.items():
+        if isinstance(v, str) and v.lower() in _BOOL_MAP:
+            result[k] = _BOOL_MAP[v.lower()]
+        else:
+            result[k] = v
+    return result
+
+
+def _to_bool(v) -> bool:
+    """Convertit une valeur potentiellement stringifiée en bool Python."""
+    if isinstance(v, bool):
+        return v
+    if isinstance(v, str):
+        return _BOOL_MAP.get(v.lower(), bool(v))
+    return bool(v)
+
+
+def export_weapons(output: Path = OUTPUT_DIR / "items") -> int:
+    """Exporte les armes enrichies via load_weapon() (attack_bonus, is_magic, price…)."""
     output.mkdir(parents=True, exist_ok=True)
-    categories = ["weapons", "armors", "magic-items"]
+    from dnd_5e_core.data.loader import load_weapon
+    src = DATA_ROOT / "weapons"
+    if not src.exists():
+        print("  ⚠ Dossier weapons introuvable")
+        return 0
+
     exported = 0
-    index = []
-
-    for cat in categories:
-        src = DATA_ROOT / cat
-        if not src.exists():
+    for fpath in sorted(src.glob("*.json")):
+        idx = fpath.stem
+        w = load_weapon(idx)
+        if w is None:
             continue
-        for fpath in sorted(src.glob("*.json")):
-            with open(fpath, encoding="utf-8") as f:
-                raw = json.load(f)
 
-            out = {
-                "index":    raw.get("index", fpath.stem),
-                "name":     raw.get("name", ""),
-                "category": cat.rstrip("s"),
-                "cost":     raw.get("cost", {}),
-                "weight":   raw.get("weight", 0),
-                "desc":     raw.get("desc", []),
-                "damage":   raw.get("damage", {}),
-                "armor_class": raw.get("armor_class", {}),
-                "properties": [p.get("index","") for p in raw.get("properties", [])],
-                "weapon_range": raw.get("weapon_range", ""),
-                "str_minimum": raw.get("str_minimum", 0),
-                "stealth_disadvantage": raw.get("stealth_disadvantage", False),
-            }
+        two_h = w.damage_dice_two_handed
+        out = {
+            "index":    w.index,
+            "name":     w.name,
+            "category": "weapons",
+            "damage": {
+                "damage_dice":           str(w.damage_dice),
+                "damage_type":           {"index": str(w.damage_type), "name": str(w.damage_type).capitalize()},
+                "damage_dice_two_handed": str(two_h) if two_h else None,
+            },
+            "range":              str(w.range),
+            "throw_range":        str(w.throw_range) if w.throw_range else None,
+            "properties":         [str(p) for p in w.properties],
+            "special_properties": [str(p) for p in (w.special_properties or [])],
+            "attack_bonus":       w.attack_bonus,
+            "damage_bonus":       w.damage_bonus,
+            "is_magic":           w.is_magic,
+            "is_martial":         w.is_martial,
+            "is_melee":           w.is_melee,
+            "is_ranged":          w.is_ranged,
+            "is_simple":          w.is_simple,
+            "category_type":      str(w.category_type).split(".")[-1].lower(),
+            "category_range":     w.category_range,
+            "cost":               str(w.cost),
+            "price":              w.price,
+            "sell_price":         w.sell_price,
+            "weight":             w.weight,
+            "desc":               list(w.desc) if w.desc else [],
+        }
 
-            dest = output / f"{cat.replace('-','_')}_{fpath.name}"
-            with open(dest, "w", encoding="utf-8") as f:
-                json.dump(out, f, ensure_ascii=False, indent=2)
+        dest = output / f"weapons_{idx}.json"
+        with open(dest, "w", encoding="utf-8") as f:
+            json.dump(out, f, ensure_ascii=False, indent=2)
+        exported += 1
 
-            index.append({"index": out["index"], "name": out["name"], "category": cat})
-            exported += 1
+    print(f"  ✓ {exported} armes exportées")
+    return exported
 
-    print(f"  ✓ {exported} objets exportés")
+
+def export_armors(output: Path = OUTPUT_DIR / "items") -> int:
+    """Exporte les armures enrichies via load_armor() (armor_bonus, saving_throw_bonus, price…)."""
+    output.mkdir(parents=True, exist_ok=True)
+    from dnd_5e_core.data.loader import load_armor
+    src = DATA_ROOT / "armors"
+    if not src.exists():
+        print("  ⚠ Dossier armors introuvable")
+        return 0
+
+    exported = 0
+    for fpath in sorted(src.glob("*.json")):
+        idx = fpath.stem
+        a = load_armor(idx)
+        if a is None:
+            continue
+
+        out = {
+            "index":               a.index,
+            "name":                a.name,
+            "category":            "armors",
+            "armor_class":         _normalize_ac(a.armor_class),
+            "armor_bonus":         a.armor_bonus,
+            "str_minimum":         a.str_minimum,
+            "stealth_disadvantage": _to_bool(a.stealth_disadvantage),
+            "saving_throw_bonus":  a.saving_throw_bonus,
+            "damage_immunities":   list(a.damage_immunities),
+            "damage_resistances":  list(a.damage_resistances),
+            "condition_immunities": list(a.condition_immunities),
+            "special_properties":  list(a.special_properties),
+            "cost":                str(a.cost),
+            "price":               a.price,
+            "sell_price":          a.sell_price,
+            "weight":              a.weight,
+            "desc":                list(a.desc) if a.desc else [],
+        }
+
+        dest = output / f"armors_{idx}.json"
+        with open(dest, "w", encoding="utf-8") as f:
+            json.dump(out, f, ensure_ascii=False, indent=2)
+        exported += 1
+
+    print(f"  ✓ {exported} armures exportées")
+    return exported
+
+
+def export_magic_items(output: Path = OUTPUT_DIR / "items") -> int:
+    """Exporte les objets magiques enrichis via create_magic_item_from_data() (rarity, ac_bonus…)."""
+    output.mkdir(parents=True, exist_ok=True)
+    from dnd_5e_core.equipment.magic_item import create_magic_item_from_data
+    src = DATA_ROOT / "magic-items"
+    if not src.exists():
+        print("  ⚠ Dossier magic-items introuvable")
+        return 0
+
+    exported = 0
+    for fpath in sorted(src.glob("*.json")):
+        with open(fpath, encoding="utf-8") as f:
+            raw = json.load(f)
+        mi = create_magic_item_from_data(raw)
+        if mi is None:
+            continue
+
+        actions_list = []
+        for act in (mi.actions or []):
+            actions_list.append({
+                "name": getattr(act, "name", str(act)),
+                "desc": getattr(act, "desc", ""),
+            })
+
+        out = {
+            "index":              mi.index,
+            "name":               mi.name,
+            "category":           "magic-items",
+            "item_type":          str(mi.item_type).split(".")[-1].lower() if mi.item_type else "wondrous",
+            "rarity":             str(mi.rarity).split(".")[-1].lower() if mi.rarity else "common",
+            "requires_attunement": mi.requires_attunement,
+            "attuned":            False,
+            "ac_bonus":           mi.ac_bonus,
+            "saving_throw_bonus": mi.saving_throw_bonus,
+            "ability_bonuses":    dict(mi.ability_bonuses) if mi.ability_bonuses else {},
+            "actions":            actions_list,
+            "effects":            [str(e) for e in (mi.effects or [])],
+            "cost":               str(mi.cost),
+            "price":              mi.price,
+            "sell_price":         mi.sell_price,
+            "weight":             mi.weight,
+            "desc":               list(mi.desc) if isinstance(mi.desc, list) else ([mi.desc] if mi.desc else []),
+        }
+
+        dest = output / f"magic_items_{mi.index}.json"
+        with open(dest, "w", encoding="utf-8") as f:
+            json.dump(out, f, ensure_ascii=False, indent=2)
+        exported += 1
+
+    print(f"  ✓ {exported} objets magiques exportés")
+    return exported
+
+
+def export_items(output: Path = OUTPUT_DIR / "items") -> int:
+    """Exporte armes, armures et objets magiques enrichis via le module dnd-5e-core."""
+    n_weapons = export_weapons(output)
+    n_armors  = export_armors(output)
+    n_magic   = export_magic_items(output)
+    total = n_weapons + n_armors + n_magic
+
+    # Index global
+    index: list[dict] = []
+    for f in sorted(output.glob("*.json")):
+        if f.name == "_index.json":
+            continue
+        with open(f, encoding="utf-8") as fh:
+            d = json.load(fh)
+        index.append({"index": d.get("index",""), "name": d.get("name",""), "category": d.get("category","")})
+
     with open(output / "_index.json", "w", encoding="utf-8") as f:
         json.dump(index, f, ensure_ascii=False, indent=2)
-    return exported
+
+    return total
 
 
 def copy_tokens(output: Path = OUTPUT_DIR.parent / "assets" / "tokens") -> int:

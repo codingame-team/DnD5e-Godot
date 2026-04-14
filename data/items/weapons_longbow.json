@@ -1,28 +1,35 @@
 {
   "index": "longbow",
   "name": "Longbow",
-  "category": "weapon",
-  "cost": {
-    "quantity": 50,
-    "unit": "gp"
-  },
-  "weight": 2,
-  "desc": [],
+  "category": "weapons",
   "damage": {
     "damage_dice": "1d8",
     "damage_type": {
       "index": "piercing",
-      "name": "Piercing",
-      "url": "/api/damage-types/piercing"
-    }
+      "name": "Piercing"
+    },
+    "damage_dice_two_handed": null
   },
-  "armor_class": {},
+  "range": "150/600",
+  "throw_range": null,
   "properties": [
-    "ammunition",
-    "heavy",
-    "two-handed"
+    "Ammunition",
+    "Heavy",
+    "Two-Handed"
   ],
-  "weapon_range": "Ranged",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  "special_properties": [],
+  "attack_bonus": 0,
+  "damage_bonus": 0,
+  "is_magic": false,
+  "is_martial": true,
+  "is_melee": false,
+  "is_ranged": true,
+  "is_simple": false,
+  "category_type": "martial",
+  "category_range": "Martial Ranged",
+  "cost": "50 gp",
+  "price": 5000,
+  "sell_price": 2500,
+  "weight": 2,
+  "desc": []
 }

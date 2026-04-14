@@ -1,28 +1,35 @@
 {
   "index": "handaxe",
   "name": "Handaxe",
-  "category": "weapon",
-  "cost": {
-    "quantity": 5,
-    "unit": "gp"
-  },
-  "weight": 2,
-  "desc": [],
+  "category": "weapons",
   "damage": {
     "damage_dice": "1d6",
     "damage_type": {
       "index": "slashing",
-      "name": "Slashing",
-      "url": "/api/damage-types/slashing"
-    }
+      "name": "Slashing"
+    },
+    "damage_dice_two_handed": null
   },
-  "armor_class": {},
+  "range": "5/None",
+  "throw_range": null,
   "properties": [
-    "light",
-    "thrown",
-    "monk"
+    "Light",
+    "Thrown",
+    "Monk"
   ],
-  "weapon_range": "Melee",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  "special_properties": [],
+  "attack_bonus": 0,
+  "damage_bonus": 0,
+  "is_magic": false,
+  "is_martial": false,
+  "is_melee": true,
+  "is_ranged": false,
+  "is_simple": true,
+  "category_type": "simple",
+  "category_range": "Simple Melee",
+  "cost": "5 gp",
+  "price": 500,
+  "sell_price": 250,
+  "weight": 2,
+  "desc": []
 }

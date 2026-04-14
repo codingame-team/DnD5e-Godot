@@ -1,26 +1,33 @@
 {
   "index": "sling",
   "name": "Sling",
-  "category": "weapon",
-  "cost": {
-    "quantity": 1,
-    "unit": "sp"
-  },
-  "weight": 0,
-  "desc": [],
+  "category": "weapons",
   "damage": {
     "damage_dice": "1d4",
     "damage_type": {
       "index": "bludgeoning",
-      "name": "Bludgeoning",
-      "url": "/api/damage-types/bludgeoning"
-    }
+      "name": "Bludgeoning"
+    },
+    "damage_dice_two_handed": null
   },
-  "armor_class": {},
+  "range": "30/120",
+  "throw_range": null,
   "properties": [
-    "ammunition"
+    "Ammunition"
   ],
-  "weapon_range": "Ranged",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  "special_properties": [],
+  "attack_bonus": 0,
+  "damage_bonus": 0,
+  "is_magic": false,
+  "is_martial": false,
+  "is_melee": false,
+  "is_ranged": true,
+  "is_simple": true,
+  "category_type": "simple",
+  "category_range": "Simple Ranged",
+  "cost": "1 sp",
+  "price": 10,
+  "sell_price": 5,
+  "weight": 0,
+  "desc": []
 }

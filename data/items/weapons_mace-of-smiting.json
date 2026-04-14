@@ -1,18 +1,35 @@
 {
   "index": "mace-of-smiting",
   "name": "Mace of Smiting",
-  "category": "weapon",
-  "cost": {},
+  "category": "weapons",
+  "damage": {
+    "damage_dice": "1d4",
+    "damage_type": {
+      "index": "slashing",
+      "name": "Slashing"
+    },
+    "damage_dice_two_handed": null
+  },
+  "range": "None",
+  "throw_range": null,
+  "properties": [],
+  "special_properties": [],
+  "attack_bonus": 0,
+  "damage_bonus": 0,
+  "is_magic": false,
+  "is_martial": false,
+  "is_melee": true,
+  "is_ranged": false,
+  "is_simple": true,
+  "category_type": "simple",
+  "category_range": "Simple Melee",
+  "cost": "0 gp",
+  "price": 0,
+  "sell_price": 0,
   "weight": 0,
   "desc": [
     "Weapon (mace), rare",
     "You gain a +1 bonus to attack and damage rolls made with this magic weapon. The bonus increases to +3 when you use the mace to attack a construct.",
     "When you roll a 20 on an attack roll made with this weapon, the target takes an extra 2d6 bludgeoning damage, or 4d6 bludgeoning damage if it's a construct. If a construct has 25 hit points or fewer after taking this damage, it is destroyed."
-  ],
-  "damage": {},
-  "armor_class": {},
-  "properties": [],
-  "weapon_range": "",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  ]
 }

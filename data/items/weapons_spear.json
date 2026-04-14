@@ -1,28 +1,35 @@
 {
   "index": "spear",
   "name": "Spear",
-  "category": "weapon",
-  "cost": {
-    "quantity": 1,
-    "unit": "gp"
-  },
-  "weight": 3,
-  "desc": [],
+  "category": "weapons",
   "damage": {
     "damage_dice": "1d6",
     "damage_type": {
       "index": "piercing",
-      "name": "Piercing",
-      "url": "/api/damage-types/piercing"
-    }
+      "name": "Piercing"
+    },
+    "damage_dice_two_handed": null
   },
-  "armor_class": {},
+  "range": "5/None",
+  "throw_range": null,
   "properties": [
-    "thrown",
-    "versatile",
-    "monk"
+    "Thrown",
+    "Versatile",
+    "Monk"
   ],
-  "weapon_range": "Melee",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  "special_properties": [],
+  "attack_bonus": 0,
+  "damage_bonus": 0,
+  "is_magic": false,
+  "is_martial": false,
+  "is_melee": true,
+  "is_ranged": false,
+  "is_simple": true,
+  "category_type": "simple",
+  "category_range": "Simple Melee",
+  "cost": "1 gp",
+  "price": 100,
+  "sell_price": 50,
+  "weight": 3,
+  "desc": []
 }

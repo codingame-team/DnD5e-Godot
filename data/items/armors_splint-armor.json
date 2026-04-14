@@ -1,21 +1,23 @@
 {
   "index": "splint-armor",
   "name": "Splint Armor",
-  "category": "armor",
-  "cost": {
-    "quantity": 200,
-    "unit": "gp"
-  },
-  "weight": 60,
-  "desc": [],
-  "damage": {},
+  "category": "armors",
   "armor_class": {
     "base": 17,
-    "dex_bonus": "False",
-    "max_bonus": "None"
+    "dex_bonus": false,
+    "max_bonus": null
   },
-  "properties": [],
-  "weapon_range": "",
+  "armor_bonus": 0,
   "str_minimum": 15,
-  "stealth_disadvantage": "True"
+  "stealth_disadvantage": true,
+  "saving_throw_bonus": 0,
+  "damage_immunities": [],
+  "damage_resistances": [],
+  "condition_immunities": [],
+  "special_properties": [],
+  "cost": "200 gp",
+  "price": 20000,
+  "sell_price": 10000,
+  "weight": 60,
+  "desc": []
 }

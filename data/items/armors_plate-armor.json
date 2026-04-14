@@ -1,21 +1,23 @@
 {
   "index": "plate-armor",
   "name": "Plate Armor",
-  "category": "armor",
-  "cost": {
-    "quantity": 1500,
-    "unit": "gp"
-  },
-  "weight": 65,
-  "desc": [],
-  "damage": {},
+  "category": "armors",
   "armor_class": {
     "base": 18,
-    "dex_bonus": "False",
-    "max_bonus": "None"
+    "dex_bonus": false,
+    "max_bonus": null
   },
-  "properties": [],
-  "weapon_range": "",
+  "armor_bonus": 0,
   "str_minimum": 15,
-  "stealth_disadvantage": "True"
+  "stealth_disadvantage": true,
+  "saving_throw_bonus": 0,
+  "damage_immunities": [],
+  "damage_resistances": [],
+  "condition_immunities": [],
+  "special_properties": [],
+  "cost": "1500 gp",
+  "price": 150000,
+  "sell_price": 75000,
+  "weight": 65,
+  "desc": []
 }

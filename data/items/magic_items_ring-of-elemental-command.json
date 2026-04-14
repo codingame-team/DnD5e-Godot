@@ -1,9 +1,20 @@
 {
   "index": "ring-of-elemental-command",
   "name": "Ring of Elemental Command",
-  "category": "magic-item",
-  "cost": {},
-  "weight": 0,
+  "category": "magic-items",
+  "item_type": "ring",
+  "rarity": "legendary",
+  "requires_attunement": true,
+  "attuned": false,
+  "ac_bonus": 0,
+  "saving_throw_bonus": 0,
+  "ability_bonuses": {},
+  "actions": [],
+  "effects": [],
+  "cost": "100 gp",
+  "price": 10000,
+  "sell_price": 5000,
+  "weight": 1,
   "desc": [
     "Ring, legendary (requires attunement)",
     "This ring is linked to one of the four Elemental Planes. The GM chooses or randomly determines the linked plane.",
@@ -27,11 +38,5 @@
     "If you help slay a water elemental while attuned to the ring, you gain access to the following additional properties:",
     "You can breathe underwater and have a swimming speed equal to your walking speed.",
     "You can cast the following spells from the ring, expending the necessary number of charges: create or destroy water (1 charge), control water (3 charges), ice storm (2 charges), or wall of ice (3 charges)."
-  ],
-  "damage": {},
-  "armor_class": {},
-  "properties": [],
-  "weapon_range": "",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  ]
 }

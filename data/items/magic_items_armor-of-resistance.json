@@ -1,9 +1,20 @@
 {
   "index": "armor-of-resistance",
   "name": "Armor of Resistance",
-  "category": "magic-item",
-  "cost": {},
-  "weight": 0,
+  "category": "magic-items",
+  "item_type": "armor",
+  "rarity": "rare",
+  "requires_attunement": true,
+  "attuned": false,
+  "ac_bonus": 0,
+  "saving_throw_bonus": 0,
+  "ability_bonuses": {},
+  "actions": [],
+  "effects": [],
+  "cost": "100 gp",
+  "price": 10000,
+  "sell_price": 5000,
+  "weight": 1,
   "desc": [
     "Armor (light, medium, or heavy), rare (requires attunement)",
     "You have resistance to one type of damage while you wear this armor. The GM chooses the type or determines it randomly from the options below.",
@@ -19,11 +30,5 @@
     "| 8 | Psychic |",
     "| 9 | Radiant |",
     "| 10 | Thunder |"
-  ],
-  "damage": {},
-  "armor_class": {},
-  "properties": [],
-  "weapon_range": "",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  ]
 }

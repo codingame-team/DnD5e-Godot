@@ -1,330 +1,5 @@
 [
   {
-    "index": "battleaxe",
-    "name": "Battleaxe",
-    "category": "weapons"
-  },
-  {
-    "index": "berserker-axe",
-    "name": "Berserker Axe",
-    "category": "weapons"
-  },
-  {
-    "index": "blowgun",
-    "name": "Blowgun",
-    "category": "weapons"
-  },
-  {
-    "index": "club",
-    "name": "Club",
-    "category": "weapons"
-  },
-  {
-    "index": "crossbow-hand",
-    "name": "Crossbow, hand",
-    "category": "weapons"
-  },
-  {
-    "index": "crossbow-heavy",
-    "name": "Crossbow, heavy",
-    "category": "weapons"
-  },
-  {
-    "index": "crossbow-light",
-    "name": "Crossbow, light",
-    "category": "weapons"
-  },
-  {
-    "index": "dagger-of-venom",
-    "name": "Dagger of Venom",
-    "category": "weapons"
-  },
-  {
-    "index": "dagger",
-    "name": "Dagger",
-    "category": "weapons"
-  },
-  {
-    "index": "dancing-sword",
-    "name": "Dancing Sword",
-    "category": "weapons"
-  },
-  {
-    "index": "dart",
-    "name": "Dart",
-    "category": "weapons"
-  },
-  {
-    "index": "defender",
-    "name": "Defender",
-    "category": "weapons"
-  },
-  {
-    "index": "dragon-slayer",
-    "name": "Dragon Slayer",
-    "category": "weapons"
-  },
-  {
-    "index": "dwarven-thrower",
-    "name": "Dwarven Thrower",
-    "category": "weapons"
-  },
-  {
-    "index": "flail",
-    "name": "Flail",
-    "category": "weapons"
-  },
-  {
-    "index": "flame-tongue",
-    "name": "Flame Tongue",
-    "category": "weapons"
-  },
-  {
-    "index": "frost-brand",
-    "name": "Frost Brand",
-    "category": "weapons"
-  },
-  {
-    "index": "giant-slayer",
-    "name": "Giant Slayer",
-    "category": "weapons"
-  },
-  {
-    "index": "glaive",
-    "name": "Glaive",
-    "category": "weapons"
-  },
-  {
-    "index": "greataxe",
-    "name": "Greataxe",
-    "category": "weapons"
-  },
-  {
-    "index": "greatclub",
-    "name": "Greatclub",
-    "category": "weapons"
-  },
-  {
-    "index": "greatsword",
-    "name": "Greatsword",
-    "category": "weapons"
-  },
-  {
-    "index": "halberd",
-    "name": "Halberd",
-    "category": "weapons"
-  },
-  {
-    "index": "hammer-of-thunderbolts",
-    "name": "Hammer of Thunderbolts",
-    "category": "weapons"
-  },
-  {
-    "index": "handaxe",
-    "name": "Handaxe",
-    "category": "weapons"
-  },
-  {
-    "index": "hands",
-    "name": "Hands",
-    "category": "weapons"
-  },
-  {
-    "index": "holy-avenger",
-    "name": "Holy Avenger",
-    "category": "weapons"
-  },
-  {
-    "index": "javelin-of-lightning",
-    "name": "Javelin of Lightning",
-    "category": "weapons"
-  },
-  {
-    "index": "javelin",
-    "name": "Javelin",
-    "category": "weapons"
-  },
-  {
-    "index": "lance",
-    "name": "Lance",
-    "category": "weapons"
-  },
-  {
-    "index": "light-hammer",
-    "name": "Light hammer",
-    "category": "weapons"
-  },
-  {
-    "index": "longbow",
-    "name": "Longbow",
-    "category": "weapons"
-  },
-  {
-    "index": "longsword",
-    "name": "Longsword",
-    "category": "weapons"
-  },
-  {
-    "index": "luck-blade",
-    "name": "Luck Blade",
-    "category": "weapons"
-  },
-  {
-    "index": "mace-of-disruption",
-    "name": "Mace of Disruption",
-    "category": "weapons"
-  },
-  {
-    "index": "mace-of-smiting",
-    "name": "Mace of Smiting",
-    "category": "weapons"
-  },
-  {
-    "index": "mace-of-terror",
-    "name": "Mace of Terror",
-    "category": "weapons"
-  },
-  {
-    "index": "mace",
-    "name": "Mace",
-    "category": "weapons"
-  },
-  {
-    "index": "maul",
-    "name": "Maul",
-    "category": "weapons"
-  },
-  {
-    "index": "morningstar",
-    "name": "Morningstar",
-    "category": "weapons"
-  },
-  {
-    "index": "net",
-    "name": "Net",
-    "category": "weapons"
-  },
-  {
-    "index": "nine-lives-stealer",
-    "name": "Nine Lives Stealer",
-    "category": "weapons"
-  },
-  {
-    "index": "oathbow",
-    "name": "Oathbow",
-    "category": "weapons"
-  },
-  {
-    "index": "pike",
-    "name": "Pike",
-    "category": "weapons"
-  },
-  {
-    "index": "quarterstaff",
-    "name": "Quarterstaff",
-    "category": "weapons"
-  },
-  {
-    "index": "rapier",
-    "name": "Rapier",
-    "category": "weapons"
-  },
-  {
-    "index": "scimitar-of-speed",
-    "name": "Scimitar of Speed",
-    "category": "weapons"
-  },
-  {
-    "index": "scimitar",
-    "name": "Scimitar",
-    "category": "weapons"
-  },
-  {
-    "index": "shortbow",
-    "name": "Shortbow",
-    "category": "weapons"
-  },
-  {
-    "index": "shortsword",
-    "name": "Shortsword",
-    "category": "weapons"
-  },
-  {
-    "index": "sickle",
-    "name": "Sickle",
-    "category": "weapons"
-  },
-  {
-    "index": "sling",
-    "name": "Sling",
-    "category": "weapons"
-  },
-  {
-    "index": "spear",
-    "name": "Spear",
-    "category": "weapons"
-  },
-  {
-    "index": "sun-blade",
-    "name": "Sun Blade",
-    "category": "weapons"
-  },
-  {
-    "index": "sword-of-life-stealing",
-    "name": "Sword of Life Stealing",
-    "category": "weapons"
-  },
-  {
-    "index": "sword-of-sharpness",
-    "name": "Sword of Sharpness",
-    "category": "weapons"
-  },
-  {
-    "index": "sword-of-wounding",
-    "name": "Sword of Wounding",
-    "category": "weapons"
-  },
-  {
-    "index": "trident-of-fish-command",
-    "name": "Trident of Fish Command",
-    "category": "weapons"
-  },
-  {
-    "index": "trident",
-    "name": "Trident",
-    "category": "weapons"
-  },
-  {
-    "index": "vicious-weapon",
-    "name": "Vicious Weapon",
-    "category": "weapons"
-  },
-  {
-    "index": "vorpal-sword",
-    "name": "Vorpal Sword",
-    "category": "weapons"
-  },
-  {
-    "index": "war-pick",
-    "name": "War pick",
-    "category": "weapons"
-  },
-  {
-    "index": "warhammer",
-    "name": "Warhammer",
-    "category": "weapons"
-  },
-  {
-    "index": "weapon",
-    "name": "Weapon, +1, +2, or +3",
-    "category": "weapons"
-  },
-  {
-    "index": "whip",
-    "name": "Whip",
-    "category": "weapons"
-  },
-  {
     "index": "adamantine-armor",
     "name": "Adamantine Armor",
     "category": "armors"
@@ -1668,5 +1343,330 @@
     "index": "wings-of-flying",
     "name": "Wings of Flying",
     "category": "magic-items"
+  },
+  {
+    "index": "battleaxe",
+    "name": "Battleaxe",
+    "category": "weapons"
+  },
+  {
+    "index": "berserker-axe",
+    "name": "Berserker Axe",
+    "category": "weapons"
+  },
+  {
+    "index": "blowgun",
+    "name": "Blowgun",
+    "category": "weapons"
+  },
+  {
+    "index": "club",
+    "name": "Club",
+    "category": "weapons"
+  },
+  {
+    "index": "crossbow-hand",
+    "name": "Crossbow, hand",
+    "category": "weapons"
+  },
+  {
+    "index": "crossbow-heavy",
+    "name": "Crossbow, heavy",
+    "category": "weapons"
+  },
+  {
+    "index": "crossbow-light",
+    "name": "Crossbow, light",
+    "category": "weapons"
+  },
+  {
+    "index": "dagger-of-venom",
+    "name": "Dagger of Venom",
+    "category": "weapons"
+  },
+  {
+    "index": "dagger",
+    "name": "Dagger",
+    "category": "weapons"
+  },
+  {
+    "index": "dancing-sword",
+    "name": "Dancing Sword",
+    "category": "weapons"
+  },
+  {
+    "index": "dart",
+    "name": "Dart",
+    "category": "weapons"
+  },
+  {
+    "index": "defender",
+    "name": "Defender",
+    "category": "weapons"
+  },
+  {
+    "index": "dragon-slayer",
+    "name": "Dragon Slayer",
+    "category": "weapons"
+  },
+  {
+    "index": "dwarven-thrower",
+    "name": "Dwarven Thrower",
+    "category": "weapons"
+  },
+  {
+    "index": "flail",
+    "name": "Flail",
+    "category": "weapons"
+  },
+  {
+    "index": "flame-tongue",
+    "name": "Flame Tongue",
+    "category": "weapons"
+  },
+  {
+    "index": "frost-brand",
+    "name": "Frost Brand",
+    "category": "weapons"
+  },
+  {
+    "index": "giant-slayer",
+    "name": "Giant Slayer",
+    "category": "weapons"
+  },
+  {
+    "index": "glaive",
+    "name": "Glaive",
+    "category": "weapons"
+  },
+  {
+    "index": "greataxe",
+    "name": "Greataxe",
+    "category": "weapons"
+  },
+  {
+    "index": "greatclub",
+    "name": "Greatclub",
+    "category": "weapons"
+  },
+  {
+    "index": "greatsword",
+    "name": "Greatsword",
+    "category": "weapons"
+  },
+  {
+    "index": "halberd",
+    "name": "Halberd",
+    "category": "weapons"
+  },
+  {
+    "index": "hammer-of-thunderbolts",
+    "name": "Hammer of Thunderbolts",
+    "category": "weapons"
+  },
+  {
+    "index": "handaxe",
+    "name": "Handaxe",
+    "category": "weapons"
+  },
+  {
+    "index": "hands",
+    "name": "Hands",
+    "category": "weapons"
+  },
+  {
+    "index": "holy-avenger",
+    "name": "Holy Avenger",
+    "category": "weapons"
+  },
+  {
+    "index": "javelin-of-lightning",
+    "name": "Javelin of Lightning",
+    "category": "weapons"
+  },
+  {
+    "index": "javelin",
+    "name": "Javelin",
+    "category": "weapons"
+  },
+  {
+    "index": "lance",
+    "name": "Lance",
+    "category": "weapons"
+  },
+  {
+    "index": "light-hammer",
+    "name": "Light hammer",
+    "category": "weapons"
+  },
+  {
+    "index": "longbow",
+    "name": "Longbow",
+    "category": "weapons"
+  },
+  {
+    "index": "longsword",
+    "name": "Longsword",
+    "category": "weapons"
+  },
+  {
+    "index": "luck-blade",
+    "name": "Luck Blade",
+    "category": "weapons"
+  },
+  {
+    "index": "mace-of-disruption",
+    "name": "Mace of Disruption",
+    "category": "weapons"
+  },
+  {
+    "index": "mace-of-smiting",
+    "name": "Mace of Smiting",
+    "category": "weapons"
+  },
+  {
+    "index": "mace-of-terror",
+    "name": "Mace of Terror",
+    "category": "weapons"
+  },
+  {
+    "index": "mace",
+    "name": "Mace",
+    "category": "weapons"
+  },
+  {
+    "index": "maul",
+    "name": "Maul",
+    "category": "weapons"
+  },
+  {
+    "index": "morningstar",
+    "name": "Morningstar",
+    "category": "weapons"
+  },
+  {
+    "index": "net",
+    "name": "Net",
+    "category": "weapons"
+  },
+  {
+    "index": "nine-lives-stealer",
+    "name": "Nine Lives Stealer",
+    "category": "weapons"
+  },
+  {
+    "index": "oathbow",
+    "name": "Oathbow",
+    "category": "weapons"
+  },
+  {
+    "index": "pike",
+    "name": "Pike",
+    "category": "weapons"
+  },
+  {
+    "index": "quarterstaff",
+    "name": "Quarterstaff",
+    "category": "weapons"
+  },
+  {
+    "index": "rapier",
+    "name": "Rapier",
+    "category": "weapons"
+  },
+  {
+    "index": "scimitar-of-speed",
+    "name": "Scimitar of Speed",
+    "category": "weapons"
+  },
+  {
+    "index": "scimitar",
+    "name": "Scimitar",
+    "category": "weapons"
+  },
+  {
+    "index": "shortbow",
+    "name": "Shortbow",
+    "category": "weapons"
+  },
+  {
+    "index": "shortsword",
+    "name": "Shortsword",
+    "category": "weapons"
+  },
+  {
+    "index": "sickle",
+    "name": "Sickle",
+    "category": "weapons"
+  },
+  {
+    "index": "sling",
+    "name": "Sling",
+    "category": "weapons"
+  },
+  {
+    "index": "spear",
+    "name": "Spear",
+    "category": "weapons"
+  },
+  {
+    "index": "sun-blade",
+    "name": "Sun Blade",
+    "category": "weapons"
+  },
+  {
+    "index": "sword-of-life-stealing",
+    "name": "Sword of Life Stealing",
+    "category": "weapons"
+  },
+  {
+    "index": "sword-of-sharpness",
+    "name": "Sword of Sharpness",
+    "category": "weapons"
+  },
+  {
+    "index": "sword-of-wounding",
+    "name": "Sword of Wounding",
+    "category": "weapons"
+  },
+  {
+    "index": "trident-of-fish-command",
+    "name": "Trident of Fish Command",
+    "category": "weapons"
+  },
+  {
+    "index": "trident",
+    "name": "Trident",
+    "category": "weapons"
+  },
+  {
+    "index": "vicious-weapon",
+    "name": "Vicious Weapon",
+    "category": "weapons"
+  },
+  {
+    "index": "vorpal-sword",
+    "name": "Vorpal Sword",
+    "category": "weapons"
+  },
+  {
+    "index": "war-pick",
+    "name": "War pick",
+    "category": "weapons"
+  },
+  {
+    "index": "warhammer",
+    "name": "Warhammer",
+    "category": "weapons"
+  },
+  {
+    "index": "weapon",
+    "name": "Weapon, +1, +2, or +3",
+    "category": "weapons"
+  },
+  {
+    "index": "whip",
+    "name": "Whip",
+    "category": "weapons"
   }
 ]

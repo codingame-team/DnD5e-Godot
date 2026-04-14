@@ -1,9 +1,20 @@
 {
   "index": "carpet-of-flying",
   "name": "Carpet of Flying",
-  "category": "magic-item",
-  "cost": {},
-  "weight": 0,
+  "category": "magic-items",
+  "item_type": "wondrous",
+  "rarity": "rare",
+  "requires_attunement": false,
+  "attuned": false,
+  "ac_bonus": 0,
+  "saving_throw_bonus": 0,
+  "ability_bonuses": {},
+  "actions": [],
+  "effects": [],
+  "cost": "100 gp",
+  "price": 10000,
+  "sell_price": 5000,
+  "weight": 1,
   "desc": [
     "Wondrous item, very rare",
     "You can speak the carpet's command word as an  action to make the carpet hover and fly. It moves  according to your spoken directions, provided that you are within 30 feet of it.",
@@ -15,11 +26,5 @@
     "| 56-80 | 5 ft. × 7 ft. | 600 lb. | 40 feet |",
     "| 81-100 | 6 ft. × 9 ft. | 800 lb. | 30 feet |",
     "A carpet can carry up to twice the weight shown on the table, but it flies at half speed if it carries more than its normal capacity."
-  ],
-  "damage": {},
-  "armor_class": {},
-  "properties": [],
-  "weapon_range": "",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  ]
 }

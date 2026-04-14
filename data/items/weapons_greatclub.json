@@ -1,26 +1,33 @@
 {
   "index": "greatclub",
   "name": "Greatclub",
-  "category": "weapon",
-  "cost": {
-    "quantity": 2,
-    "unit": "sp"
-  },
-  "weight": 10,
-  "desc": [],
+  "category": "weapons",
   "damage": {
     "damage_dice": "1d8",
     "damage_type": {
       "index": "bludgeoning",
-      "name": "Bludgeoning",
-      "url": "/api/damage-types/bludgeoning"
-    }
+      "name": "Bludgeoning"
+    },
+    "damage_dice_two_handed": null
   },
-  "armor_class": {},
+  "range": "5/None",
+  "throw_range": null,
   "properties": [
-    "two-handed"
+    "Two-Handed"
   ],
-  "weapon_range": "Melee",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  "special_properties": [],
+  "attack_bonus": 0,
+  "damage_bonus": 0,
+  "is_magic": false,
+  "is_martial": false,
+  "is_melee": true,
+  "is_ranged": false,
+  "is_simple": true,
+  "category_type": "simple",
+  "category_range": "Simple Melee",
+  "cost": "2 sp",
+  "price": 20,
+  "sell_price": 10,
+  "weight": 10,
+  "desc": []
 }

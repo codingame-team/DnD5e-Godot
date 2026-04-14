@@ -1,17 +1,24 @@
 {
   "index": "adamantine-armor",
   "name": "Adamantine Armor",
-  "category": "armor",
-  "cost": {},
+  "category": "armors",
+  "armor_class": {
+    "base": 10
+  },
+  "armor_bonus": 0,
+  "str_minimum": 0,
+  "stealth_disadvantage": false,
+  "saving_throw_bonus": 0,
+  "damage_immunities": [],
+  "damage_resistances": [],
+  "condition_immunities": [],
+  "special_properties": [],
+  "cost": "0 gp",
+  "price": 0,
+  "sell_price": 0,
   "weight": 0,
   "desc": [
     "Armor (medium or heavy, but not hide), uncommon",
     "This suit of armor is reinforced with adamantine, one of the hardest substances in existence. While you're wearing it, any critical hit against you becomes a normal hit."
-  ],
-  "damage": {},
-  "armor_class": {},
-  "properties": [],
-  "weapon_range": "",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  ]
 }

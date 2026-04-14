@@ -1,21 +1,23 @@
 {
   "index": "studded-leather-armor",
   "name": "Studded Leather Armor",
-  "category": "armor",
-  "cost": {
-    "quantity": 45,
-    "unit": "gp"
-  },
-  "weight": 13,
-  "desc": [],
-  "damage": {},
+  "category": "armors",
   "armor_class": {
     "base": 12,
-    "dex_bonus": "True",
-    "max_bonus": "None"
+    "dex_bonus": true,
+    "max_bonus": null
   },
-  "properties": [],
-  "weapon_range": "",
+  "armor_bonus": 0,
   "str_minimum": 0,
-  "stealth_disadvantage": "False"
+  "stealth_disadvantage": false,
+  "saving_throw_bonus": 0,
+  "damage_immunities": [],
+  "damage_resistances": [],
+  "condition_immunities": [],
+  "special_properties": [],
+  "cost": "45 gp",
+  "price": 4500,
+  "sell_price": 2250,
+  "weight": 13,
+  "desc": []
 }

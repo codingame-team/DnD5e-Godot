@@ -1,28 +1,35 @@
 {
   "index": "crossbow-light",
   "name": "Crossbow, light",
-  "category": "weapon",
-  "cost": {
-    "quantity": 25,
-    "unit": "gp"
-  },
-  "weight": 5,
-  "desc": [],
+  "category": "weapons",
   "damage": {
     "damage_dice": "1d8",
     "damage_type": {
       "index": "piercing",
-      "name": "Piercing",
-      "url": "/api/damage-types/piercing"
-    }
+      "name": "Piercing"
+    },
+    "damage_dice_two_handed": null
   },
-  "armor_class": {},
+  "range": "80/320",
+  "throw_range": null,
   "properties": [
-    "ammunition",
-    "loading",
-    "two-handed"
+    "Ammunition",
+    "Loading",
+    "Two-Handed"
   ],
-  "weapon_range": "Ranged",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  "special_properties": [],
+  "attack_bonus": 0,
+  "damage_bonus": 0,
+  "is_magic": false,
+  "is_martial": false,
+  "is_melee": false,
+  "is_ranged": true,
+  "is_simple": true,
+  "category_type": "simple",
+  "category_range": "Simple Ranged",
+  "cost": "25 gp",
+  "price": 2500,
+  "sell_price": 1250,
+  "weight": 5,
+  "desc": []
 }

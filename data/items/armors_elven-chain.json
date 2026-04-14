@@ -1,17 +1,24 @@
 {
   "index": "elven-chain",
   "name": "Elven Chain",
-  "category": "armor",
-  "cost": {},
+  "category": "armors",
+  "armor_class": {
+    "base": 10
+  },
+  "armor_bonus": 0,
+  "str_minimum": 0,
+  "stealth_disadvantage": false,
+  "saving_throw_bonus": 0,
+  "damage_immunities": [],
+  "damage_resistances": [],
+  "condition_immunities": [],
+  "special_properties": [],
+  "cost": "0 gp",
+  "price": 0,
+  "sell_price": 0,
   "weight": 0,
   "desc": [
     "Armor (chain shirt), rare",
     "You gain a +1 bonus to AC while you wear this armor. You are considered proficient with this armor even if you lack proficiency with medium armor."
-  ],
-  "damage": {},
-  "armor_class": {},
-  "properties": [],
-  "weapon_range": "",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  ]
 }

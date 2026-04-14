@@ -1,27 +1,34 @@
 {
   "index": "greataxe",
   "name": "Greataxe",
-  "category": "weapon",
-  "cost": {
-    "quantity": 30,
-    "unit": "gp"
-  },
-  "weight": 7,
-  "desc": [],
+  "category": "weapons",
   "damage": {
     "damage_dice": "1d12",
     "damage_type": {
       "index": "slashing",
-      "name": "Slashing",
-      "url": "/api/damage-types/slashing"
-    }
+      "name": "Slashing"
+    },
+    "damage_dice_two_handed": null
   },
-  "armor_class": {},
+  "range": "5/None",
+  "throw_range": null,
   "properties": [
-    "heavy",
-    "two-handed"
+    "Heavy",
+    "Two-Handed"
   ],
-  "weapon_range": "Melee",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  "special_properties": [],
+  "attack_bonus": 0,
+  "damage_bonus": 0,
+  "is_magic": false,
+  "is_martial": true,
+  "is_melee": true,
+  "is_ranged": false,
+  "is_simple": false,
+  "category_type": "martial",
+  "category_range": "Martial Melee",
+  "cost": "30 gp",
+  "price": 3000,
+  "sell_price": 1500,
+  "weight": 7,
+  "desc": []
 }

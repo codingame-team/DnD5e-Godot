@@ -1,21 +1,23 @@
 {
   "index": "ring-mail",
   "name": "Ring Mail",
-  "category": "armor",
-  "cost": {
-    "quantity": 30,
-    "unit": "gp"
-  },
-  "weight": 40,
-  "desc": [],
-  "damage": {},
+  "category": "armors",
   "armor_class": {
     "base": 14,
-    "dex_bonus": "False",
-    "max_bonus": "None"
+    "dex_bonus": false,
+    "max_bonus": null
   },
-  "properties": [],
-  "weapon_range": "",
+  "armor_bonus": 0,
   "str_minimum": 0,
-  "stealth_disadvantage": "True"
+  "stealth_disadvantage": true,
+  "saving_throw_bonus": 0,
+  "damage_immunities": [],
+  "damage_resistances": [],
+  "condition_immunities": [],
+  "special_properties": [],
+  "cost": "30 gp",
+  "price": 3000,
+  "sell_price": 1500,
+  "weight": 40,
+  "desc": []
 }

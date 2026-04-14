@@ -1,21 +1,23 @@
 {
   "index": "scale-mail",
   "name": "Scale Mail",
-  "category": "armor",
-  "cost": {
-    "quantity": 50,
-    "unit": "gp"
-  },
-  "weight": 45,
-  "desc": [],
-  "damage": {},
+  "category": "armors",
   "armor_class": {
     "base": 14,
-    "dex_bonus": "True",
+    "dex_bonus": true,
     "max_bonus": 2
   },
-  "properties": [],
-  "weapon_range": "",
+  "armor_bonus": 0,
   "str_minimum": 0,
-  "stealth_disadvantage": "True"
+  "stealth_disadvantage": true,
+  "saving_throw_bonus": 0,
+  "damage_immunities": [],
+  "damage_resistances": [],
+  "condition_immunities": [],
+  "special_properties": [],
+  "cost": "50 gp",
+  "price": 5000,
+  "sell_price": 2500,
+  "weight": 45,
+  "desc": []
 }

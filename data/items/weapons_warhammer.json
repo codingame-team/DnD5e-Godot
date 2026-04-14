@@ -1,26 +1,33 @@
 {
   "index": "warhammer",
   "name": "Warhammer",
-  "category": "weapon",
-  "cost": {
-    "quantity": 15,
-    "unit": "gp"
-  },
-  "weight": 2,
-  "desc": [],
+  "category": "weapons",
   "damage": {
     "damage_dice": "1d8",
     "damage_type": {
       "index": "bludgeoning",
-      "name": "Bludgeoning",
-      "url": "/api/damage-types/bludgeoning"
-    }
+      "name": "Bludgeoning"
+    },
+    "damage_dice_two_handed": null
   },
-  "armor_class": {},
+  "range": "5/None",
+  "throw_range": null,
   "properties": [
-    "versatile"
+    "Versatile"
   ],
-  "weapon_range": "Melee",
-  "str_minimum": 0,
-  "stealth_disadvantage": false
+  "special_properties": [],
+  "attack_bonus": 0,
+  "damage_bonus": 0,
+  "is_magic": false,
+  "is_martial": true,
+  "is_melee": true,
+  "is_ranged": false,
+  "is_simple": false,
+  "category_type": "martial",
+  "category_range": "Martial Melee",
+  "cost": "15 gp",
+  "price": 1500,
+  "sell_price": 750,
+  "weight": 2,
+  "desc": []
 }
