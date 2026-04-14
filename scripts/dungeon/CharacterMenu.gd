@@ -55,8 +55,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func open(hero_dict: Dictionary) -> void:
 	_hero = hero_dict
-	# Réinitialiser l'inventaire pour forcer la reconstruction avec les catégories correctes
-	_hero.erase("inventory")
+	# Compléter l'inventaire sans écraser les items déjà présents (loots, …)
+	_ensure_inventory_categories()
 	_refresh_stats()
 	_refresh_inventory()
 	_tab_bar.current_tab = 0
@@ -142,30 +142,59 @@ func _refresh_inventory() -> void:
 		row.add_child(btn)
 		_inv_list.add_child(row)
 
-func _build_default_inventory() -> Array:
-	"""Construit un inventaire minimal depuis weapon_index / armor_index actuels."""
-	var items: Array = []
+func _ensure_inventory_categories() -> void:
+	"""Garantit que l'inventaire contient l'arme et l'armure équipées et que chaque item a son champ category."""
+	var inv: Array = _hero.get("inventory", [])
+
+	# S'assurer que chaque item existant a un champ category
+	for item in inv:
+		if item is Dictionary and not item.has("category"):
+			# Heuristique : item chargé depuis DataManager weapons vs armors
+			if item.has("damage"):
+				item["category"] = "weapons"
+			elif item.has("armor_class"):
+				item["category"] = "armors"
+			else:
+				item["category"] = "magic-items"
+
+	# Ajouter l'arme équipée si absente de l'inventaire
 	var wpn_idx: String = _hero.get("weapon_index", "")
-	if wpn_idx != "":
+	if wpn_idx != "" and not _inv_has_index(inv, wpn_idx):
 		var d := DataManager.get_item("weapons", wpn_idx)
 		if not d.is_empty():
 			d["category"] = "weapons"
-			items.append(d)
+			inv.append(d)
+
+	# Ajouter l'armure équipée si absente de l'inventaire
 	var arm_idx: String = _hero.get("armor_index", "")
-	if arm_idx != "":
+	if arm_idx != "" and not _inv_has_index(inv, arm_idx):
 		var d := DataManager.get_item("armors", arm_idx)
 		if not d.is_empty():
 			d["category"] = "armors"
-			items.append(d)
-	# Potions
+			inv.append(d)
+
+	# Ajouter les potions manquantes
 	var potions: int = _hero.get("potions", 0)
-	for _p in range(potions):
-		items.append({"index": "healing-potion", "name": "Potion de Soin", "category": "potions"})
-	# Stocker dans hero pour les prochaines ouvertures
-	_hero["inventory"] = items
-	# Synchroniser dans GameManager.party
+	var potions_in_inv: int = 0
+	for item in inv:
+		if (item as Dictionary).get("category", "") == "potions":
+			potions_in_inv += 1
+	for _p in range(potions - potions_in_inv):
+		inv.append({"index": "healing-potion", "name": "Potion de Soin", "category": "potions"})
+
+	_hero["inventory"] = inv
 	_sync_hero_back()
-	return items
+
+func _inv_has_index(inv: Array, idx: String) -> bool:
+	for item in inv:
+		if (item as Dictionary).get("index", "") == idx:
+			return true
+	return false
+
+func _build_default_inventory() -> Array:
+	"""Appelé si l'inventaire est vide — délègue à _ensure_inventory_categories."""
+	_ensure_inventory_categories()
+	return _hero.get("inventory", [])
 
 func _is_equipped(item: Dictionary) -> bool:
 	var idx: String = item.get("index", "")
