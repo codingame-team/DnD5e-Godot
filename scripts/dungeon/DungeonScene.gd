@@ -758,12 +758,16 @@ func _jump_hero() -> void:
 	var step := _yaw_to_dir(_hero_yaw)
 	var next1 := _hero_pos + step
 	var next2 := _hero_pos + step * 2
-	# Saut par-dessus un baril si la case suivante est un obstacle et la suivante est libre
-	var over_barrel: bool = _dungeon.get_cell(next1.x, next1.y) == DungeonGen.CELL_BARREL \
-		and _dungeon.is_walkable(next2.x, next2.y)
+	var barrel_at_next1: bool = _dungeon.get_cell(next1.x, next1.y) == DungeonGen.CELL_BARREL
+	# Saut par-dessus un baril : case suivante = baril, case d'après = libre
+	var over_barrel: bool = barrel_at_next1 and _dungeon.is_walkable(next2.x, next2.y)
+	# Saut sur le baril : baril dans un coin (rien de franchissable derrière) → renverser le baril
+	var onto_barrel: bool = barrel_at_next1 and not over_barrel
 	var target_pos: Vector2i
 	if over_barrel:
 		target_pos = next2
+	elif onto_barrel:
+		target_pos = next1
 	elif _dungeon.is_walkable(next1.x, next1.y):
 		target_pos = next1
 	else:
@@ -773,6 +777,12 @@ func _jump_hero() -> void:
 		_play_named_anim(_hero_anim_player, ["Idle", "idle", "IDLE", "Stand"])
 		return
 	_is_moving = true
+	# Renverser le baril avant de s'y poser
+	if onto_barrel:
+		_dungeon.grid[next1.y][next1.x] = DungeonGen.CELL_FLOOR
+		if _objects.has(next1):
+			_objects[next1]["node"].queue_free()
+			_objects.erase(next1)
 	_hero_pos = target_pos
 	var hero := _get_hero()
 	if hero == null:
@@ -781,7 +791,7 @@ func _jump_hero() -> void:
 	hero.rotation_degrees.y = - _hero_yaw
 	var world_target := _grid_to_world(target_pos)
 	_play_named_anim(_hero_anim_player, ["Jump", "jump", "Roll", "roll"])
-	var duration := 0.50 if over_barrel else 0.35 # saut baril = 2 cases → plus long
+	var duration := 0.50 if over_barrel else 0.35
 	var tween := create_tween()
 	tween.tween_property(hero, "position", world_target, duration).set_trans(Tween.TRANS_SPRING)
 	await tween.finished
