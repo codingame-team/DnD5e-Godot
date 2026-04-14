@@ -83,10 +83,6 @@ func _refresh_stats() -> void:
 	var speed: int = h.get("speed", 30)
 	var pb: int = h.get("proficiency_bonus", 2)
 
-	func _mod(score: int) -> String:
-		var m := (score - 10) / 2
-		return ("+%d" % m) if m >= 0 else ("%d" % m)
-
 	var txt := "[b]%s[/b]   Niv. %d\n" % [name_str, level]
 	txt += "[color=gray]%s — %s[/color]\n\n" % [race_str, class_name_str]
 	txt += "[b]PV :[/b] %d / %d   [b]CA :[/b] %d   [b]Vitesse :[/b] %d pi   [b]Bonus de maîtrise :[/b] +%d\n\n" % [hp, max_hp, ac, speed, pb]
@@ -94,7 +90,7 @@ func _refresh_stats() -> void:
 	for key in ["str", "dex", "con", "int", "wis", "cha"]:
 		var label_map := {"str": "FOR", "dex": "DEX", "con": "CON", "int": "INT", "wis": "SAG", "cha": "CHA"}
 		var score: int = abilities.get(key, 10)
-		txt += "  [b]%s[/b] %d (%s)\n" % [label_map[key], score, _mod(score)]
+		txt += "  [b]%s[/b] %d (%s)\n" % [label_map[key], score, _ability_mod_str(score)]
 
 	# Équipement actuel
 	txt += "\n[b]─── Équipement ───[/b]\n"
@@ -331,3 +327,7 @@ func _on_tab_changed(tab: int) -> void:
 # --------------------------------------------------------------------------
 func _ability_mod(score: int) -> int:
 	return (score - 10) / 2
+
+func _ability_mod_str(score: int) -> String:
+	var m := (score - 10) / 2
+	return ("+%d" % m) if m >= 0 else ("%d" % m)
