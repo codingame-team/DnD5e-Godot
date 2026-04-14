@@ -34,9 +34,16 @@ func _draw() -> void:
 			var py := float(r - hero_pos.y) * CELL_SIZE
 			draw_rect(Rect2(px, py, CELL_SIZE - 1, CELL_SIZE - 1), col)
 	# Indicateur heros : triangle tournant selon hero_yaw.
-	# yaw=0=sud(+row), donc on ajuste rotation = -hero_yaw pour aligner avec la vue.
+	# Repère minimap : +X=est, +Y=sud (row croissant = vers le bas).
+	# Triangle par défaut : pointe vers (0,-s) = NORD.
+	# Pour pointer dans la direction du héros (ex : yaw=0=sud = bas),
+	# il faut angle = deg_to_rad(hero_yaw + 180) :
+	#   yaw=0  → 180° → pointe bas (sud) ✓
+	#   yaw=90 → 270° → pointe gauche (ouest) ✓
+	#   yaw=180→ 360°=0° → pointe haut (nord) ✓
+	#   yaw=270→ 90°  → pointe droite (est) ✓
 	var s := float(CELL_SIZE) * 1.1
-	var angle := deg_to_rad(-hero_yaw + 180.0)
+	var angle := deg_to_rad(hero_yaw + 180.0)
 	var cos_a := cos(angle)
 	var sin_a := sin(angle)
 	# Triangle de base pointant vers +Y local (nord dans la grille)
