@@ -55,6 +55,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func open(hero_dict: Dictionary) -> void:
 	_hero = hero_dict
+	# Réinitialiser l'inventaire pour forcer la reconstruction avec les catégories correctes
+	_hero.erase("inventory")
 	_refresh_stats()
 	_refresh_inventory()
 	_tab_bar.current_tab = 0
@@ -147,11 +149,13 @@ func _build_default_inventory() -> Array:
 	if wpn_idx != "":
 		var d := DataManager.get_item("weapons", wpn_idx)
 		if not d.is_empty():
+			d["category"] = "weapons"
 			items.append(d)
 	var arm_idx: String = _hero.get("armor_index", "")
 	if arm_idx != "":
 		var d := DataManager.get_item("armors", arm_idx)
 		if not d.is_empty():
+			d["category"] = "armors"
 			items.append(d)
 	# Potions
 	var potions: int = _hero.get("potions", 0)
