@@ -120,7 +120,13 @@ func _place_objects() -> void:
 func _generate_item_data(cell_type: int) -> Dictionary:
 	match cell_type:
 		CELL_CHEST:
-			var loot := ["pe longue", "Arc court", "Dague +1", "Anneau de protection", "Cape d'invisibilit"]
+			var loot: Array[Dictionary] = [
+				{"category": "weapons",     "index": "longsword",         "name": "Épée longue"},
+				{"category": "weapons",     "index": "shortbow",          "name": "Arc court"},
+				{"category": "weapons",     "index": "dagger",            "name": "Dague"},
+				{"category": "magic-items", "index": "ring-of-protection", "name": "Anneau de protection"},
+				{"category": "magic-items", "index": "cloak-of-protection", "name": "Cape de protection"},
+			]
 			return {"loot": loot[randi() % loot.size()], "gold": randi_range(10, 50)}
 		CELL_GOLD:
 			return {"gold": randi_range(5, 25)}

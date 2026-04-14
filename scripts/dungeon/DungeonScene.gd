@@ -893,10 +893,18 @@ func _check_pickup() -> void:
 			_update_ui()
 		DungeonGen.CELL_CHEST:
 			_play_named_anim(_hero_anim_player, ["PickUp", "Pickup", "pickup"])
-			var loot: String = data.get("loot", "Parchemin")
+			var loot_item: Dictionary = data.get("loot", {})
+			var loot_name: String = loot_item.get("name", "Parchemin") if loot_item is Dictionary else str(loot_item)
 			var gold: int = data.get("gold", 20)
 			GameManager.gold += gold
-			info_label.text = "Coffre : %s + %d or !" % [loot, gold]
+			info_label.text = "Coffre : %s + %d or !" % [loot_name, gold]
+			# Ajouter l'item à l'inventaire du héros
+			if not loot_item.is_empty() and not GameManager.party.is_empty():
+				var hero_data: Dictionary = GameManager.party[0]
+				var inv: Array = hero_data.get("inventory", [])
+				inv.append(loot_item)
+				hero_data["inventory"] = inv
+				GameManager.party[0] = hero_data
 			obj["node"].queue_free()
 			_objects.erase(_hero_pos)
 			_dungeon.grid[_hero_pos.y][_hero_pos.x] = DungeonGen.CELL_FLOOR
