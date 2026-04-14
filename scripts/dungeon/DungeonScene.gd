@@ -262,7 +262,7 @@ func _spawn_hero() -> void:
 
 # Oriente le hero vers le premier couloir ouvert depuis l'entree.
 func _initial_facing() -> void:
-	# Yaw 0=sud(+Z), 90=ouest, 180=nord, 270=est
+	# Yaw 0=sud(+Z), 90=ouest(-X), 180=nord(-Z), 270=est(+X)
 	var dirs := [Vector2i(0, 1), Vector2i(-1, 0), Vector2i(0, -1), Vector2i(1, 0)]
 	var yaws := [0.0, 90.0, 180.0, 270.0]
 	for i in dirs.size():
@@ -645,6 +645,7 @@ func _jump_hero() -> void:
 	var duration := 0.50 if over_barrel else 0.35 # saut baril = 2 cases → plus long
 	var tween := create_tween()
 	tween.tween_property(hero, "position", world_target, duration).set_trans(Tween.TRANS_SPRING)
+	tween.tween_callback(_update_camera).set_delay(0.0).set_parallel()
 	await tween.finished
 	_play_named_anim(_hero_anim_player, ["Idle", "idle", "IDLE", "Stand"])
 	_is_moving = false
@@ -679,6 +680,7 @@ func _roll_hero() -> void:
 	_play_named_anim(_hero_anim_player, ["Roll", "roll"])
 	var tween := create_tween()
 	tween.tween_property(hero, "position", world_target, 0.30).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_callback(_update_camera).set_delay(0.0).set_parallel()
 	await tween.finished
 	_play_named_anim(_hero_anim_player, ["Idle", "idle", "IDLE", "Stand"])
 	_is_moving = false
@@ -706,6 +708,7 @@ func _move_hero() -> void:
 	_play_named_anim(_hero_anim_player, ["Run", "Run_Weapon", "Walk", "walk", "Walking"])
 	var tween := create_tween()
 	tween.tween_property(hero, "position", target, 0.28).set_trans(Tween.TRANS_QUAD)
+	tween.tween_callback(_update_camera).set_delay(0.0).set_parallel()
 	await tween.finished
 	_play_named_anim(_hero_anim_player, ["Idle", "idle", "IDLE", "Stand", "stand", "T-Pose"])
 	_update_camera()
