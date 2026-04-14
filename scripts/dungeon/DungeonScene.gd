@@ -70,6 +70,9 @@ var _invert_camera_x: bool = false
 # Minimap 2D
 var _minimap: Node2D = null
 
+# Menu personnage
+var _char_menu: Control = null
+
 # Animation héros
 var _hero_anim_player: AnimationPlayer = null
 var _is_moving: bool = false # verrou anti-spam pendant tween/anim
@@ -104,6 +107,7 @@ func _ready() -> void:
 	btn_combat.pressed.connect(_on_test_combat)
 	info_label.text = ""
 	_setup_minimap()
+	_setup_char_menu()
 	# Vue initiale : survol du donjon entier
 	_overview_camera()
 
@@ -489,6 +493,128 @@ func _update_minimap() -> void:
 	_minimap.rotation = 0.0
 	_minimap.queue_redraw()
 
+# --------------------------------------------------------------------------
+# Menu personnage
+# --------------------------------------------------------------------------
+
+func _setup_char_menu() -> void:
+	var script := load("res://scripts/dungeon/CharacterMenu.gd") as Script
+	if script == null:
+		push_warning("CharacterMenu.gd introuvable")
+		return
+	_char_menu = script.new() as Control
+	_char_menu.name = "CharacterMenu"
+	_char_menu.visible = false
+	_char_menu.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_char_menu.closed.connect(_on_char_menu_closed)
+	# Construire le sous-arbre AVANT add_child afin que @onready se résolve correctement.
+	_build_char_menu_ui(_char_menu)
+	$UI.add_child(_char_menu)
+
+func _build_char_menu_ui(root: Control) -> void:
+	# ── Fond sombre semi-transparent sur toute la fenêtre ──────────────────
+	var bg := ColorRect.new()
+	bg.name = "BgDim"
+	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
+	bg.color = Color(0.0, 0.0, 0.0, 0.60)
+	root.add_child(bg)
+
+	# ── Panneau principal centré ────────────────────────────────────────────
+	var vp := get_viewport().get_visible_rect().size
+	var panel := PanelContainer.new()
+	panel.name = "Panel"
+	panel.custom_minimum_size = Vector2(620.0, 540.0)
+	panel.position = (vp - Vector2(620.0, 540.0)) * 0.5
+	root.add_child(panel)
+
+	var outer_vbox := VBoxContainer.new()
+	outer_vbox.name = "VBox"
+	outer_vbox.add_theme_constant_override("separation", 6)
+	panel.add_child(outer_vbox)
+
+	# ── TabBar ──────────────────────────────────────────────────────────────
+	var tab_bar := TabBar.new()
+	tab_bar.name = "TabBar"
+	tab_bar.add_tab("Personnage")
+	tab_bar.add_tab("Inventaire")
+	outer_vbox.add_child(tab_bar)
+
+	# ── Pages ───────────────────────────────────────────────────────────────
+	var pages := Control.new()
+	pages.name = "Pages"
+	pages.custom_minimum_size = Vector2(614.0, 460.0)
+	pages.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	outer_vbox.add_child(pages)
+
+	# Page Stats
+	var pg_stats := MarginContainer.new()
+	pg_stats.name = "Stats"
+	pg_stats.set_anchors_preset(Control.PRESET_FULL_RECT)
+	pages.add_child(pg_stats)
+	var stats_lbl := RichTextLabel.new()
+	stats_lbl.name = "StatsLabel"
+	stats_lbl.bbcode_enabled = true
+	stats_lbl.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	pg_stats.add_child(stats_lbl)
+
+	# Page Inventaire
+	var pg_inv := HBoxContainer.new()
+	pg_inv.name = "Inventory"
+	pg_inv.set_anchors_preset(Control.PRESET_FULL_RECT)
+	pages.add_child(pg_inv)
+
+	# Liste scrollable
+	var scroll := ScrollContainer.new()
+	scroll.name = "ScrollInv"
+	scroll.custom_minimum_size = Vector2(260.0, 440.0)
+	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	pg_inv.add_child(scroll)
+	var inv_list := VBoxContainer.new()
+	inv_list.name = "InvList"
+	inv_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(inv_list)
+
+	# Détail d'item (panneau droit)
+	var detail_panel := PanelContainer.new()
+	detail_panel.name = "ItemDetail"
+	detail_panel.custom_minimum_size = Vector2(300.0, 440.0)
+	detail_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	detail_panel.visible = false
+	pg_inv.add_child(detail_panel)
+	var detail_vbox := VBoxContainer.new()
+	detail_vbox.name = "DetailVBox"
+	detail_panel.add_child(detail_vbox)
+	var detail_lbl := RichTextLabel.new()
+	detail_lbl.name = "DetailLabel"
+	detail_lbl.bbcode_enabled = true
+	detail_lbl.custom_minimum_size.y = 280
+	detail_lbl.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	detail_vbox.add_child(detail_lbl)
+	var btn_equip := Button.new()
+	btn_equip.name = "BtnEquip"
+	btn_equip.text = "Équiper"
+	detail_vbox.add_child(btn_equip)
+	var btn_drop := Button.new()
+	btn_drop.name = "BtnDrop"
+	btn_drop.text = "Jeter"
+	detail_vbox.add_child(btn_drop)
+
+	# ── Bouton Fermer ───────────────────────────────────────────────────────
+	var btn_close := Button.new()
+	btn_close.name = "BtnClose"
+	btn_close.text = "Fermer  [C]"
+	outer_vbox.add_child(btn_close)
+
+func _on_char_menu_closed() -> void:
+	_update_ui()
+
+func _open_char_menu() -> void:
+	if _char_menu == null:
+		return
+	if GameManager.party.is_empty():
+		return
+	_char_menu.open(GameManager.party[0])
+
 func _cycle_cam_mode() -> void:
 	_cam_mode = ((_cam_mode + 1) % 3) as CamMode
 	# En 1ere personne : absorber _cam_yaw dans _hero_yaw pour aligner
@@ -548,6 +674,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	var key_event := event as InputEventKey
 	var keycode: Key = key_event.keycode
+	# C / I : menu personnage
+	if keycode == KEY_C or keycode == KEY_I:
+		if _char_menu != null:
+			if _char_menu.visible:
+				_char_menu.visible = false
+			else:
+				_open_char_menu()
+		return
 	# V : changer mode camera
 	if keycode == _settings_manager().get_keybind("cam_cycle_mode"):
 		_cycle_cam_mode()
